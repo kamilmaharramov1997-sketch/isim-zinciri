@@ -184,7 +184,15 @@
   .tg i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
   .tg input:checked + i{background:var(--accent)}
   .tg input:checked + i::after{transform:translateX(18px)}
-  #nmAdd,#nmReset,.nm-backup,#nmMsg{display:none !important}
+  body:not(.admin) #nmAdd,body:not(.admin) #nmReset,body:not(.admin) #nmMsg,body:not(.admin) .nm-bulk,body:not(.admin) .adm-badge{display:none !important}
+  .nm-backup{display:none !important}
+  .adm-badge{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:var(--gold);color:#28241e;font-size:11px;letter-spacing:.3px;vertical-align:1px}
+  .nm-bulk{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .nm-bulk textarea{width:100%;box-sizing:border-box;margin:8px 0;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);outline:none;resize:vertical}
+  .nm-bulk textarea:focus{border-color:var(--accent)}
+  .nm-bulk .row{display:flex;align-items:center;gap:10px}
+  #nmBulkAdd{width:100%}
+  #nmSync{margin-top:8px;min-height:16px}
   .nm-backup{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
   .nm-backup .row{margin-top:8px}
   .chipn .nm{cursor:pointer}
@@ -308,6 +316,76 @@
   input:focus{border-color:var(--accent)}
   form button{white-space:nowrap;border:none;background:var(--accent-2);color:var(--accent);font:inherit;font-weight:600;padding:0 16px;border-radius:11px;cursor:pointer}
   .msg{font-size:13px;color:var(--red);text-align:center;min-height:0}
+  /* Nasıl oynanır */
+  .tut{position:fixed;inset:0;z-index:40;background:var(--bg);display:none;flex-direction:column;padding:max(16px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom))}
+  .tut.show{display:flex}
+  .tut-in{flex:1;width:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;min-height:0}
+  .tut-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .tut-top .seg{flex:1;max-width:280px}
+  .tut-skip{border:none;background:none;color:var(--muted);font:inherit;font-weight:600;font-size:14px;cursor:pointer;padding:8px}
+  .tut-slide{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px;padding:10px 6px;overflow-y:auto}
+  .tut-ico{width:120px;height:120px;border-radius:34px;display:grid;place-items:center;font-size:58px;background:var(--card);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+  .tut-slide h2{font-size:23px;font-weight:800;letter-spacing:-.3px}
+  .tut-slide p{font-size:16px;line-height:1.55;color:var(--muted);max-width:380px}
+  .tut-slide p b{color:var(--ink)}
+  .tut-ex{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;font-weight:700;font-size:15px}
+  .tut-ex span{padding:6px 11px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+  .tut-ex i{font-style:normal} .tut-ex .l{color:var(--blue)} .tut-ex .r{background:var(--red-bg);color:var(--red);border-color:transparent} .tut-ex .u{background:var(--unk-bg);color:var(--unk);border-color:transparent}
+  .tut-dots{display:flex;gap:7px;justify-content:center;margin:8px 0 16px}
+  .tut-dots i{width:8px;height:8px;border-radius:4px;background:var(--line);transition:all .25s}
+  .tut-dots i.on{width:22px;background:var(--accent)}
+  .tut-nav{display:flex;gap:10px}
+  .tut-nav .btn{flex:1}
+  .howbtn{align-self:center;border:none;background:none;color:var(--accent);font:inherit;font-weight:700;font-size:15px;cursor:pointer;padding:6px 10px}
+  /* Yönetici paneli */
+  body:not(.admin) .adm-only{display:none !important}
+  .adm-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none}
+  .adm-tabs button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:13.5px;font-weight:600;padding:8px 13px;border-radius:999px;cursor:pointer}
+  .adm-tabs button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .adm-tabs .n{display:inline-block;min-width:18px;margin-left:4px;padding:0 5px;border-radius:9px;background:var(--red);color:#fff;font-size:11px}
+  .adm-tabs .n:empty{display:none}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+  .kpi b{display:block;font-size:26px;font-weight:800;letter-spacing:-.5px}
+  .kpi small{font-size:12.5px;color:var(--muted)}
+  .arow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .arow:last-child{border-bottom:none}
+  .arow .grow{flex:1;min-width:0}
+  .arow .grow small{display:block;font-size:12px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .arow .num{font-weight:700;color:var(--muted);min-width:28px;text-align:right}
+  .abtn{border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .abtn.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+  .abtn.no{color:var(--red)}
+  .abtn:disabled{opacity:.5}
+  .bar{height:6px;border-radius:3px;background:var(--accent);opacity:.8;margin-top:5px}
+  .ubtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .urow{padding:12px 0;border-bottom:1px solid var(--line)}
+  .urow .top2{display:flex;align-items:center;gap:10px}
+  .urow .av{width:38px;height:38px}
+  .ban{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--red-bg);color:var(--red);font-size:11px;font-weight:700}
+  .ainput{display:flex;gap:8px;margin-bottom:10px}
+  .ainput input,.atext{flex:1;min-width:0;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);outline:none}
+  .atext{width:100%;box-sizing:border-box;resize:vertical;margin:8px 0}
+  .ann{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:12px 14px;margin:0 0 12px;font-size:14px;line-height:1.45;text-align:left}
+  .ann .grow{flex:1;white-space:pre-wrap}
+  .ann button{border:none;background:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1}
+  li .sug{border:1px solid var(--unk);background:transparent;color:var(--unk);font:inherit;font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;cursor:pointer;white-space:nowrap;margin-left:4px}
+  li .sug:disabled{opacity:.6;cursor:default}
+  /* Duvar kağıdı */
+  body.wp, body.wp .home{background:linear-gradient(var(--veil),var(--veil)), var(--wpimg) center bottom/cover no-repeat}
+  :root{--veil:rgba(244,241,234,.38)} :root[data-theme="dark"]{--veil:rgba(10,14,12,.55)}
+  body.wp .top h1, body.wp .top small{text-shadow:0 1px 8px var(--bg)}
+  .wp-pop{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.35);display:none;align-items:flex-end;justify-content:center}
+  .wp-pop.show{display:flex}
+  .wp-box{width:100%;max-width:620px;max-height:80dvh;overflow-y:auto;background:var(--card);border-radius:22px 22px 0 0;padding:18px 16px max(18px, env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.2)}
+  .wp-box h4{font-size:17px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+  .wp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .wp-it{border:2px solid transparent;border-radius:14px;padding:0;background:none;cursor:pointer;color:var(--ink);font:inherit;font-size:12px;font-weight:600;text-align:center}
+  .wp-it i{display:block;aspect-ratio:9/16;border-radius:11px;background:var(--bg) center bottom/cover;border:1px solid var(--line);margin-bottom:5px;position:relative}
+  .wp-it.none i{display:grid;place-items:center;font-style:normal;font-size:22px;color:var(--muted)}
+  .wp-it.on{border-color:var(--accent)}
+  .wp-it.on i::after{content:"✓";position:absolute;right:6px;top:6px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:13px;font-style:normal}
+  .wp-it span{display:block;padding-bottom:4px}
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:24px;z-index:10}
   .modal.show{display:flex}
   .modal .box{background:var(--card);border-radius:18px;padding:22px;max-width:320px;text-align:center}
@@ -324,6 +402,7 @@
       </div>
       <div class="tbtns">
         <button class="icon-btn" id="resetBtn" aria-label="Sıfırla" title="Sıfırla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        <button class="icon-btn" id="wpBtn" aria-label="Duvar kağıdı" title="Duvar kağıdı"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="9.5" r="1.8"/><path d="M21 16l-5.5-5.5L6 20"/></svg></button>
         <button class="icon-btn" id="themeBtn" aria-label="Tema" title="Tema"><span id="themeIco"></span></button>
         <button class="icon-btn" id="setBtn" aria-label="Ayarlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
       </div>
@@ -379,11 +458,14 @@
       <h1 class="hero-t">İsim Zinciri</h1>
       <p class="hero-s" data-i18n="sub">Son harften devam et</p>
     </div>
+    <div id="annBox"></div>
     <div class="acct" id="acctCard"></div>
     <div class="home-btns">
       <button class="btn mic big" id="goOnline"><span class="ico">🌐</span><span><b data-i18n="playOnline">Online oyna</b><small data-i18n="playOnlineS">Arkadaşlarınla, herkes kendi telefonundan</small></span></button>
+      <button class="btn ghost big adm-only" id="goAdmin"><span class="ico">🛠</span><span><b>Yönetici paneli</b><small>İstatistik, öneriler, kullanıcılar, duyuru</small></span></button>
       <button class="btn ghost big" id="goLocal"><span class="ico">📱</span><span><b data-i18n="playLocal">Aynı telefonda oyna</b><small data-i18n="playLocalS">İnternetsiz, tek telefonda sırayla</small></span></button>
     </div>
+    <button class="howbtn" id="homeHow" data-i18n="howBtn">❓ Nasıl oynanır?</button>
   </div>
 </div>
 
@@ -459,14 +541,14 @@
         <h3 data-i18n="game">Oyun</h3>
         <div class="s-label" data-i18n="timeLimit">Cevap süresi</div>
         <div class="seg" id="timeSeg">
-          <button data-v="5"></button><button data-v="10"></button><button data-v="15"></button><button data-v="20"></button>
+          <button data-v="15"></button><button data-v="20"></button><button data-v="30"></button><button data-v="40"></button>
         </div>
         <div class="s-note" id="graceNote"></div>
         <label class="tg"><span><b data-i18n="hardOff">Zor harfleri çarktan çıkar</b><small id="hardInfo"></small></span><input type="checkbox" id="hardTg"><i></i></label>
         <label class="tg"><span><b data-i18n="sound">Geri sayım sesi</b></span><input type="checkbox" id="soundTg"><i></i></label>
       </section>
       <section class="s-sec">
-        <h3 data-i18n="nameLists">İsim listeleri</h3>
+        <h3><span data-i18n="nameLists">İsim listeleri</span><span class="adm-badge" data-i18n="adminBadge">YÖNETİCİ</span></h3>
         <div class="seg" id="nmSeg">
           <button data-v="tr">Türkçe <span class="n" id="nmCntTr"></span></button>
           <button data-v="az">Azərbaycan <span class="n" id="nmCntAz"></span></button>
@@ -478,6 +560,12 @@
         <div class="nm-list" id="nmList"></div>
         <div class="nm-msg" id="nmMsg"></div>
         <div class="nm-foot"><span id="nmInfo"></span><button class="linkbtn" id="nmReset" data-i18n="nmReset">Varsayılana dön</button></div>
+        <div class="nm-bulk">
+          <div class="s-note" data-i18n="bulkHint">Toplu ekle: her satıra bir isim yaz (virgülle de ayırabilirsin).</div>
+          <textarea id="nmBulk" rows="4"></textarea>
+          <button class="btn spin sm" id="nmBulkAdd" data-i18n="bulkAdd">Toplu ekle</button>
+          <div class="s-note" id="nmSync"></div>
+        </div>
         <div class="nm-backup">
           <div class="s-note" data-i18n="backupHint">Eklediğin isimleri dosyaya kaydet, başka telefona aktar.</div>
           <div class="row"><button class="btn ghost sm" id="nmExport" data-i18n="exp">⬇ Dışa aktar</button><button class="btn ghost sm" id="nmImport" data-i18n="imp">⬆ İçe aktar</button></div>
@@ -497,6 +585,7 @@
               <li data-i18n="how4">Her isim için 3 + 10 saniyen var.</li>
               <li data-i18n="how5">Her geçerli isim 1 puan, turu kazanan +2 puan alır.</li>
             </ul>
+            <button class="btn ghost sm" id="setHow" data-i18n="howBtn" style="margin:4px 0 10px">❓ Nasıl oynanır?</button><br>
             <small data-i18n="aboutVer">Sürüm 1.0 · Eklediğin isimler bu cihazda saklanır.</small>
           </div>
         </div>
@@ -504,7 +593,25 @@
     </div></div>
   </aside>
 </div>
+<div class="sheet page" id="adminPage" aria-hidden="true">
+  <aside class="panel">
+    <div class="s-head"><div class="s-wrap s-headin"><button class="icon-btn" data-close="adminPage" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><h2>Yönetici paneli</h2></div></div>
+    <div class="s-body"><div class="s-wrap">
+      <div class="adm-tabs" id="admTabs">
+        <button data-v="sum" class="on">📊 Özet</button><button data-v="sug">💡 Öneriler<span class="n" id="sugCnt"></span></button><button data-v="users">👥 Kullanıcılar</button><button data-v="ann">📣 Duyuru</button><button data-v="rooms">🎮 Odalar</button>
+      </div>
+      <div id="admBody"></div>
+    </div></div>
+  </aside>
+</div>
+<div class="tut" id="tut"><div class="tut-in">
+  <div class="tut-top"><div class="seg" id="tutSeg"><button data-v="local" class="on"></button><button data-v="online"></button></div><button class="tut-skip" id="tutSkip"></button></div>
+  <div class="tut-slide" id="tutSlide"></div>
+  <div class="tut-dots" id="tutDots"></div>
+  <div class="tut-nav"><button class="btn ghost" id="tutPrev"></button><button class="btn spin" id="tutNext"></button></div>
+</div></div>
 <div class="toast" id="toast"></div>
+<div class="wp-pop" id="wpPop"><div class="wp-box"><h4><span data-i18n="wpTitle">Duvar kağıdı</span><button class="icon-btn" id="wpClose" aria-label="Kapat">✕</button></h4><div class="wp-grid" id="wpGrid"></div></div></div>
 <div class="count" id="count"></div>
 <div class="modal" id="timeout">
   <div class="box">
@@ -563,7 +670,7 @@ const BASE = {}; for (const l in NAMES) BASE[l] = NAMES[l].split(' ');
 let custom = { tr:{add:[],del:[]}, az:{add:[],del:[]} };
 try { const c = JSON.parse(localStorage.getItem('iz-admin')||'null'); if (c) custom = Object.assign(custom, c); } catch(_){}
 try { localStorage.removeItem('iz-custom'); localStorage.removeItem('iz-accepted'); } catch(_){}
-function saveCustom(){ try { localStorage.setItem('iz-admin', JSON.stringify(custom)); } catch(_){} }
+function saveCustom(){ try { localStorage.setItem('iz-admin', JSON.stringify(custom)); } catch(_){} if (window.adminSync) window.adminSync(); }
 const NAMESET = {};
 const fold = k => k.replace(/ı/g,'i').replace(/ə/g,'e').replace(/x/g,'h').replace(/q/g,'k')
   .replace(/â/g,'a').replace(/î/g,'i').replace(/û/g,'u').replace(/d$/,'t').replace(/b$/,'p').replace(/c$/,'ç').replace(/g$/,'k');
@@ -680,8 +787,8 @@ const I18N = {
     nmAdded:x=>`"${x}" listeye eklendi`, nmExists:x=>`"${x}" zaten listede`, nmRemoved:x=>`"${x}" listeden çıkarıldı`,
     nmResetQ:'Bu dildeki tüm eklemeler ve çıkarmalar geri alınsın mı? Tekrar bas.', nmResetDone:'Liste varsayılana döndü',
     about:'Hakkında', aboutText:'İsim Zinciri, çocukken oynadığımız "son harften isim söyleme" oyununun sesli hâli. Çark ilk harfi seçer, isimleri söylersin, uygulama yazar ve kontrol eder.',
-    how1:'Çarkı çevir ve "Başlat"a bas.', how2:'Her isim, bir önceki ismin son harfiyle başlamalı.', how3:'Tekrar eden ve yanlış harfli isimler kırmızı görünür.', how4:()=>`Her isim için 3 + ${settings.time} saniyen var. Süresi dolan elenir.`,
-    aboutVer:'Sürüm 1.2 · Ayarlar ve eklediğin isimler bu cihazda saklanır.',
+    how1:'Çarkı çevir. Tek telefonda "Başlat"a bas, online oyunda mikrofon kendiliğinden açılır.', how2:'Her isim, bir önceki ismin son harfiyle başlamalı.', how3:'Tekrar eden ve yanlış harfli isimler kırmızı görünür.', how4:()=>`Her isim için 3 + ${settings.time} saniyen var. Süresi dolan elenir.`,
+    aboutVer:'Sürüm 1.3 · İsim listesi yönetici tarafından güncellenir.',
     how5:'Her geçerli isim 1 puan, turu kazanan +2 puan alır.',
     players:'Oyuncular', playersHint:'En fazla 11 oyuncu. Boş bırakırsan tek başına oynarsın.', addPlayer:'+ Oyuncu ekle', playerN:n=>`${n}. oyuncu`,
     save:'Kaydet', close:'Kapat', noPlayers:'👤 Oyuncu ekle',
@@ -692,6 +799,19 @@ const I18N = {
     nmEditing:x=>`"${x}" düzenleniyor. Yeni hâlini yazıp Kaydet'e bas.`, nmEdited:(a,b)=>`"${a}" → "${b}"`, nmTap:'Düzenlemek için isme, silmek için × işaretine dokun.',
     exp:'⬇ Dışa aktar', imp:'⬆ İçe aktar', backupHint:'Eklediğin ve çıkardığın isimleri dosyaya kaydet, başka telefona aktar.',
     impDone:n=>`${n} isim değişikliği içe aktarıldı`, impErr:'Dosya okunamadı',
+    howBtn:'❓ Nasıl oynanır?', tutLocal:'📱 Tek telefon', tutOnline:'🌐 Online', tutSkip:'Atla', tutPrev:'Geri', tutNext:'İleri', tutGo:'Oynamaya başla',
+    tut:{
+      wheel:['🔤','Çark harfi seçer','<b>Çarkı Çevir</b> butonuna bas. Çıkan harfle başlayan bir isim söyleyerek tur başlar. Her harf bir kez çıkar.'],
+      local:['📱','Tek telefonda','Harf çıkınca <b>Başlat</b>’a bas, mikrofon açılır. Oyuncular telefonu ortaya koyar ve <b>sırayla</b> isim söyler. Oyuncuları <b>Oyuncu ekle</b> ile yazarsın (2–11 kişi).'],
+      online:['🌐','Online oyunda','Herkes <b>kendi telefonundan</b> oynar. İlk turda çarkı <b>oda kurucusu</b>, sonraki turlarda <b>bir önceki turun kazananı</b> çevirir. <b>Başlat yok</b>: 3-2-1 sayılır, sırası gelenin mikrofonu kendiliğinden açılır. Oda kurucusu tur sayısını seçer: 5, 10 ya da harfler bitene kadar.'],
+      chain:['🔗','Son harften devam','Her yeni isim, bir öncekinin <b>son harfiyle</b> başlar. <b>Mavi</b> harf sıradakidir. <b>ı</b> veya <b>ğ</b> ile biten isimde bir önceki harf geçer (Nazlı → Z).','<span>Al<i class="l">i</i></span><span>İlya<i class="l">s</i></span><span>Seli<i class="l">n</i></span>'],
+      bad:['🚫','Geçmeyen isimler','<b>Kırmızı</b>: tekrar eden ya da yanlış harfle başlayan isim. <b>Sarı</b>: listede olmayan isim. Bunlar zinciri ilerletmez. Listede olmayan ismi <b>💡 Öner</b> ile yöneticiye gönderebilirsin.','<span class="r">Ali (tekrar)</span><span class="u">Sarpedon</span>'],
+      time:['⏱','Süre ve elenme','Her isim için <b>3 sn hazırlık + seçtiğin süre</b> (15, 20, 30 ya da 40 sn) var. Son 5 saniye geri sayılır. Süresi biten <b>o tur için elenir</b>, tek kişi kalınca tur biter. Yeni turda herkes geri döner.'],
+      score:['🏆','Puanlar','Her geçerli isim <b>1 puan</b>, turu kazanan <b>+2 puan</b> alır. Tur sonunda özet çıkar, istersen resim olarak paylaşırsın. İyi eğlenceler!']
+    },
+    sugBtn:'Öner', sugSent:'Önerildi ✓', sugNeedLogin:'İsim önermek için giriş yap', sugDone:x=>`"${x}" yöneticiye önerildi`, bannedMsg:d=>d?`Hesabın ${d} tarihine kadar engellendi`:'Hesabın kalıcı olarak engellendi', bannedS:'Engelli hesap',
+    wpTitle:'Duvar kağıdı', wpNames:{none:'Yok', mountain:'Dağlar', sea:'Gün batımı', forest:'Orman gölü', desert:'Çöl', aurora:'Kuzey ışıkları', lavender:'Lavanta', balloons:'Balonlar'},
+    adminBadge:'YÖNETİCİ', bulkHint:'Toplu ekle: her satıra bir isim yaz (virgülle de ayırabilirsin).', bulkAdd:'Toplu ekle', bulkDone:(a,b)=>`${a} isim eklendi${b?` · ${b} tanesi zaten vardı`:''}`, syncing:'Kaydediliyor…', synced:'✓ Herkes için kaydedildi', syncErr:'⚠ Kaydedilemedi, interneti kontrol et',
     playOnline:'Online oyna', playOnlineS:'Arkadaşlarınla, herkes kendi telefonundan', playLocal:'Aynı telefonda oyna', playLocalS:'İnternetsiz, tek telefonda sırayla',
     signIn:'Giriş yap', signUp:'Hesap oluştur', signOut:'Çıkış yap', withGoogle:'Google ile devam et', or:'veya e-posta ile', email:'E-posta', password:'Şifre', password2:'Şifre (tekrar)',
     forgot:'Şifremi unuttum', authLead:'Online oynamak için giriş yap ya da yeni hesap oluştur.',
@@ -721,7 +841,7 @@ const I18N = {
     nmResetQ:'Bu dildəki bütün dəyişikliklər geri qaytarılsın? Yenidən bas.', nmResetDone:'Siyahı ilkin vəziyyətə qaytarıldı',
     about:'Haqqında', aboutText:'İsim Zinciri uşaqlıqda oynadığımız "son hərfdən ad demə" oyununun səsli formasıdır. Çarx ilk hərfi seçir, sən adları deyirsən, tətbiq yazır və yoxlayır.',
     how1:'Çarxı fırlat və "Başla" düyməsinə bas.', how2:'Hər ad əvvəlki adın son hərfi ilə başlamalıdır.', how3:'Təkrar və səhv hərfli adlar qırmızı görünür.', how4:()=>`Hər ad üçün 3 + ${settings.time} saniyən var. Vaxtı bitən oyundan çıxır.`,
-    aboutVer:'Versiya 1.2 · Ayarlar və əlavə etdiyin adlar bu cihazda saxlanılır.',
+    aboutVer:'Versiya 1.3 · Ad siyahısını admin yeniləyir.',
     how5:'Hər düzgün ad 1 xal, raundu qazanan +2 xal alır.',
     players:'Oyunçular', playersHint:'Ən çox 11 oyunçu. Boş saxlasan tək oynayırsan.', addPlayer:'+ Oyunçu əlavə et', playerN:n=>`${n}. oyunçu`,
     save:'Yadda saxla', close:'Bağla', noPlayers:'👤 Oyunçu əlavə et',
@@ -732,6 +852,19 @@ const I18N = {
     nmEditing:x=>`"${x}" redaktə olunur. Yeni formasını yaz və Yadda saxla düyməsinə bas.`, nmEdited:(a,b)=>`"${a}" → "${b}"`, nmTap:'Redaktə üçün ada, silmək üçün × işarəsinə toxun.',
     exp:'⬇ İxrac et', imp:'⬆ İdxal et', backupHint:'Əlavə etdiyin və çıxardığın adları fayla saxla, başqa telefona köçür.',
     impDone:n=>`${n} ad dəyişikliyi idxal olundu`, impErr:'Fayl oxunmadı',
+    howBtn:'❓ Necə oynanılır?', tutLocal:'📱 Bir telefon', tutOnline:'🌐 Onlayn', tutSkip:'Keç', tutPrev:'Geri', tutNext:'İrəli', tutGo:'Oynamağa başla',
+    tut:{
+      wheel:['🔤','Çarx hərfi seçir','<b>Çarxı fırlat</b> düyməsinə bas. Çıxan hərflə başlayan ad deməklə raund başlayır. Hər hərf bir dəfə çıxır.'],
+      local:['📱','Bir telefonda','Hərf çıxanda <b>Başla</b> düyməsinə bas, mikrofon açılır. Oyunçular telefonu ortaya qoyur və <b>növbə ilə</b> ad deyir. Oyunçuları <b>Oyunçu əlavə et</b> ilə yazırsan (2–11 nəfər).'],
+      online:['🌐','Onlayn oyunda','Hər kəs <b>öz telefonundan</b> oynayır. İlk raundda çarxı <b>otağı quran</b>, sonrakı raundlarda <b>əvvəlki raundun qalibi</b> fırladır. <b>Başla düyməsi yoxdur</b>: 3-2-1 sayılır, növbəsi gələnin mikrofonu özü açılır. Otağı quran raund sayını seçir: 5, 10 və ya hərflər bitənədək.'],
+      chain:['🔗','Son hərfdən davam','Hər yeni ad əvvəlkinin <b>son hərfi</b> ilə başlayır. <b>Göy</b> hərf növbətidir. <b>ı</b> və ya <b>ğ</b> ilə bitən adda ondan əvvəlki hərf keçir.','<span>Əl<i class="l">i</i></span><span>İlqa<i class="l">r</i></span><span>Rəşa<i class="l">d</i></span>'],
+      bad:['🚫','Keçməyən adlar','<b>Qırmızı</b>: təkrar və ya səhv hərflə başlayan ad. <b>Sarı</b>: siyahıda olmayan ad. Bunlar zənciri irəlilətmir. Siyahıda olmayan adı <b>💡 Təklif et</b> ilə adminə göndərə bilərsən.','<span class="r">Əli (təkrar)</span><span class="u">Sarpedon</span>'],
+      time:['⏱','Vaxt və mübarizədən çıxma','Hər ad üçün <b>3 san hazırlıq + seçdiyin vaxt</b> (15, 20, 30 və ya 40 san) var. Son 5 saniyə geri sayılır. Vaxtı bitən <b>həmin raund üçün çıxır</b>, bir nəfər qalanda raund bitir. Yeni raundda hamı geri qayıdır.'],
+      score:['🏆','Xallar','Hər düzgün ad <b>1 xal</b>, raundu qazanan <b>+2 xal</b> alır. Raund sonunda xülasə çıxır, istəsən şəkil kimi paylaşırsan. Uğurlar!']
+    },
+    sugBtn:'Təklif et', sugSent:'Təklif olundu ✓', sugNeedLogin:'Ad təklif etmək üçün daxil ol', sugDone:x=>`"${x}" adminə təklif olundu`, bannedMsg:d=>d?`Hesabın ${d} tarixinədək bloklanıb`:'Hesabın həmişəlik bloklanıb', bannedS:'Bloklanmış hesab',
+    wpTitle:'Divar kağızı', wpNames:{none:'Yoxdur', mountain:'Dağlar', sea:'Gün batımı', forest:'Meşə gölü', desert:'Səhra', aurora:'Qütb parıltısı', lavender:'Lavanda', balloons:'Şarlar'},
+    adminBadge:'ADMİN', bulkHint:'Toplu əlavə: hər sətirə bir ad yaz (vergüllə də ayıra bilərsən).', bulkAdd:'Toplu əlavə et', bulkDone:(a,b)=>`${a} ad əlavə olundu${b?` · ${b} ad artıq var idi`:''}`, syncing:'Yadda saxlanılır…', synced:'✓ Hamı üçün yadda saxlanıldı', syncErr:'⚠ Yadda saxlanılmadı, interneti yoxla',
     playOnline:'Onlayn oyna', playOnlineS:'Dostlarınla, hər kəs öz telefonundan', playLocal:'Eyni telefonda oyna', playLocalS:'İnternetsiz, bir telefonda növbə ilə',
     signIn:'Daxil ol', signUp:'Hesab yarat', signOut:'Çıxış', withGoogle:'Google ilə davam et', or:'və ya e-poçt ilə', email:'E-poçt', password:'Şifrə', password2:'Şifrə (təkrar)',
     forgot:'Şifrəmi unutdum', authLead:'Onlayn oynamaq üçün daxil ol və ya yeni hesab yarat.',
@@ -746,8 +879,9 @@ const I18N = {
       'auth/email-already-in-use':'Bu e-poçtla artıq hesab var, daxil olmağa çalış', 'auth/weak-password':'Şifrə ən azı 6 simvol olmalıdır', 'auth/too-many-requests':'Çox cəhd edildi, bir az sonra yenidən yoxla',
       'auth/network-request-failed':'İnternet bağlantısı yoxdur', 'auth/popup-closed-by-user':'Google girişi bağlandı', 'auth/unauthorized-domain':'Bu ünvan Firebase-də icazəli deyil', other:'Problem yarandı, yenidən yoxla' } }
 };
-let settings = { theme:'auto', ui:'tr', players:[], time:10, hardOff:false, sound:true };
+let settings = { wp:'', theme:'auto', ui:'tr', players:[], time:15, hardOff:false, sound:true };
 try { Object.assign(settings, JSON.parse(localStorage.getItem('iz-settings')||'{}')); } catch(_){}
+if (![15,20,30,40].includes(+settings.time)) settings.time = 15;
 function saveSettings(){ try { localStorage.setItem('iz-settings', JSON.stringify(settings)); } catch(_){} }
 function t(k, ...a){ const v = (I18N[settings.ui]||I18N.tr)[k]; return typeof v === 'function' ? v(...a) : (v ?? k); }
 function applyI18n(){
@@ -789,11 +923,13 @@ function renderNames(){
   const mine = new Set(custom[l].add);
   const hits = q ? all.filter(n => n.startsWith(q) || fold(n).startsWith(fold(q))) : all;
   const MAX = 300, show = hits.slice(0, MAX);
-  $('nmList').innerHTML = show.map(n => `<span class="chipn${mine.has(n)?' mine':''}${nmEditing===n?' editing':''}"><span class="nm">${cap(n,l).replace(/</g,'&lt;')}</span></span>`).join('')
+  const adm = document.body.classList.contains('admin');
+  $('nmList').innerHTML = show.map(n => { const e = n.replace(/"/g,'&quot;');
+    return `<span class="chipn${adm&&mine.has(n)?' mine':''}${nmEditing===n?' editing':''}"><span class="nm"${adm?` data-e="${e}"`:''}>${cap(n,l).replace(/</g,'&lt;')}</span>${adm?`<button data-n="${e}" aria-label="sil">×</button>`:''}</span>`; }).join('')
     + (hits.length > MAX ? `<span class="chipn" style="border-style:dashed">${t('nmMore', hits.length - MAX)}</span>` : '')
     + (q && !hits.length ? `<span style="font-size:13px;color:var(--muted)">${t('nmNone2')}</span>` : '');
   $('nmCntTr').textContent = NAMESET.tr.size; $('nmCntAz').textContent = NAMESET.az.size;
-  $('nmInfo').textContent = t('nmInfo', all.length, 0) + ' · ' + t('nmAdminOnly');
+  $('nmInfo').textContent = adm ? t('nmInfo', all.length, 0) + ' · ' + t('nmTap') : t('nmInfo', all.length, 0) + ' · ' + t('nmAdminOnly');
 }
 function nmFlash(txt){ $('nmMsg').textContent = txt; clearTimeout(nmFlash.t); nmFlash.t = setTimeout(() => $('nmMsg').textContent = '', 2500); }
 
@@ -884,7 +1020,7 @@ function spin(){
   const L = activeLetters();
   const pool = L.filter(ch => !used.has(ch));
   if (!pool.length){ $('modal').classList.add('show'); return; }
-  stopListening();
+  statFlush(); stopListening();
   $('sumModal').classList.remove('show');
   spinning = true; $('spinBtn').disabled = true; $('micBtn').disabled = true;
   hub.textContent = '…';
@@ -899,7 +1035,7 @@ function spin(){
   setTimeout(() => {
     spinning = false; current = pick; used.add(pick);
     hub.textContent = pick; hub.classList.add('pop'); setTimeout(()=>hub.classList.remove('pop'), 300);
-    names = []; roundOver = false;
+    names = []; roundOver = false; statIdx = 0; statCounted = false;
     if (P()){ alive = settings.players.map(() => true); turn = startTurn % P(); startTurn++; }
     renderList(); drawWheel(); setPlaying(); keepAwake(true);
     $('spinBtn').disabled = false; $('micBtn').disabled = false;
@@ -907,9 +1043,19 @@ function spin(){
   }, 4700);
 }
 
+let statIdx = 0, statCounted = false;
+const sugSent = new Set();
+function statFlush(){
+  const fresh = names.slice(statIdx); statIdx = names.length;
+  if (!fresh.length || !window.statPush) return;
+  const said = fresh.filter(n => !n.wrong && !n.rep && !n.unk).map(n => n.key);
+  const unk = fresh.filter(n => n.unk && !n.wrong).map(n => n.key);
+  window.statPush(said, unk, !statCounted, lang); statCounted = true;
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) statFlush(); });
 function resetSession(){
-  stopListening();
-  used.clear(); current = null; names = []; hub.textContent = '?'; roundOver = false; resetPlayers(); setPlaying(); keepAwake(false);
+  statFlush(); stopListening();
+  used.clear(); current = null; names = []; statIdx = 0; statCounted = false; hub.textContent = '?'; roundOver = false; resetPlayers(); setPlaying(); keepAwake(false);
   $('spinLabel').textContent = t('spin'); $('micBtn').disabled = true;
   $('legend').style.display = NAMESET[lang] ? 'flex' : 'none';
   drawWheel(); renderList();
@@ -987,7 +1133,7 @@ function nameHtml(n){
 function renderList(){
   const ol = $('list');
   ol.innerHTML = names.map((n,i) =>
-    `<li class="${n.wrong?'wrong':(n.rep?'rep':(n.unk?'unk':''))}"><span class="t" dir="auto">${n.by >= 0 && pname(n.by) ? `<span class="by">${pname(n.by).replace(/</g,'&lt;')}</span>` : ''}${nameHtml(n)}${n.heard?`<small class="hd">${t('heard')} ${n.heard.replace(/</g,'&lt;')}</small>`:''}</span>${n.wrong?`<span class="wt">${t('wrong', n.exp)}</span>`:n.rep?`<span class="tag">${t('rep')}</span>`:(n.unk?`<span class="ut">${t('unk')}</span>`:'')}<button class="x" data-i="${i}" aria-label="Sil">×</button></li>`
+    `<li class="${n.wrong?'wrong':(n.rep?'rep':(n.unk?'unk':''))}"><span class="t" dir="auto">${n.by >= 0 && pname(n.by) ? `<span class="by">${pname(n.by).replace(/</g,'&lt;')}</span>` : ''}${nameHtml(n)}${n.heard?`<small class="hd">${t('heard')} ${n.heard.replace(/</g,'&lt;')}</small>`:''}</span>${n.wrong?`<span class="wt">${t('wrong', n.exp)}</span>`:n.rep?`<span class="tag">${t('rep')}</span>`:(n.unk?`<span class="ut">${t('unk')}</span><button class="sug" data-s="${i}"${sugSent.has(lang+':'+n.key)?' disabled':''}>${sugSent.has(lang+':'+n.key)?t('sugSent'):'💡 '+t('sugBtn')}</button>`:'')}<button class="x" data-i="${i}" aria-label="Sil">×</button></li>`
   ).join('');
   $('empty').style.display = names.length ? 'none' : 'block';
   $('countBadge').textContent = names.filter(n => !n.wrong && !n.unk && !n.rep).length;
@@ -1002,7 +1148,7 @@ function renderList(){
 }
 
 /* ---------- Süre: 3 sn tolerans + 10 sn, son 5 sn geri sayım ---------- */
-const GRACE = 3000; const LIMIT_MS = () => (settings.time || 10) * 1000;
+const GRACE = 3000; const LIMIT_MS = () => (settings.time || 15) * 1000;
 let tStart = 0, tRaf = null, tLastSec = null;
 function hideCount(){ $('count').classList.remove('show'); $('count').innerHTML = ''; }
 function timerStart(){
@@ -1161,7 +1307,7 @@ $('micBtn').onclick = () => { ensureAudio(); listening ? stopListening() : start
 $('resetBtn').onclick = resetSession;
 $('mYes').onclick = () => { $('modal').classList.remove('show'); resetSession(); };
 $('mNo').onclick = () => $('modal').classList.remove('show');
-$('list').onclick = e => { const b = e.target.closest('.x'); if (b) return removeName(+b.dataset.i); const a = e.target.closest('.acc'); if (a) acceptName(+a.dataset.a); };
+$('list').onclick = e => { const b = e.target.closest('.x'); if (b) return removeName(+b.dataset.i); const sg = e.target.closest('.sug'); if (sg){ if (window.suggestName) window.suggestName(names[+sg.dataset.s], lang); return; } const a = e.target.closest('.acc'); if (a) acceptName(+a.dataset.a); };
 $('form').onsubmit = e => { e.preventDefault(); const v = $('input').value; if (v.trim()){ addPhrase(v); $('input').value=''; } };
 $('langs').onclick = e => {
   const b = e.target.closest('.lang'); if (!b || spinning) return;
@@ -1176,6 +1322,108 @@ const THEME_ICO = {
   auto:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>' };
 function updateThemeBtn(){ $('themeIco').innerHTML = THEME_ICO[settings.theme]; $('themeBtn').title = t(settings.theme); }
 function toast(txt){ const el = $('toast'); el.textContent = txt; el.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 1400); }
+/* ---------- Duvar kağıtları (çizim, internet gerekmez) ---------- */
+const WP = (() => {
+  const W = 400, H = 800;
+  function rnd(seed){ let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+  function ridge(y, amp, step, seed, rough = 1){
+    const r = rnd(seed); let d = `M0 ${H} L0 ${y}`, cur = y;
+    for (let x = 0; x <= W + step; x += step){ cur = y + (r() - .5) * amp * 2 * rough + Math.sin(x / 60 + seed) * amp * .5; d += ` L${x} ${cur.toFixed(1)}`; }
+    return d + ` L${W} ${H} Z`;
+  }
+  function hill(y, amp, seed){
+    let d = `M0 ${H} L0 ${y}`;
+    for (let x = 0; x <= W; x += 10) d += ` L${x} ${(y - Math.sin(x / 90 + seed) * amp - Math.sin(x / 37 + seed * 2) * amp * .3).toFixed(1)}`;
+    return d + ` L${W} ${H} Z`;
+  }
+  const g = (id, stops, v = true) => `<linearGradient id="${id}" x1="0" y1="0" x2="${v?0:1}" y2="${v?1:0}">${stops.map(([o,c]) => `<stop offset="${o}" stop-color="${c}"/>`).join('')}</linearGradient>`;
+  const svg = (defs, body) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMax slice"><defs>${defs}</defs>${body}</svg>`;
+  const pine = (x, y, h, c) => `<path d="M${x} ${y-h} L${x-h*.28} ${y-h*.45} L${x-h*.12} ${y-h*.45} L${x-h*.36} ${y} L${x+h*.36} ${y} L${x+h*.12} ${y-h*.45} L${x+h*.28} ${y-h*.45} Z" fill="${c}"/>`;
+  function stars(n, seed, maxY){ const r = rnd(seed); let s = ''; for (let i = 0; i < n; i++) s += `<circle cx="${(r()*W).toFixed(0)}" cy="${(r()*maxY).toFixed(0)}" r="${(r()*1.3+.3).toFixed(1)}" fill="#fff" opacity="${(r()*.7+.3).toFixed(2)}"/>`; return s; }
+
+  const S = {
+    mountain: () => svg(g('s', [[0,'#9cc3e6'],[.55,'#f6d7c3'],[1,'#fbe9d7']]),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/><circle cx="290" cy="330" r="46" fill="#fff4e0" opacity=".9"/>
+       <path d="${ridge(380,40,25,3,1.3)}" fill="#a9b9d6"/><path d="${ridge(450,35,20,7,1.2)}" fill="#7f94bd"/>
+       <path d="${ridge(520,30,18,11)}" fill="#5c739f"/><path d="${ridge(600,22,16,17)}" fill="#3f5580"/><path d="${ridge(690,14,14,23)}" fill="#2b3d61"/>`),
+    sea: () => svg(g('s', [[0,'#3b2c6b'],[.35,'#c8577a'],[.62,'#f6a25d'],[.64,'#2d4f7c'],[1,'#13284a']]) + g('r', [[0,'#ffd08a'],[1,'#ffd08a00']]),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/><circle cx="200" cy="500" r="62" fill="#ffd9a0"/>
+       <rect x="0" y="512" width="${W}" height="${H}" fill="#24426d"/><rect x="0" y="512" width="${W}" height="${H}" fill="url(#s)" opacity=".35"/>
+       ${[0,1,2,3,4,5,6,7,8].map(i => `<rect x="${170 - i*4 + (i%2)*10}" y="${525 + i*16}" width="${60 + i*8}" height="3" rx="1.5" fill="#ffd08a" opacity="${.8 - i*.08}"/>`).join('')}
+       <path d="M0 513 L0 478 Q30 452 70 470 Q100 482 125 513 Z" fill="#2a2148"/><path d="M300 513 Q340 492 400 488 L400 513 Z" fill="#2a2148" opacity=".8"/>`),
+    forest: () => svg(g('s', [[0,'#bfe3ef'],[.6,'#e9f4e6'],[1,'#e9f4e6']]) + g('l', [[0,'#7fb8c8'],[1,'#3f7f8f']]),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/><path d="${ridge(400,30,22,9,1.2)}" fill="#a3c7c0"/>
+       <path d="${hill(470,20,2)}" fill="#6f9f88"/><rect x="0" y="560" width="${W}" height="${H}" fill="url(#l)"/>
+       ${[20,55,95,130,300,335,370].map((x,i) => pine(x, 562, 70 + (i*23)%40, '#2f5d4b')).join('')}
+       <path d="${hill(680,18,4)}" fill="#2e5a3f"/>${[30,80,330,385].map((x,i) => pine(x, 700, 110 + i*12, '#1f3f2e')).join('')}`),
+    desert: () => svg(g('s', [[0,'#f7c98b'],[.5,'#fbe3b8'],[1,'#fbe3b8']]),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/><circle cx="110" cy="300" r="52" fill="#fff1d2"/>
+       <path d="${hill(470,30,1)}" fill="#e9b56f"/><path d="${hill(560,40,3)}" fill="#d9944c"/>
+       <path d="${hill(660,35,5)}" fill="#c27a36"/><path d="${hill(740,25,8)}" fill="#a8622a"/>
+       <g fill="#6b3f1e"><rect x="300" y="545" width="6" height="40" rx="3"/><rect x="290" y="555" width="5" height="18" rx="2.5"/><rect x="311" y="551" width="5" height="16" rx="2.5"/></g>`),
+    aurora: () => svg(g('s', [[0,'#050b1e'],[.6,'#0c2340'],[1,'#123552']]) + g('a', [[0,'#3dffb200'],[.5,'#3dffb2'],[1,'#7b5cff00']], false),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/>${stars(90, 13, 500)}
+       <path d="M-20 260 C 90 160, 180 360, 260 230 S 400 200, 430 260 L430 330 C 360 290, 300 400, 210 320 S 60 300, -20 360 Z" fill="url(#a)" opacity=".55"/>
+       <path d="M-20 330 C 100 260, 200 420, 300 300 S 420 330, 430 320 L430 360 C 320 380, 260 430, 160 380 S 30 400, -20 420 Z" fill="url(#a)" opacity=".35"/>
+       <path d="${ridge(560,40,22,4,1.3)}" fill="#1d3550"/><path d="${hill(650,20,6)}" fill="#dfe9f2"/><path d="${hill(720,15,9)}" fill="#c3d3e2"/>
+       ${[40,90,320,370].map((x,i) => pine(x, 735, 80 + i*10, '#0f2236')).join('')}`),
+    lavender: () => svg(g('s', [[0,'#f7b9a6'],[.45,'#fde4c8'],[1,'#fde4c8']]),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/><circle cx="270" cy="360" r="40" fill="#fff3dc"/>
+       <path d="${hill(440,12,3)}" fill="#b7a2c9"/><path d="${hill(470,10,7)}" fill="#8e76b0"/>
+       ${Array.from({length:14}, (_,i) => { const x = W/2 + (i-6.5)*14; const bx = W/2 + (i-6.5)*90; return `<path d="M${x} 475 L${bx-22} ${H} L${bx+22} ${H} Z" fill="${i%2?'#7c5ea8':'#6a4b96'}"/>`; }).join('')}
+       <g fill="#4d6b3a"><rect x="60" y="430" width="5" height="36"/><circle cx="62" cy="425" r="20"/></g>`),
+    balloons: () => svg(g('s', [[0,'#8fc6ea'],[.6,'#f9dfc6'],[1,'#f3c9a2']]),
+      `<rect width="${W}" height="${H}" fill="url(#s)"/>
+       ${[[90,260,26,'#e85d4a'],[260,190,34,'#f0be3c'],[320,330,20,'#2f6f5e'],[160,380,16,'#7c5ea8'],[40,430,12,'#f08a3c']].map(([x,y,r,c]) => `<g><ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r*1.15}" fill="${c}"/><path d="M${x-r*.9} ${y+r*.5} L${x-r*.25} ${y+r*1.6} M${x+r*.9} ${y+r*.5} L${x+r*.25} ${y+r*1.6}" stroke="#6b4a2f" stroke-width="1"/><rect x="${x-r*.25}" y="${y+r*1.55}" width="${r*.5}" height="${r*.4}" rx="2" fill="#6b4a2f"/><path d="M${x} ${y-r*1.15} Q${x-r*.5} ${y} ${x} ${y+r*1.1}" stroke="#fff" stroke-opacity=".35" stroke-width="2" fill="none"/></g>`).join('')}
+       <path d="${hill(560,26,2)}" fill="#e2a879"/>
+       ${[[60,600,34],[120,590,46],[175,605,30],[250,585,54],[320,598,38],[375,592,44]].map(([x,y,h]) => `<path d="M${x-14} ${y+30} L${x-8} ${y-h} Q${x} ${y-h-14} ${x+8} ${y-h} L${x+14} ${y+30} Z" fill="#cf8f5e"/>`).join('')}
+       <path d="${hill(650,18,5)}" fill="#c27b4c"/><path d="${hill(730,14,8)}" fill="#a2603a"/>`)
+  };
+  const cache = {};
+  const url = k => cache[k] || (cache[k] = 'url("data:image/svg+xml;charset=utf-8,' + encodeURIComponent(S[k]()) + '")');
+  return { keys: Object.keys(S), url };
+})();
+function applyWp(){
+  const k = settings.wp && WP.keys.includes(settings.wp) ? settings.wp : '';
+  document.body.classList.toggle('wp', !!k);
+  if (k) document.body.style.setProperty('--wpimg', WP.url(k)); else document.body.style.removeProperty('--wpimg');
+}
+function renderWp(){
+  const N = t('wpNames'), cur = settings.wp || '';
+  $('wpGrid').innerHTML = `<button class="wp-it none${cur?'':' on'}" data-k=""><i>∅</i><span>${N.none}</span></button>` +
+    WP.keys.map(k => `<button class="wp-it${cur===k?' on':''}" data-k="${k}"><i style='background-image:${WP.url(k)}'></i><span>${N[k]}</span></button>`).join('');
+}
+$('wpBtn').onclick = () => { renderWp(); $('wpPop').classList.add('show'); };
+$('wpClose').onclick = () => $('wpPop').classList.remove('show');
+$('wpPop').onclick = e => { if (e.target.id === 'wpPop') $('wpPop').classList.remove('show'); };
+$('wpGrid').onclick = e => { const b = e.target.closest('[data-k]'); if (!b) return; settings.wp = b.dataset.k; saveSettings(); applyWp(); renderWp(); };
+applyWp();
+
+/* ---------- Nasıl oynanır ---------- */
+let tutMode = 'local', tutI = 0;
+const tutSeq = () => ['wheel', tutMode, 'chain', 'bad', 'time', 'score'];
+function renderTut(){
+  const T = t('tut'), seq = tutSeq(), k = seq[tutI], [ico, h, p, ex] = T[k];
+  $('tutSlide').innerHTML = `<div class="tut-ico">${ico}</div><h2>${h}</h2>${ex ? `<div class="tut-ex">${ex}</div>` : ''}<p>${p}</p>`;
+  $('tutDots').innerHTML = seq.map((_, i) => `<i class="${i === tutI ? 'on' : ''}"></i>`).join('');
+  const b = document.querySelectorAll('#tutSeg button'); b[0].textContent = t('tutLocal'); b[1].textContent = t('tutOnline'); segSet('tutSeg', tutMode);
+  $('tutSkip').textContent = t('tutSkip'); $('tutPrev').textContent = t('tutPrev');
+  $('tutPrev').style.visibility = tutI ? 'visible' : 'hidden';
+  $('tutNext').textContent = tutI === seq.length - 1 ? t('tutGo') : t('tutNext');
+}
+function openTut(mode){ tutMode = mode || 'local'; tutI = 0; renderTut(); $('tut').classList.add('show'); if (window.armBack) armBack(); }
+function closeTut(){ $('tut').classList.remove('show'); try { localStorage.setItem('iz-tut', '1'); } catch(_){} }
+$('tutSeg').onclick = e => { const b = e.target.closest('button'); if (b){ tutMode = b.dataset.v; renderTut(); } };
+$('tutSkip').onclick = closeTut;
+$('tutPrev').onclick = () => { if (tutI){ tutI--; renderTut(); } };
+$('tutNext').onclick = () => { if (tutI < tutSeq().length - 1){ tutI++; renderTut(); } else closeTut(); };
+(() => { let x0 = null; const el = $('tutSlide');
+  el.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive:true });
+  el.addEventListener('touchend', e => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (dx < -50) $('tutNext').click(); else if (dx > 50) $('tutPrev').click(); }); })();
+$('homeHow').onclick = () => openTut('local');
+$('setHow').onclick = () => openTut('local');
+try { if (!localStorage.getItem('iz-tut')) setTimeout(() => openTut('local'), 400); } catch(_){}
 $('themeBtn').onclick = () => {
   settings.theme = { light:'dark', dark:'auto', auto:'light' }[settings.theme] || 'light';
   saveSettings(); applyTheme(); updateThemeBtn(); toast(t('themeIs', t(settings.theme)));
@@ -1203,6 +1451,15 @@ $('nmList').onclick = e => {
   const e2 = e.target.closest('[data-e]'); if (!e2) return;
   nmEditing = e2.dataset.e; $('nmInput').value = cap(nmEditing, nmLang); $('nmAdd').textContent = t('save');
   nmFlash(t('nmEditing', cap(nmEditing, nmLang))); renderNames(); $('nmInput').focus();
+};
+$('nmBulkAdd').onclick = () => {
+  const loc = LANGS[nmLang].locale;
+  const list = [...new Set($('nmBulk').value.split(/[\n,;]+/).map(x => x.trim().replace(/\s+/g,' ').toLocaleLowerCase(loc)).filter(Boolean))];
+  if (!list.length) return;
+  let a = 0, b = 0, prev = window.adminSync; window.adminSync = null;
+  for (const k of list){ if (NAMESET[nmLang].has(k)){ b++; continue; } addCustom(nmLang, k); a++; }
+  window.adminSync = prev; saveCustom();
+  $('nmBulk').value = ''; renderNames(); nmFlash(t('bulkDone', a, b));
 };
 /* Oyun ayarları */
 $('timeSeg').onclick = e => { const b = e.target.closest('button'); if (!b) return; settings.time = +b.dataset.v; saveSettings(); renderGameSettings(); };
@@ -1325,13 +1582,229 @@ async function fbInit(){
     const db = F.getFirestore(app);
     FB = { A, U, F, app, auth, db };
     U.getRedirectResult(auth).catch(e => authErr(e));
+    namesReady = loadRemoteNames(); loadAnn();
     U.onAuthStateChanged(auth, async u => {
-      me = u; profile = null;
-      if (u) await loadProfile();
+      me = u; profile = null; setAdmin(false);
+      if (u){ await loadProfile(); checkAdmin(); }
       fbReady = true; renderAcct(); afterAuth();
     });
   } catch(e){ console.warn('Firebase yüklenemedi', e); fbReady = false; renderAcct(); }
 }
+/* ---------- İsim listesi (admin) ---------- */
+let namesReady = Promise.resolve(), isAdminUser = false, syncT = null;
+async function loadRemoteNames(){
+  try {
+    const s = await FB.F.getDoc(FB.F.doc(FB.db, 'config', 'names'));
+    const d = s.exists() ? s.data() : {};
+    const norm = x => ({ add: Array.isArray(x && x.add) ? x.add : [], del: Array.isArray(x && x.del) ? x.del : [] });
+    custom = { tr: norm(d.tr), az: norm(d.az) };
+    try { localStorage.setItem('iz-admin', JSON.stringify(custom)); } catch(_){}
+    buildIndexes(); renderNames(); recompute();
+  } catch(e){ console.warn('İsim listesi alınamadı', e); }
+}
+function setAdmin(v){ isAdminUser = v; document.body.classList.toggle('admin', v); window.adminSync = v ? queueSync : null; renderNames(); }
+async function checkAdmin(){
+  try {
+    const s = await FB.F.getDoc(FB.F.doc(FB.db, 'admins', me.uid));
+    if (s.exists()){ await namesReady; setAdmin(true); renderAcct(); loadSugCount(); }
+  } catch(_){}
+}
+function queueSync(){
+  $('nmSync').textContent = t('syncing');
+  clearTimeout(syncT); syncT = setTimeout(pushNames, 800);
+}
+async function pushNames(){
+  if (!isAdminUser) return;
+  try {
+    await FB.F.setDoc(FB.F.doc(FB.db, 'config', 'names'), { tr: custom.tr, az: custom.az, updatedAt: FB.F.serverTimestamp(), by: me.uid });
+    $('nmSync').textContent = t('synced');
+  } catch(e){ console.warn(e); $('nmSync').textContent = t('syncErr'); }
+}
+/* ===================== YÖNETİCİ PANELİ ===================== */
+const escH = x => String(x == null ? '' : x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const today = () => new Date().toLocaleDateString('sv');
+const FOREVER = new Date('9999-01-01T00:00:00Z');
+function banEnd(p){ const b = p && p.bannedUntil; const ms = b && b.toMillis ? b.toMillis() : 0; return ms > Date.now() ? ms : 0; }
+function banText(ms){ return ms >= FOREVER.getTime() - 864e5 ? '' : new Date(ms).toLocaleDateString(settings.ui === 'az' ? 'az' : 'tr', { day:'numeric', month:'long', year:'numeric' }); }
+const isBanned = () => !!banEnd(profile);
+
+/* --- İstatistik kaydı (her tur sonunda) --- */
+window.statPush = async (said, unk, game, l) => {
+  if (!FB || !me || !profile || isBanned()) return;
+  const { F } = FB, inc = F.increment(1), obj = {};
+  if (game) obj.games = inc;
+  const put = (key, arr) => { if (!arr.length) return; const m = {}; arr.slice(0, 40).forEach(k => { if (k) m[k] = inc; }); obj[key] = { [l]: m }; };
+  put('said', said); put('unknown', unk);
+  if (!Object.keys(obj).length) return;
+  obj.updatedAt = F.serverTimestamp();
+  try {
+    await Promise.all([F.setDoc(F.doc(FB.db, 'stats', 'total'), obj, { merge:true }), F.setDoc(F.doc(FB.db, 'stats', 'day_' + today()), obj, { merge:true })]);
+  } catch(e){ console.warn('istatistik', e); }
+};
+
+/* --- Oyuncu isim önerisi --- */
+window.suggestName = async (n, l) => {
+  if (!n) return;
+  if (!FB || !me || !profile){ toast(t('sugNeedLogin')); return; }
+  if (isBanned()){ toast(t('bannedMsg', banText(banEnd(profile)))); return; }
+  const id = l + ':' + n.key; if (sugSent.has(id)) return;
+  sugSent.add(id); renderList();
+  try {
+    await FB.F.addDoc(FB.F.collection(FB.db, 'suggestions'), { name:n.key, lang:l, uid:me.uid, uname:profile.username || '', createdAt:FB.F.serverTimestamp() });
+    toast(t('sugDone', n.text));
+  } catch(e){ sugSent.delete(id); renderList(); toast(t('netErr')); }
+};
+
+/* --- Duyuru (herkes görür) --- */
+let annData = null;
+async function loadAnn(){
+  try { const s = await FB.F.getDoc(FB.F.doc(FB.db, 'config', 'announce')); annData = s.exists() ? s.data() : null; } catch(_){ annData = null; }
+  renderAnn();
+}
+function annKey(){ return annData && annData.updatedAt && annData.updatedAt.toMillis ? String(annData.updatedAt.toMillis()) : ''; }
+function renderAnn(){
+  let hid = ''; try { hid = localStorage.getItem('iz-ann-hide') || ''; } catch(_){}
+  const show = annData && annData.on && annData.text && hid !== annKey();
+  $('annBox').innerHTML = show ? `<div class="ann"><span>📣</span><span class="grow">${escH(annData.text)}</span><button id="annX" aria-label="Kapat">×</button></div>` : '';
+  if (show) $('annX').onclick = () => { try { localStorage.setItem('iz-ann-hide', annKey()); } catch(_){} renderAnn(); };
+}
+
+/* --- Panel --- */
+let admTab = 'sum', admLang = 'tr', sugGroups = [];
+function openAdmin(){ if (!isAdminUser) return; openPage('adminPage'); admShow(admTab); loadSugCount(); }
+$('goAdmin').onclick = openAdmin;
+$('admTabs').onclick = e => { const b = e.target.closest('button'); if (b) admShow(b.dataset.v); };
+function admShow(v){
+  admTab = v; document.querySelectorAll('#admTabs button').forEach(b => b.classList.toggle('on', b.dataset.v === v));
+  ({ sum:admSummary, sug:admSug, users:admUsers, ann:admAnn, rooms:admRooms })[v]();
+}
+const box = (title, inner) => `<section class="s-sec"><h3>${title}</h3>${inner}</section>`;
+const loading = () => { $('admBody').innerHTML = `<p class="s-note" style="text-align:center;padding:30px 0">Yükleniyor…</p>`; };
+const langSeg = () => `<div class="seg" id="admLang" style="margin-bottom:10px"><button data-v="tr" class="${admLang==='tr'?'on':''}">Türkçe</button><button data-v="az" class="${admLang==='az'?'on':''}">Azərbaycan</button></div>`;
+
+async function admSummary(){
+  loading();
+  const { F, db } = FB;
+  let users = '—', tot = {}, day = {};
+  try { users = (await F.getCountFromServer(F.collection(db, 'users'))).data().count; } catch(e){ console.warn(e); }
+  try { const a = await F.getDoc(F.doc(db, 'stats', 'total')); tot = a.exists() ? a.data() : {}; } catch(e){ console.warn(e); }
+  try { const b = await F.getDoc(F.doc(db, 'stats', 'day_' + today())); day = b.exists() ? b.data() : {}; } catch(e){ console.warn(e); }
+  if (admTab !== 'sum') return;
+  const top = (m, n) => Object.entries(m || {}).sort((a,b) => b[1]-a[1]).slice(0, n);
+  const said = top((tot.said || {})[admLang], 15), mx = said.length ? said[0][1] : 1;
+  const unk = top((tot.unknown || {})[admLang], 60).filter(([k]) => !NAMESET[admLang].has(k)).slice(0, 20);
+  $('admBody').innerHTML =
+    `<div class="kpis"><div class="kpi"><b>${users}</b><small>Toplam kullanıcı</small></div><div class="kpi"><b>${day.games || 0}</b><small>Bugün oynanan oyun</small></div>
+     <div class="kpi"><b>${tot.games || 0}</b><small>Toplam oyun</small></div><div class="kpi"><b>${sugGroups.length || $('sugCnt').textContent || 0}</b><small>Bekleyen öneri</small></div></div>
+     <p class="s-note" style="margin:4px 0 14px">Oyunlar, oyuncu giriş yapmışken oynandığında sayılır.</p>` +
+    langSeg() +
+    box('En çok söylenen isimler', said.length ? said.map(([k,v],i) => `<div class="arow"><span class="num">${i+1}</span><span class="grow">${escH(cap(k, admLang))}<div class="bar" style="width:${Math.max(6, v/mx*100)}%"></div></span><span class="num">${v}</span></div>`).join('') : '<p class="s-note">Henüz veri yok.</p>') +
+    box('"Listede yok" denilenler', unk.length ? unk.map(([k,v]) => `<div class="arow"><span class="grow">${escH(cap(k, admLang))}<small>${v} kez söylendi</small></span><button class="abtn ok" data-add="${escH(k)}">+ Listeye ekle</button></div>`).join('') : '<p class="s-note">Listede olmayan isim söylenmemiş.</p>');
+  $('admLang').onclick = e => { const b = e.target.closest('button'); if (b){ admLang = b.dataset.v; admSummary(); } };
+  $('admBody').querySelectorAll('[data-add]').forEach(b => b.onclick = () => { addCustom(admLang, b.dataset.add); b.disabled = true; b.textContent = 'Eklendi ✓'; toast(`"${cap(b.dataset.add, admLang)}" eklendi`); });
+}
+
+async function fetchSug(){
+  const { F, db } = FB;
+  const snap = await F.getDocs(F.query(F.collection(db, 'suggestions'), F.orderBy('createdAt', 'desc'), F.limit(300)));
+  const g = new Map();
+  snap.forEach(d => { const x = d.data(), k = x.lang + ':' + x.name;
+    if (!g.has(k)) g.set(k, { name:x.name, lang:x.lang, ids:[], who:new Set(), at:x.createdAt });
+    const it = g.get(k); it.ids.push(d.id); if (x.uname) it.who.add(x.uname); });
+  sugGroups = [...g.values()].sort((a,b) => b.ids.length - a.ids.length);
+  $('sugCnt').textContent = sugGroups.length || '';
+}
+async function loadSugCount(){ try { await fetchSug(); } catch(e){ console.warn(e); } }
+async function admSug(){
+  loading();
+  try { await fetchSug(); } catch(e){ $('admBody').innerHTML = `<p class="s-note">Öneriler alınamadı.</p>`; return; }
+  if (admTab !== 'sug') return;
+  const flag = l => l === 'az' ? '🇦🇿' : '🇹🇷';
+  $('admBody').innerHTML = box('Oyunculardan gelen isim önerileri', sugGroups.length ? sugGroups.map((x,i) => {
+    const inList = NAMESET[x.lang].has(x.name);
+    return `<div class="arow"><span>${flag(x.lang)}</span><span class="grow"><b>${escH(cap(x.name, x.lang))}</b><small>${x.ids.length} öneri · ${escH([...x.who].map(u => '@'+u).join(', '))}${inList?' · zaten listede':''}</small></span>
+      <button class="abtn ok" data-ok="${i}">✓ Ekle</button><button class="abtn no" data-no="${i}">✕</button></div>`; }).join('') : '<p class="s-note">Yeni öneri yok. Oyuncular "Listede yok" çıkan isimlerin yanındaki 💡 Öner butonuyla buraya öneri gönderir.</p>');
+  const done = async (i, add) => {
+    const x = sugGroups[i]; if (!x) return;
+    if (add) addCustom(x.lang, x.name);
+    try { await Promise.all(x.ids.map(id => FB.F.deleteDoc(FB.F.doc(FB.db, 'suggestions', id)))); } catch(e){ toast('Silinemedi'); }
+    toast(add ? `"${cap(x.name, x.lang)}" listeye eklendi` : 'Öneri reddedildi'); admSug();
+  };
+  $('admBody').querySelectorAll('[data-ok]').forEach(b => b.onclick = () => { b.disabled = true; done(+b.dataset.ok, true); });
+  $('admBody').querySelectorAll('[data-no]').forEach(b => b.onclick = () => { b.disabled = true; done(+b.dataset.no, false); });
+}
+
+let admQ = '';
+function admUsers(){
+  $('admBody').innerHTML = `<div class="ainput"><input id="uQ" placeholder="Kullanıcı adı ara…" value="${escH(admQ)}" autocomplete="off" autocapitalize="off"><button class="abtn ok" id="uGo">Ara</button></div><div id="uRes"></div>`;
+  $('uGo').onclick = () => { admQ = $('uQ').value.trim().replace(/^@/, ''); loadUsers(); };
+  $('uQ').onkeydown = e => { if (e.key === 'Enter') $('uGo').click(); };
+  loadUsers();
+}
+async function loadUsers(){
+  const { F, db } = FB, q = admQ.toLocaleLowerCase('tr');
+  $('uRes').innerHTML = `<p class="s-note">Yükleniyor…</p>`;
+  let snap;
+  try {
+    snap = q ? await F.getDocs(F.query(F.collection(db, 'users'), F.where('unameLower', '>=', q), F.where('unameLower', '<=', q + ''), F.limit(25)))
+             : await F.getDocs(F.query(F.collection(db, 'users'), F.orderBy('createdAt', 'desc'), F.limit(25)));
+  } catch(e){ console.warn(e); $('uRes').innerHTML = `<p class="s-note">Kullanıcılar alınamadı.</p>`; return; }
+  const rows = []; snap.forEach(d => rows.push({ id:d.id, ...d.data() }));
+  $('uRes').innerHTML = `<h3 class="s-note" style="margin-bottom:4px">${q ? 'Arama sonuçları' : 'Son katılanlar'}</h3>` + (rows.length ? rows.map(u => {
+    const b = banEnd(u), self = u.id === me.uid, when = u.createdAt && u.createdAt.toDate ? u.createdAt.toDate().toLocaleDateString('tr') : '';
+    return `<div class="urow" data-u="${u.id}"><div class="top2"><span class="av">${u.photo ? `<img src="${escH(u.photo)}" alt="" referrerpolicy="no-referrer">` : escH((u.username||'?').charAt(0).toUpperCase())}</span>
+      <span class="grow"><b>@${escH(u.username)}</b>${b ? `<span class="ban">${banText(b) ? banText(b) + "'e kadar engelli" : 'Kalıcı engelli'}</span>` : ''}<small style="display:block;color:var(--muted);font-size:12px">${when ? 'Katıldı: ' + when : ''}${self ? ' · sen' : ''}</small></span></div>
+      ${self ? '' : `<div class="ubtns"><button class="abtn" data-act="ren">✏️ Adını değiştir</button><button class="abtn no" data-act="7">7 gün engelle</button><button class="abtn no" data-act="30">30 gün engelle</button><button class="abtn no" data-act="inf">Süresiz engelle</button>${b ? '<button class="abtn ok" data-act="unban">Engeli kaldır</button>' : ''}</div>`}</div>`; }).join('') : '<p class="s-note">Kullanıcı bulunamadı.</p>');
+  $('uRes').querySelectorAll('[data-act]').forEach(btn => btn.onclick = () => userAct(rows.find(r => r.id === btn.closest('[data-u]').dataset.u), btn.dataset.act, btn));
+}
+async function userAct(u, act, btn){
+  const { F, db } = FB, ref = F.doc(db, 'users', u.id);
+  if (act === 'ren'){
+    const row = btn.closest('.urow'); if (row.querySelector('.ainput')) return;
+    row.insertAdjacentHTML('beforeend', `<div class="ainput" style="margin-top:8px"><input placeholder="yeni kullanıcı adı" autocapitalize="off" value="${escH(u.username)}"><button class="abtn ok">Kaydet</button></div><small class="s-note">3-16 karakter: harf, rakam, _ ve .</small>`);
+    const inp = row.querySelector('.ainput input'); inp.focus();
+    row.querySelector('.ainput button').onclick = async () => {
+      const nu = inp.value.trim().replace(/^@/, ''), key = nu.toLocaleLowerCase('tr');
+      if (!UNAME_RE.test(key)){ toast('Geçersiz kullanıcı adı'); return; }
+      try {
+        await F.runTransaction(db, async tx => {
+          const nref = F.doc(db, 'usernames', key), ex = await tx.get(nref);
+          if (ex.exists() && ex.data().uid !== u.id) throw new Error('taken');
+          if (u.unameLower && u.unameLower !== key) tx.delete(F.doc(db, 'usernames', u.unameLower));
+          if (!ex.exists()) tx.set(nref, { uid:u.id });
+          tx.update(ref, { username:nu, unameLower:key, updatedAt:F.serverTimestamp() });
+        });
+        toast(`@${u.username} → @${nu}`); loadUsers();
+      } catch(e){ toast(e.message === 'taken' ? 'Bu kullanıcı adı alınmış' : 'Değiştirilemedi'); }
+    };
+    return;
+  }
+  const label = { '7':'7 gün', '30':'30 gün', inf:'süresiz', unban:'' }[act];
+  if (act !== 'unban' && !btn.dataset.sure){ btn.dataset.sure = 1; btn.textContent = 'Emin misin? Tekrar bas'; setTimeout(() => { delete btn.dataset.sure; btn.textContent = label + ' engelle'; btn.textContent = btn.textContent.charAt(0).toUpperCase() + btn.textContent.slice(1); }, 3500); return; }
+  try {
+    if (act === 'unban') await F.updateDoc(ref, { bannedUntil:F.deleteField() });
+    else await F.updateDoc(ref, { bannedUntil:F.Timestamp.fromDate(act === 'inf' ? FOREVER : new Date(Date.now() + (+act) * 864e5)) });
+    toast(act === 'unban' ? `@${u.username} engeli kaldırıldı` : `@${u.username} ${label} engellendi`); loadUsers();
+  } catch(e){ console.warn(e); toast('İşlem yapılamadı'); }
+}
+
+async function admAnn(){
+  loading(); await loadAnn();
+  if (admTab !== 'ann') return;
+  const a = annData || {};
+  $('admBody').innerHTML = box('Duyuru', `<p class="s-note">Herkesin açılış ekranında görünür. Oyuncu kapatana kadar kalır, metni değiştirince yeniden görünür.</p>
+    <textarea class="atext" id="annT" rows="4" maxlength="300" placeholder="Örn: 200 yeni isim eklendi!">${escH(a.text)}</textarea>
+    <label class="tg"><span><b>Duyuru yayında</b></span><input type="checkbox" id="annOn"${a.on ? ' checked' : ''}><i></i></label>
+    <button class="btn spin sm" id="annSave" style="width:100%;margin-top:10px">Kaydet</button>`);
+  $('annSave').onclick = async () => {
+    try { await FB.F.setDoc(FB.F.doc(FB.db, 'config', 'announce'), { text:$('annT').value.trim(), on:$('annOn').checked, updatedAt:FB.F.serverTimestamp() });
+      toast('Duyuru kaydedildi'); loadAnn(); } catch(e){ toast('Kaydedilemedi'); }
+  };
+}
+function admRooms(){
+  $('admBody').innerHTML = box('Açık odalar', `<div class="soon"><div class="big">🎮</div><b>Online oyun eklenince burada görünecek</b><p>Açık odaları, oyuncuları ve oyun durumunu buradan izleyip gerekirse odayı kapatabileceksin.</p></div>`);
+}
+
 async function loadProfile(){
   try { const s = await FB.F.getDoc(FB.F.doc(FB.db, 'users', me.uid)); profile = s.exists() ? s.data() : null; } catch(_){ profile = null; }
 }
@@ -1340,7 +1813,7 @@ function afterAuth(){
   if (isOpen('authPage')){
     closePage('authPage');
     if (!profile || !profile.username) openPage('unamePage');
-    else if (pendingRoute === 'online'){ pendingRoute = null; openOnline(); }
+    else if (pendingRoute === 'online'){ pendingRoute = null; if (isBanned()) toast(t('bannedMsg', banText(banEnd(profile)))); else openOnline(); }
   }
 }
 
@@ -1348,16 +1821,17 @@ function afterAuth(){
 const isOpen = id => $(id).classList.contains('open');
 function openPage(id){ $(id).classList.add('open'); $(id).setAttribute('aria-hidden','false'); armBack(); }
 function closePage(id){ $(id).classList.remove('open'); $(id).setAttribute('aria-hidden','true'); }
-function showHome(){ stopListening(); timerStop(); $('home').classList.remove('hide'); renderAcct(); }
+function showHome(){ statFlush(); stopListening(); timerStop(); $('home').classList.remove('hide'); renderAcct(); }
 function hideHome(){ $('home').classList.add('hide'); }
 function navTop(){
-  for (const id of ['unamePage','authPage','sheet','onlinePage']) if (isOpen(id)) return id;
+  for (const id of ['adminPage','unamePage','authPage','sheet','onlinePage']) if (isOpen(id)) return id;
   return $('home').classList.contains('hide') ? 'game' : null;
 }
 let backArmed = false;
 function armBack(){ if (!backArmed){ try { history.pushState({ iz:1 }, ''); backArmed = true; } catch(_){} } }
 window.addEventListener('popstate', () => {
   backArmed = false;
+  if ($('tut').classList.contains('show')){ closeTut(); if (navTop()) armBack(); return; }
   const top = navTop(); if (!top) return;
   if (top === 'game') showHome(); else if (top === 'sheet') closeSettings(); else closePage(top);
   if (navTop()) armBack();
@@ -1374,9 +1848,10 @@ function renderAcct(){
   const esc = x => String(x || '').replace(/</g,'&lt;');
   let home, set;
   if (me && profile && profile.username){
-    const who = `${avHtml()}<span class="who"><b>@${esc(profile.username)}</b><small>${esc(me.email)}</small></span>`;
+    const bn = banEnd(profile);
+    const who = `${avHtml()}<span class="who"><b>@${esc(profile.username)}</b><small>${bn ? `<span style="color:var(--red)">${esc(t('bannedMsg', banText(bn)))}</span>` : esc(me.email)}</small></span>`;
     home = who;
-    set = `<div class="acct">${who}</div><div class="row"><button class="btn ghost sm" id="setUname">${t('changeUname')}</button><button class="btn ghost sm" id="setOut">${t('signOut')}</button></div>`;
+    set = `<div class="acct">${who}</div><div class="row">${isAdminUser ? `<button class="btn spin sm" id="setAdmin">🛠 Yönetici paneli</button>` : ''}<button class="btn ghost sm" id="setUname">${t('changeUname')}</button><button class="btn ghost sm" id="setOut">${t('signOut')}</button></div>`;
   } else if (me){
     const who = `${avHtml()}<span class="who"><b>${esc(me.email)}</b><small>${t('pickUname')}</small></span>`;
     home = who + `<button class="btn spin" id="homeUname">${t('pickUname')}</button>`;
@@ -1388,7 +1863,7 @@ function renderAcct(){
   }
   $('acctCard').innerHTML = home; $('setAcct').innerHTML = set;
   const on = (id, fn) => { const el = $(id); if (el) el.onclick = fn; };
-  on('homeSign', () => openAuth()); on('setSign', () => openAuth());
+  on('setAdmin', () => openAdmin()); on('homeSign', () => openAuth()); on('setSign', () => openAuth());
   on('homeUname', () => openPage('unamePage')); on('setUname', () => { $('uName').value = profile && profile.username || ''; openPage('unamePage'); });
   on('setOut', async () => { try { await FB.U.signOut(FB.auth); toast(t('signOut')); } catch(_){} });
   if (isOpen('onlinePage')) $('onlineMe').innerHTML = `${avHtml()}<span><b>@${esc(profile && profile.username)}</b><small>${esc(me && me.email)}</small></span>`;
@@ -1406,7 +1881,9 @@ $('goOnline').onclick = () => {
   pendingRoute = 'online';
   if (!me) return openAuth();
   if (!profile || !profile.username) return openPage('unamePage');
-  pendingRoute = null; openOnline();
+  pendingRoute = null;
+  if (isBanned()){ toast(t('bannedMsg', banText(banEnd(profile)))); return; }
+  openOnline();
 };
 $('homeSet').onclick = () => { openSettings(); armBack(); };
 $('setBtn').onclick = () => { openSettings(); armBack(); };
@@ -1484,7 +1961,7 @@ $('unameForm').onsubmit = async e => {
     });
     await loadProfile(); renderAcct();
     toast(t('welcome', '@' + shown)); closePage('unamePage');
-    if (pendingRoute === 'online'){ pendingRoute = null; openOnline(); }
+    if (pendingRoute === 'online'){ pendingRoute = null; if (isBanned()) toast(t('bannedMsg', banText(banEnd(profile)))); else openOnline(); }
   } catch(err){
     $('uMsg').className = 'amsg';
     $('uMsg').textContent = err && err.code === 'taken' ? t('unameTaken') : (navigator.onLine ? t('err').other : t('netErr'));
