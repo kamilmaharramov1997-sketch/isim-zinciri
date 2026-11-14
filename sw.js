@@ -1,5 +1,5 @@
 // İsim Zinciri: önce internetten yeni sürümü al, internet yoksa kayıtlı sürümü aç
-const C = 'isim-zinciri-v4';
+const C = 'isim-zinciri-v5';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(C).then(c => c.addAll(['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png']))); });
 self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch', e => {
