@@ -16,12 +16,21 @@
     --bg:#f4f1ea; --card:#ffffff; --ink:#1c1b19; --muted:#8a857c; --line:#e6e1d6;
     --accent:#2f6f5e; --accent-d:#245849; --accent-2:#e7f0ec; --seg-a:#2f6f5e; --seg-b:#3d8a75;
     --used:#dcd7cc; --red:#d64541; --red-bg:#fdecea; --gold:#e8b630;
+    --chip:rgba(255,255,255,.7); --seg-bg:#e9e4d9; --seg-off:#6d685f; --hub:#ffffff; --ring1:#ffffff; --ring2:#ece6da;
+    --unk-bg:#fff6dc; --unk:#9a6a00; --blue:#1f6fd1; --blue-bg:#e3efff; --glow:#e3eee8; --sep:#ffffff; --tagbg:#ffffff;
     --w:min(72vw, 34dvh, 340px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
+  :root[data-theme="dark"]{
+    --bg:#121614; --card:#1b211e; --ink:#ecebe6; --muted:#97a19c; --line:#2a332f;
+    --accent:#5fb89c; --accent-d:#4aa287; --accent-2:#1f3a32; --seg-a:#2f6f5e; --seg-b:#3b8770;
+    --used:#3a413e; --red:#ff6b62; --red-bg:#3a1f1d; --chip:rgba(255,255,255,.06); --seg-bg:#232a27; --seg-off:#9aa39e;
+    --hub:#202825; --ring1:#28302d; --ring2:#171c1a; --unk-bg:#3a3018; --unk:#f0c45a; --blue:#6aa8ff; --blue-bg:#1c2a40;
+    --glow:#183129; --sep:#141917; --tagbg:#121614; color-scheme:dark;
+  }
   body{font-family:Inter,system-ui,sans-serif;color:var(--ink);overflow:hidden;
-       background:radial-gradient(120% 70% at 50% -10%, #e3eee8 0%, rgba(227,238,232,0) 60%), var(--bg);
+       background:radial-gradient(120% 70% at 50% -10%, var(--glow) 0%, transparent 60%), var(--bg);
        padding:max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
   .app{height:100%;width:100%;max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
   .stage{display:flex;flex-direction:column;gap:12px}
@@ -33,21 +42,21 @@
   .logo svg{width:30px;height:30px}
   h1{font-size:20px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
   .brand small{display:block;font-size:12px;color:var(--muted);font-weight:500}
-  .reset{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.7);border:1px solid var(--line);color:var(--ink);
+  .reset{display:flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--line);color:var(--ink);
          font:inherit;font-size:13px;font-weight:600;padding:8px 13px;border-radius:999px;cursor:pointer;backdrop-filter:blur(6px)}
   .reset svg{width:15px;height:15px}
 
   /* Dil seçimi */
-  .langs{display:flex;padding:4px;background:#e9e4d9;border-radius:14px;gap:4px}
-  .lang{flex:1;border:none;background:transparent;font:inherit;font-size:14px;font-weight:600;color:#6d685f;
+  .langs{display:flex;padding:4px;background:var(--seg-bg);border-radius:14px;gap:4px}
+  .lang{flex:1;border:none;background:transparent;font:inherit;font-size:14px;font-weight:600;color:var(--seg-off);
         padding:9px 6px;border-radius:10px;cursor:pointer;transition:all .25s}
-  .lang.on{background:#fff;color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .lang.on{background:var(--card);color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.08)}
 
   /* Çark */
   .wheel-area{display:grid;place-items:center;padding:calc(var(--w) * .11) 0 calc(var(--w) * .04)}
   .wheel-wrap{position:relative;width:var(--w);aspect-ratio:1}
   .wheel-wrap::before{content:"";position:absolute;inset:-4.5%;border-radius:50%;
-       background:linear-gradient(160deg,#ffffff,#ece6da);box-shadow:0 18px 40px rgba(47,111,94,.18), inset 0 1px 0 #fff}
+       background:linear-gradient(160deg,var(--ring1),var(--ring2));box-shadow:0 18px 40px rgba(47,111,94,.18), inset 0 1px 0 var(--ring1)}
   .wheel-wrap::after{content:"";position:absolute;inset:-4.5%;border-radius:50%;
        background:repeating-conic-gradient(from 0deg, rgba(47,111,94,.35) 0 1.2deg, transparent 1.2deg 10deg);
        -webkit-mask:radial-gradient(circle, transparent 66%, #000 67%, #000 69.5%, transparent 70%);
@@ -55,12 +64,12 @@
   #wheel{position:relative;width:100%;height:100%;transition:transform 4.6s cubic-bezier(.15,.75,.12,1)}
   .pointer{position:absolute;top:-9%;left:50%;transform:translateX(-50%);width:12%;z-index:3;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25))}
   .pointer svg{display:block;width:100%;height:auto}
-  .hub{position:absolute;inset:0;margin:auto;width:27%;height:27%;border-radius:50%;background:#fff;z-index:2;
+  .hub{position:absolute;inset:0;margin:auto;width:27%;height:27%;border-radius:50%;background:var(--hub);z-index:2;
        display:flex;align-items:center;justify-content:center;font-size:calc(var(--w) * .135);font-weight:800;color:var(--accent);
        box-shadow:0 0 0 calc(var(--w) * .018) rgba(255,255,255,.55), 0 6px 18px rgba(0,0,0,.18);transition:transform .3s}
   .hub.pop{transform:scale(1.15)}
 
-  .info{align-self:center;color:var(--muted);font-size:12.5px;font-weight:500;background:rgba(255,255,255,.65);
+  .info{align-self:center;color:var(--muted);font-size:12.5px;font-weight:500;background:var(--chip);
         border:1px solid var(--line);padding:5px 12px;border-radius:999px}
   .row{display:flex;gap:10px}
   .btn{flex:1;border:none;font:inherit;font-size:16px;font-weight:700;padding:15px;border-radius:16px;cursor:pointer;
@@ -68,7 +77,7 @@
   .btn svg{width:19px;height:19px}
   .btn:active{transform:scale(.97)}
   .btn:disabled{opacity:.4;cursor:default}
-  .spin{background:var(--ink);color:#fff;box-shadow:0 6px 16px rgba(28,27,25,.18)}
+  .spin{background:var(--ink);color:var(--bg);box-shadow:0 6px 16px rgba(28,27,25,.18)}
   .mic{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(47,111,94,.28)}
   .mic.live{background:var(--red);box-shadow:0 6px 16px rgba(214,69,65,.3)}
   .dot{width:10px;height:10px;border-radius:50%;background:#fff}
@@ -109,17 +118,17 @@
   li .t{flex:1;font-size:16px;font-weight:500}
   li.rep{background:var(--red-bg)}
   li.rep .t{color:var(--red)}
-  li .tag{font-size:11px;font-weight:600;color:var(--red);background:#fff;border-radius:6px;padding:2px 6px}
+  li .tag{font-size:11px;font-weight:600;color:var(--red);background:var(--tagbg);border-radius:6px;padding:2px 6px}
   li .x{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;padding:0 2px}
-  li.unk{background:#fff6dc}
-  li.unk .t{color:#9a6a00}
-  li .acc{font:inherit;font-size:11px;font-weight:600;color:#9a6a00;background:#fff;border:1px solid #f0d58a;border-radius:6px;padding:2px 6px;cursor:pointer}
+  li.unk{background:var(--unk-bg)}
+  li.unk .t{color:var(--unk)}
+  li .acc{white-space:nowrap;font:inherit;font-size:11px;font-weight:600;color:var(--unk);background:var(--tagbg);border:1px solid var(--gold);border-radius:6px;padding:2px 6px;cursor:pointer}
   li.wrong{background:var(--red-bg)}
   li.wrong .t{color:var(--red)}
-  li .last{color:#1f6fd1;font-weight:800;background:#e3efff;border-radius:4px;padding:0 1px;box-shadow:inset 0 -2px 0 #1f6fd1}
-  li .wt{font-size:11px;font-weight:600;color:var(--red);background:#fff;border-radius:6px;padding:2px 6px;white-space:nowrap}
+  li .last{color:var(--blue);font-weight:800;background:var(--blue-bg);border-radius:4px;padding:0 1px;box-shadow:inset 0 -2px 0 var(--blue)}
+  li .wt{font-size:11px;font-weight:600;color:var(--red);background:var(--tagbg);border-radius:6px;padding:2px 6px;white-space:nowrap}
   li .hd{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:1px}
-  li .ut{font-size:11px;font-weight:600;color:#9a6a00;white-space:nowrap}
+  li .ut{font-size:11px;font-weight:600;color:var(--unk);white-space:nowrap}
   .timer{height:6px;background:var(--line);border-radius:3px;overflow:hidden;opacity:0;transition:opacity .3s;margin-top:-6px}
   .timer.on{opacity:1}
   .timer i{display:block;height:100%;width:100%;background:var(--accent);transform-origin:left;transition:background .3s}
@@ -130,15 +139,123 @@
   .count span{animation:tick 1s ease-out}
   @keyframes tick{from{transform:scale(1.7);opacity:0}25%{opacity:1}to{transform:scale(1);opacity:.85}}
   .modal .big{font-size:44px;margin-bottom:4px}
+  @media (max-width:520px){ li .ut{display:none} .legend{gap:10px;font-size:11.5px} }
+  /* Oyuncu çubuğu */
+  .pbar{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--line);scrollbar-width:none}
+  .pbar::-webkit-scrollbar{display:none}
+  .pchip{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);
+         font:inherit;font-size:13.5px;font-weight:600;padding:6px 10px;border-radius:999px;cursor:pointer;transition:all .2s}
+  .pchip .sc{font-size:12px;font-weight:800;color:var(--accent);background:var(--accent-2);border-radius:999px;padding:1px 7px}
+  .pchip.on{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(47,111,94,.3)}
+  .pchip.on .sc{background:rgba(255,255,255,.22);color:#fff}
+  .pchip.out{opacity:.45;text-decoration:line-through}
+  .pchip.edit{color:var(--muted);padding:6px 9px}
+  li .by{font-size:11px;font-weight:700;color:var(--accent);margin-right:6px}
+  /* Oyuncu penceresi ve tur özeti */
+  .btn.ghost{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+  .btn.sm{font-size:14px;padding:11px}
+  .modal .box.pbox,.modal .box.sbox{width:min(92vw, 400px);max-width:none;max-height:86dvh;display:flex;flex-direction:column;text-align:left}
+  .modal .box.sbox{text-align:center}
+  .prows{display:flex;flex-direction:column;gap:8px;overflow-y:auto;margin-bottom:6px;padding:2px}
+  .prow{display:flex;gap:8px;align-items:center}
+  .prow span{width:22px;font-size:12px;font-weight:700;color:var(--muted);text-align:right}
+  .prow input{flex:1;min-width:0;padding:10px 12px}
+  .prow button{border:none;background:none;color:var(--muted);font-size:20px;width:30px;cursor:pointer}
+  .linkbtn.addp{color:var(--accent);align-self:flex-start;margin-bottom:14px}
+  .sbox{position:relative}
+  .sbox .share{position:absolute;top:14px;right:14px}
+  .sbox p b{color:var(--accent);font-size:16px}
+  .modal p b{color:var(--ink)}
+  .score{list-style:none;margin:6px 0 16px;display:flex;flex-direction:column;gap:6px;text-align:left;overflow-y:auto}
+  .score li{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;background:var(--bg);animation:none;counter-increment:none}
+  .score li::before{content:none}
+  .score li .m{width:24px;text-align:center}
+  .score li .nm{flex:1;font-weight:600}
+  .score li .pt{font-weight:800;color:var(--accent)}
+  .score li.win{background:var(--accent-2)}
+  /* Ayarlar: anahtarlar */
+  .s-label{font-size:14px;font-weight:600;margin-bottom:8px}
+  .s-note{font-size:12.5px;color:var(--muted);margin:8px 0 4px}
+  .tg{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0 2px;border-top:1px solid var(--line);margin-top:12px;cursor:pointer}
+  .tg b{display:block;font-size:14px;font-weight:600}
+  .tg small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+  .tg input{display:none}
+  .tg i{flex:none;width:46px;height:28px;border-radius:999px;background:var(--seg-bg);position:relative;transition:background .2s}
+  .tg i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+  .tg input:checked + i{background:var(--accent)}
+  .tg input:checked + i::after{transform:translateX(18px)}
+  .nm-backup{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+  .nm-backup .row{margin-top:8px}
+  .chipn .nm{cursor:pointer}
+  .chipn.editing{border-color:var(--gold);background:var(--unk-bg)}
+  /* Telefonda harf seçilince çark küçülür, liste büyür */
+  .wheel-wrap{transition:width .45s cubic-bezier(.2,.8,.2,1)}
+  .wheel-area{transition:padding .45s}
+  @media (max-width: 819px){
+    body.playing{ --w:min(46vw, 21dvh, 200px); }
+    body.playing .wheel-area{padding:calc(var(--w) * .13) 0 0}
+    body.playing .stage{gap:10px}
+  }
+  /* Üst butonlar */
+  .tbtns{display:flex;gap:8px}
+  .icon-btn{width:40px;height:40px;display:grid;place-items:center;background:var(--chip);border:1px solid var(--line);border-radius:999px;color:var(--ink);cursor:pointer}
+  .icon-btn svg{width:19px;height:19px}
+
+  /* Ayarlar */
+  .sheet{position:fixed;inset:0;z-index:20;display:flex;justify-content:flex-end;pointer-events:none}
+  .sheet .scrim{position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:0;transition:opacity .25s}
+  .sheet .panel{position:relative;width:100%;height:100%;background:var(--bg);transform:translateX(100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+         display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.18)}
+  .sheet.open{pointer-events:auto}
+  .sheet.open .scrim{opacity:1}
+  .sheet.open .panel{transform:none}
+  .s-head{padding:max(14px, env(safe-area-inset-top)) 18px 12px;border-bottom:1px solid var(--line)}
+  .s-wrap{width:100%;max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  .s-headin{flex-direction:row;align-items:center;gap:12px}
+  .s-head h2{flex:1;font-size:20px;font-weight:800;letter-spacing:-.3px}
+  .s-body{flex:1;overflow-y:auto;padding:18px 18px max(28px, env(safe-area-inset-bottom))}
+  .nm-list{max-height:min(52dvh, 460px) !important;min-height:60px;align-content:flex-start;align-items:flex-start}
+  .toast{position:fixed;left:50%;top:max(70px, calc(env(safe-area-inset-top) + 60px));transform:translate(-50%,-10px);background:var(--ink);color:var(--bg);font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:999px;opacity:0;pointer-events:none;transition:all .25s;z-index:30}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+  #themeIco{display:grid;place-items:center}
+  #themeIco svg{width:19px;height:19px}
+  .s-sec{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+  .s-sec h3{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px}
+  .seg{display:flex;padding:4px;background:var(--seg-bg);border-radius:12px;gap:4px}
+  .seg button{flex:1;border:none;background:transparent;font:inherit;font-size:14px;font-weight:600;color:var(--seg-off);padding:9px 6px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+  .seg button.on{background:var(--card);color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .seg .n{font-size:11px;font-weight:700;opacity:.75}
+  .nm-tools{display:flex;gap:8px;margin:12px 0 10px}
+  .nm-tools input{flex:1;min-width:0;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);outline:none}
+  .nm-tools input:focus{border-color:var(--accent)}
+  .nm-tools button{border:none;background:var(--accent);color:#fff;font:inherit;font-weight:700;padding:0 14px;border-radius:11px;cursor:pointer;white-space:nowrap}
+  .nm-list{display:flex;flex-wrap:wrap;gap:6px;max-height:340px;overflow-y:auto;padding:2px}
+  .chipn{display:inline-flex;align-items:center;gap:4px;padding:5px 6px 5px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:14px;font-weight:500}
+  .chipn.mine{border-color:var(--accent);background:var(--accent-2)}
+  .chipn button{border:none;background:transparent;color:var(--muted);font-size:16px;line-height:1;width:20px;height:20px;border-radius:50%;cursor:pointer}
+  .chipn button:hover{background:var(--line);color:var(--red)}
+  .nm-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+  .linkbtn{border:none;background:none;font:inherit;font-size:12.5px;font-weight:600;color:var(--red);cursor:pointer;padding:4px 0}
+  .nm-msg{font-size:12.5px;color:var(--accent);min-height:16px;margin-top:6px}
+  .about{display:flex;gap:14px;align-items:flex-start}
+  .about .logo{flex:none}
+  .about p{font-size:14px;color:var(--ink);line-height:1.5}
+  .about ul{margin:10px 0 0 18px;font-size:13.5px;color:var(--muted);line-height:1.6}
+  .about li{display:list-item;background:none;padding:0;border-radius:0;animation:none;counter-increment:none;font-size:13.5px}
+  .about li::before{content:none}
+  .about small{display:block;margin-top:10px;color:var(--muted);font-size:12px}
   .legend{display:flex;gap:14px;justify-content:center;font-size:12px;color:var(--muted);margin-top:10px}
+  .legend em{font-style:normal}
+  .legend{flex-wrap:wrap;row-gap:4px}
+  .legend span{white-space:nowrap}
   .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:0}
   @keyframes in{from{opacity:0;transform:translateY(-4px)}}
   .empty{color:var(--muted);font-size:14px;text-align:center;padding:14px 0}
   .interim{color:var(--muted);font-style:italic;font-size:14px;min-height:20px;margin-top:8px}
   form{display:flex;gap:8px;margin-top:12px}
-  input{flex:1;font:inherit;font-size:15px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);outline:none}
+  input{flex:1;min-width:0;font:inherit;font-size:15px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg);color:var(--ink);outline:none}
   input:focus{border-color:var(--accent)}
-  form button{border:none;background:var(--accent-2);color:var(--accent);font:inherit;font-weight:600;padding:0 16px;border-radius:11px;cursor:pointer}
+  form button{white-space:nowrap;border:none;background:var(--accent-2);color:var(--accent);font:inherit;font-weight:600;padding:0 16px;border-radius:11px;cursor:pointer}
   .msg{font-size:13px;color:var(--red);text-align:center;min-height:0}
   .modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;padding:24px;z-index:10}
   .modal.show{display:flex}
@@ -152,9 +269,13 @@
     <header class="top">
       <div class="brand">
         <span class="logo"><svg viewBox="0 0 32 32"><g transform="rotate(8 11 11)"><rect x="3" y="3" width="15" height="15" rx="4" fill="#fff"/><text x="10.5" y="15.2" text-anchor="middle" font-family="Poppins,Inter,sans-serif" font-weight="800" font-size="12" fill="#2f6f5e">A</text></g><g transform="rotate(-8 21 21)"><rect x="13.5" y="13.5" width="15" height="15" rx="4" fill="#f0be3c"/><text x="21" y="25.6" text-anchor="middle" font-family="Poppins,Inter,sans-serif" font-weight="800" font-size="12" fill="#28241e">Z</text></g></svg></span>
-        <div><h1>İsim Zinciri</h1><small>Son harften devam et</small></div>
+        <div><h1>İsim Zinciri</h1><small data-i18n="sub">Son harften devam et</small></div>
       </div>
-      <button class="reset" id="resetBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span>Sıfırla</span></button>
+      <div class="tbtns">
+        <button class="icon-btn" id="resetBtn" aria-label="Sıfırla" title="Sıfırla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        <button class="icon-btn" id="themeBtn" aria-label="Tema" title="Tema"><span id="themeIco"></span></button>
+        <button class="icon-btn" id="setBtn" aria-label="Ayarlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+      </div>
     </header>
 
     <div class="langs" id="langs">
@@ -180,66 +301,158 @@
   </section>
 
   <section class="card list-card">
+    <div class="pbar" id="pbar"></div>
     <div class="card-head">
-      <b>Söylenen isimler<span class="badge" id="countBadge">0</span></b>
+      <b><span data-i18n="listTitle">Söylenen isimler</span><span class="badge" id="countBadge">0</span></b>
       <div class="next" id="next"></div>
     </div>
     <div class="scroll" id="scrollBox">
       <ol id="list"></ol>
-      <div class="empty" id="empty">Çarkı çevir, sonra "Başlat"a bas ve isimleri söyle.</div>
+      <div class="empty" id="empty" data-i18n="empty">Çarkı çevir, sonra "Başlat"a bas ve isimleri söyle.</div>
     </div>
     <div class="interim" id="interim"></div>
-    <div class="legend" id="legend"><span><i style="background:var(--red)"></i>Tekrar / yanlış harf</span><span><i style="background:#e8b630"></i>Listede yok</span><span><i style="background:#1f6fd1"></i>Sıradaki harf</span></div>
+    <div class="legend" id="legend"><span><i style="background:var(--red)"></i><em data-i18n="lgRep">Tekrar / yanlış harf</em></span><span><i style="background:#e8b630"></i><em data-i18n="lgUnk">Listede yok</em></span><span><i style="background:var(--blue)"></i><em data-i18n="lgNext">Sıradaki harf</em></span></div>
     <form id="form">
-      <input id="input" placeholder="Ya da ismi yaz…" autocomplete="off" dir="auto">
-      <button type="submit">Ekle</button>
+      <input id="input" placeholder="Ya da ismi yaz…" data-i18n-ph="typeName" autocomplete="off" dir="auto">
+      <button type="submit" data-i18n="add">Ekle</button>
     </form>
   </section>
 </div>
 
+<div class="sheet" id="sheet" aria-hidden="true">
+  <div class="scrim" id="scrim"></div>
+  <aside class="panel">
+    <div class="s-head"><div class="s-wrap s-headin">
+      <button class="icon-btn" id="setClose" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <h2 data-i18n="settings">Ayarlar</h2>
+    </div></div>
+    <div class="s-body"><div class="s-wrap">
+      <section class="s-sec">
+        <h3 data-i18n="uiLang">Uygulama dili</h3>
+        <div class="seg" id="uiSeg">
+          <button data-v="tr">Türkçe</button>
+          <button data-v="az">Azərbaycan dili</button>
+        </div>
+      </section>
+      <section class="s-sec">
+        <h3 data-i18n="game">Oyun</h3>
+        <div class="s-label" data-i18n="timeLimit">Cevap süresi</div>
+        <div class="seg" id="timeSeg">
+          <button data-v="5"></button><button data-v="10"></button><button data-v="15"></button><button data-v="20"></button>
+        </div>
+        <div class="s-note" id="graceNote"></div>
+        <label class="tg"><span><b data-i18n="hardOff">Zor harfleri çarktan çıkar</b><small id="hardInfo"></small></span><input type="checkbox" id="hardTg"><i></i></label>
+        <label class="tg"><span><b data-i18n="sound">Geri sayım sesi</b></span><input type="checkbox" id="soundTg"><i></i></label>
+      </section>
+      <section class="s-sec">
+        <h3 data-i18n="nameLists">İsim listeleri</h3>
+        <div class="seg" id="nmSeg">
+          <button data-v="tr">Türkçe <span class="n" id="nmCntTr"></span></button>
+          <button data-v="az">Azərbaycan <span class="n" id="nmCntAz"></span></button>
+        </div>
+        <div class="nm-tools">
+          <input id="nmInput" placeholder="Ara veya yeni isim yaz…" data-i18n-ph="nmPh" autocomplete="off">
+          <button id="nmAdd" data-i18n="add">Ekle</button>
+        </div>
+        <div class="nm-list" id="nmList"></div>
+        <div class="nm-msg" id="nmMsg"></div>
+        <div class="nm-foot"><span id="nmInfo"></span><button class="linkbtn" id="nmReset" data-i18n="nmReset">Varsayılana dön</button></div>
+        <div class="nm-backup">
+          <div class="s-note" data-i18n="backupHint">Eklediğin isimleri dosyaya kaydet, başka telefona aktar.</div>
+          <div class="row"><button class="btn ghost sm" id="nmExport" data-i18n="exp">⬇ Dışa aktar</button><button class="btn ghost sm" id="nmImport" data-i18n="imp">⬆ İçe aktar</button></div>
+          <input type="file" id="nmFile" accept=".json,application/json" hidden>
+        </div>
+      </section>
+      <section class="s-sec">
+        <h3 data-i18n="about">Hakkında</h3>
+        <div class="about">
+          <span class="logo"><svg viewBox="0 0 32 32"><g transform="rotate(8 11 11)"><rect x="3" y="3" width="15" height="15" rx="4" fill="#fff"/><text x="10.5" y="15.2" text-anchor="middle" font-family="Poppins,Inter,sans-serif" font-weight="800" font-size="12" fill="#2f6f5e">A</text></g><g transform="rotate(-8 21 21)"><rect x="13.5" y="13.5" width="15" height="15" rx="4" fill="#f0be3c"/><text x="21" y="25.6" text-anchor="middle" font-family="Poppins,Inter,sans-serif" font-weight="800" font-size="12" fill="#28241e">Z</text></g></svg></span>
+          <div>
+            <p data-i18n="aboutText">İsim Zinciri, çocukken oynadığımız "son harften isim söyleme" oyununun sesli hâli. Çark ilk harfi seçer, isimleri söylersin, uygulama yazar ve kontrol eder.</p>
+            <ul>
+              <li data-i18n="how1">Çarkı çevir ve "Başlat"a bas.</li>
+              <li data-i18n="how2">Her isim, bir önceki ismin son harfiyle başlamalı.</li>
+              <li data-i18n="how3">Tekrar eden ve yanlış harfli isimler kırmızı görünür.</li>
+              <li data-i18n="how4">Her isim için 3 + 10 saniyen var.</li>
+              <li data-i18n="how5">Her geçerli isim 1 puan, turu kazanan +2 puan alır.</li>
+            </ul>
+            <small data-i18n="aboutVer">Sürüm 1.0 · Eklediğin isimler bu cihazda saklanır.</small>
+          </div>
+        </div>
+      </section>
+    </div></div>
+  </aside>
+</div>
+<div class="toast" id="toast"></div>
 <div class="count" id="count"></div>
 <div class="modal" id="timeout">
   <div class="box">
     <div class="big">⏰</div>
-    <b>Süre doldu!</b>
+    <b data-i18n="timeUp">Süre doldu!</b>
     <p id="toText">İsim bulunamadı.</p>
-    <button class="btn spin" id="toBtn" style="width:100%">Devam et</button>
+    <button class="btn spin" id="toBtn" style="width:100%" data-i18n="cont">Devam et</button>
+  </div>
+</div>
+<div class="modal" id="pModal">
+  <div class="box pbox">
+    <b data-i18n="players">Oyuncular</b>
+    <p data-i18n="playersHint">En fazla 11 oyuncu. Boş bırakırsan tek başına oynarsın.</p>
+    <div class="prows" id="pRows"></div>
+    <button class="linkbtn addp" id="pAdd" data-i18n="addPlayer">+ Oyuncu ekle</button>
+    <div class="row">
+      <button class="btn ghost" id="pCancel" data-i18n="cancel">Vazgeç</button>
+      <button class="btn spin" id="pSave" data-i18n="save">Kaydet</button>
+    </div>
+  </div>
+</div>
+<div class="modal" id="sumModal">
+  <div class="box sbox">
+    <button class="icon-btn share" id="sumShare" aria-label="Paylaş" title="Paylaş"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg></button>
+    <div class="big" id="sumIco">🏆</div>
+    <b id="sumTitle"></b>
+    <p id="sumText"></p>
+    <ol class="score" id="sumScores"></ol>
+    <div class="row">
+      <button class="btn ghost" id="sumClose" data-i18n="close">Kapat</button>
+      <button class="btn spin" id="sumNext" data-i18n="newLetter">Yeni harf</button>
+    </div>
   </div>
 </div>
 <div class="modal" id="modal">
   <div class="box">
-    <b>Tüm harfler kullanıldı</b>
-    <p>Bu oturumdaki bütün harfler çıktı. Yeni oturum başlatılsın mı?</p>
+    <b data-i18n="allUsed">Tüm harfler kullanıldı</b>
+    <p data-i18n="allUsedQ">Bu oturumdaki bütün harfler çıktı. Yeni oturum başlatılsın mı?</p>
     <div class="row">
-      <button class="btn" style="background:var(--bg)" id="mNo">Vazgeç</button>
-      <button class="btn spin" id="mYes">Sıfırla</button>
+      <button class="btn" style="background:var(--bg)" id="mNo" data-i18n="cancel">Vazgeç</button>
+      <button class="btn spin" id="mYes" data-i18n="reset">Sıfırla</button>
     </div>
   </div>
 </div>
 
 <script>
 const LANGS = {
-  tr: { speech:'tr-TR', locale:'tr', letters:'A B C Ç D E F G H I İ J K L M N O Ö P R S Ş T U Ü V Y Z'.split(' ') },
-  az: { speech:'az-AZ', locale:'az', letters:'A B C Ç D E Ə F G H X I İ J K Q L M N O Ö P R S Ş T U Ü V Y Z'.split(' ') }
+  tr: { speech:'tr-TR', locale:'tr', letters:'A B C Ç D E F G H İ J K L M N O Ö P R S Ş T U Ü V Y Z'.split(' ') },
+  az: { speech:'az-AZ', locale:'az', letters:'A B C Ç D E Ə F G H X İ J K Q L M N O Ö P R S Ş T U Ü V Y Z'.split(' ') }
 };
 
-const NAMES = {"tr": "abbas abdi abdullah abdurrahim abdurrahman abdurrezzak abdülaziz abdülbaki abdülbari abdülcelil abdülgani abdülhadi abdülhakim abdülhalim abdülhamit abdülkadir abdülkerim abdülkuddüs abdüllatif abdülmecit abdülmelik abdülmuttalip abdülnasır abdülsamet abdülvahap abdülvahit abdürrauf abdüssamet abdüsselam abide abidin acar aclan ada adalet adem adil adile adnan afet afife afitap afşin ahmet ahsen ahu akasya akay akgül akgün akhan akif akile akkız aksel aksu aktan aktuğ akça akçay akın alaaddin alaattin alattin alev algan ali alican alihan alim alime aliye alkan alkım almila alp alparslan alpaslan alpay alpcan alper alperen alphan alptekin alptuğ altan altay altuğ altın altınay alçin amine anber andaç anıl aras arca arda arif arife armağan arslan arslanbey arzu arık arıkan arın asaf asel asena asil asiye aslan aslı asude asuman asya asım ata atahan atakan atalay ataman atila atilla atiye atlas atıf atıl atınç avni avşar ayabakan ayaz aybala aybars aybek ayberk aybike aybüke aycan aydan aydemir aydeniz aydoğan aydoğdu aydın ayfer aygen aygül aygün ayhan aykan aykut aykız ayla aylan aylin ayman aynur ayperi aysal aysel aysu aysun aytaç aytekin ayten aytuğ aytül ayvaz ayyüce ayça ayşe ayşegül ayşen ayşenur azad azat azim azime aziz azize azmi azra ağah ağca aşkın aşır babür bade bager baha bahadır bahar bahattin bahise bahri bahriye bahtiyar bahtışen baki bakır balkan balkız balım banu baran barbaros barlas barçın barış basri battal batu batuhan batur baturalp batıhan bayar baybars baykal baykan bayram bedia bediha bedii bedirhan bedri bedriye begüm behice behire behiye behlül behram behzat behçet bekir belgin belkıs belma benan bengi bengisu bengü bennur berat beren berfin beril berk berkant berkay berkcan berke berker berkin berna berra berrak berrin besim beste betül beyazıt beyda beyhan beytullah beyza bilal bilge bilgehan bilgen bilgin billur binali binnaz birgül birhan birkan birnur birol birsel birsen bora boran bozkurt buket bulut burak burcu burhan burhaneddin burhanettin burç burçak burçin buse buğra bülent bünyamin büşra büşranur cafer cahide cahil cahit can canan canberk candan candemir canel caner canfeda cangül canip cansel cansu cansın cavit cebrail celal celalettin celil celile cem cemal cemalettin cemaliye cemalnur cemil cemile cemre cemşid cemşir cenan cenap cengiz cenk cennet ceren cesim cevahir cevat cevdet cevriye ceyda ceyhun ceyla ceylan cezmi cihan cihangir cihanser civan coşkun cuma cumali cumhur cülide cüneyd cüneyt dalya damla danyal davut dağhan defne demet demir demirhan deniz derin derman derviş derya destan devran devrim dicle didem dila dilan dilara dilay dilber dilek dilhan dilruba dilşad dilşen dinç dinçer direnç dirim dolunay doruk dorukhan doğa doğan doğu doğukan dudu duman duran durcan durdu durhan durmuş durmuşali dursun duru duygu döndü dündar dürdane düriye dürrü ebrar ebru ebubekir ece ecem ecesu ecrin eda edanur edhem edibe edip ediz efdal efe efkan efnan efsun eftal ege egemen ejder ekber ekim ekin ekmel ekrem ela elanur elfide elgin elif elifnur elmas elvan elvin elçim elçin emel emin emine emir emircan emirhan emrah emre emsal enes engin enginay enis ensar ensari enver ercan erdal erdem erdi erdinç erdoğan erdoğdu erem eren ergenekon ergin ergün erhan erim erinç erkal erkan erkin erkut erman erol ersan ersin ersoy ertan ertekin ertuğ ertuğrul ervin esat esen esengül eser esin eslem esma esra ethem evliya evren evrim eylem eylül eymen eyüp eyşan ezel ezgi ezgin eşe eşref fadime fadıl fahire fahrettin fahri fahriye fahrünnisa faik faika fakir faruk fatih fatin fatma fatmagül fatoş fazilet fazlı fazıl fecri fehime fehmi fehmiye ferah ferahnaz feray ferda ferdi ferhan ferhat feride feridun feriha ferit feriştah ferruh ferzan fevzi fevziye feyyaz feyza feyzi feyzullah fidan figen fikret fikri fikriye filiz firdevs firuze fuad fuat funda furkan fuzuli füruzan füsun gaffar galip gamze gani gaye gazanfer gediz gencay genco gençay giray gizem gonca gökalp gökay gökben gökberk gökdemir gökhan gökhun gökmen göknur göksel göksu gökten göktuğ göktürk gökçe gönül gözde gül gülay gülbahar gülben gülbeyaz gülbin gülcan güldane gülden güldeniz gülderen gülen güler gülfem gülfer gülfidan gülgün gülhan gülhanım gülistan gülizar güllü gülnaz gülnihal gülnur gülperi gülsen gülseren gülsüm gültekin gülten gülzar gülçin gülümser gülşah gülşen gümüş günal günay gündoğdu gündüz güney güneş güray gürbüz gürhan gürkan gürol gürsel güven güvenç güzel güzide güzin habibe habibullah habip hacer hadi hafize hafız hakan hakime hakkı halide halil halim halime halis halit haluk hamdi hamide hamit hamiyet hamza handan hande hanefi hanife hanım harun hasan hasbi hasibe hasip hasret hatem hatice hatip hatun hayal hayat hayati haydar hayreddin hayrettin hayri hayriye hazal hazım haşim hediye helin heves hicran hidayet hikmet hilal hilmi hilmiye hira hiranur hüda hüdai hülya hüma hümeyra hünkar hürrem hürriyet hüsamettin hüseyin hüsniye hüsnü hüsrev hızır ibrahim iclal idal idil idris iffet ihsan ihsaniye ikbal ikra ilayda ilbey ilhame ilhami ilhan ilkay ilke ilkem ilker ilkin ilkiz ilknur ilteber ilteriş ilyas imdat imran imren inal inanç inci ipek irem irfan isa ishak iskender islam ismail ismet ismigül ismihan israfil izzet izzettin içli kaan kadem kader kadir kadri kadriye kahraman kalender kamber kamil kamile kamuran kandemir karaca karanfil kardelen kartal kasım kaya kayahan kayhan kayra kayıhan kazime kazım kağan kemal kemalettin kemaliye kenan kenane kerem kerim keriman kerime kerimhan kevser kezban kiraz koray korkmaz korkut kubilay kuddusi kudret kumru kumsal kurtcan kurtuluş kutay kutlay kutlu kutsi kuzey kübra kübranur kürşat kılınç kılıç kınalı kınay kıvanç kıvılcım kıymet lale lalezar lamia latif latife laçin lebibe leman lerzan levent leyla leyli lezize lokman lütfi lütfiye lütfullah lütfü macit mahfuz mahinur mahir mahmure mahmut mahperi mahsun mahzar makbule maksut malik malika maliye mansur masal mazhar mazlum mecbure mecide mecit medet medih medine mefkure mehdi mehlika mehmet mehmetali mehmetcan mehtap mekin melahat melda melehat melek meleknur melih melik melike melikşah melis melisa meltem memduh memet memnune menekşe mensur meral merih mert mertcan merve meryem mestan mesude mesut metin mevlüde mevlüt meyrem mihri mihriban mihrimah mihrinaz mina mira miray miraç mirza mithat mualla muallim muammer muazzam muazzez mucize muhammed muharrem muhittin muhlis muhsin muhterem mukadder mukaddes mukbil murat musa mustafa mutlu mutluhan muzaffer mübeccel müberra mücahit mücella müfide müge müjde müjgan mükerrem mükremin mümin mümtaz münevver münir münire münür mürsel mürvet mürüvvet müslüm müzehher müzeyyen müşerref nabi naci naciye nadide nadir nadire nadiye nafia nafiz nahit nail naile naim naime nalan namık narin nazan nazen nazende nazenin nazif nazife nazike nazile nazime nazlı nazmi nazmiye nazım nağme naşit nebahat necati necdet necibe necip necla necmettin necmi necmiye nedim nedret nefes nefise nehir nergis neriman nermin nesibe nesimi neslihan nesrin nevin nevra nevriye nevzat nezahat nezaket nezih nezihe neşe neşet nida nigar nihal nihan nihat nil nilay nilgün nilsu nilüfer nimet nimetullah nisa nisanur niyazi nizam nizamettin nuh numan nur nuran nuray nurbanu nurcan nurdan nurdağ nurettin nurgül nurhan nurhayat nuri nurinisa nursel nurseli nursena nursu nurten nurullah nurşen nusret nüket nükhet nüvit nüzhet ogün okan okay oktar oktay okşan olcay olgun ongun onur orhan orkan orkun orçun osman oya ozan ozanalp oğulcan oğuz oğuzhan oğuzkaan pakize pamir payidar paşa pekcan pelin pembe pembegül peri perihan perizat perran pervin petek peyami piraye polat poyraz pürnur pınar rabia rabih raci racih ragıp rahim rahime rahmi rahmiye raif rakibe rakım ramazan rana rasim rasime rauf raşide raşit rebia recai recep refet refia refik refika reha remide remzi remziye resmiye resul revnak reyhan rezan rezzan reşat reşide reşit rifat ruhi rukiye rumeysa rumi ruşen rüknettin rüstem rüveyda rüya rüzgar rüçhan rüştü rıdvan rıfat rıza saadet saba sabahat sabahattin sabiha sabit sabri sabriye sacide sacit sadettin sadiye sadri sadık saffet safiye sahure saime sait sakine salih saliha salim samet sami samiha samim samiye sanem saniye sanver sare sarp satı savaş saygın sebahat seda sedanur sedat sedef sefa sefer sefure sehergül selahattin selami selda selen selim selin selma selvi selçuk sema semahat semanur semih semiha semiramis semra sena senanur senem serap serdar seren serhat serkan sermin serpil serra sertan sertaç server servet sevcan sevda sevde sevdenur sevgi sevgül sevil sevilay sevim sevinç sevtap seyfettin seyfi seyfullah seyhan seyhun seyit seyran seyyit sezai sezen sezer sezgin sezgül sezin seçil seçkin sibel sidar simay simge sinan sinem sona sonay soner songül su suat sude sultan suna sunay suphi suzan süha süheyl süheyla süleyman sülün sümbül sümeyye süphan süreyya süreyye sıddık sıdıka sıla sıtkı tacettin taci tahir tahire tahsin tahsine taibe talat talha talya tamer tanay tanel taner tanju tanrıverdi tansu tarkan tarık tayfun taylan tayyar tayyip taşkın tekin temel temmuz teoman tevfik tevhide tevhit tezcan tezel tijen timur tolga tolunay tomris toprak toygar toygun tuana tuba tufan tulpar tuna tunahan tunay tuncay tuncer tunç turan turgay turgut tutku tuğba tuğcan tuğhan tuğra tuğrul tuğçe tülay tülin tümay tümer türkan türker ufuk ulaş ulus ulvi ulviye umay ummahan umut ural urhan utku uygar uzay uğur uğurcan uğurhan vacit vahap vahdet vahide vahit varol vasfi vasfiye vecdet vecdi vecihe vedat vedia vefa vehbi vehbiye veli velit verda vesile veysel vicdan vildan vildane visal volkan vural yadigar yahya yahşi yakup yakut yalçın yalın yaman yamaç yaprak yaren yasemin yasin yasir yavuz yavuzhan yazgı yağmur yağız yaşar yekta yeliz yeter yeşim yiğit yiğitcan yonca yosun yunus yurdagül yurdakul yurdanur yusuf yücel yüksel yümnü yüsra yıldıray yıldırım yıldız yılmaz zafer zahide zahir zahire zahit zaim zakir zarif zarife zatiye zehra zekai zekayi zekeriya zeki zekiye zelal zeliha zerda zeren zerrin zeynel zeynelabidin zeynep zihni zikri zinet zinnur ziya ziynet zişan zübeyde zübeyir zübeyr zühal zühre zülal züleyha zülfikar zülfiye zülkarneyn zümra zümrüt çakır çağan çağatay çağdaş çağla çağlar çağlayan çağrı çağrıhan çağıl çelebi çelik çerağ çetin çilem çimen çisem çiçek çiğdem çolpan çınar öcal ödül öge ökkeş ömer ömrüm ömür önder öner örsan övünç öykü özay özcan özdemir özden özer özge özgen özgül özgür özhan özkan özker özlem öznur özsoy öztekin özün ülker ülkü ümit ümmet ümmü ümmügülsüm ümmühan ümran ünal ünsal ünzile ürün üstün üzeyir ıdil ılgar ılgaz ılgın ılık ılım ırmak ışık ışıl ışın şaban şadan şadi şafak şahabettin şahan şahap şahende şahika şahin şahinde şahnaz şahsenem şakir şamil şaziye şebnem şefik şefika şefkat şehmus şehrazat şehri şehriban şehzade şemsa şemsettin şemsi şemsiye şenay şenel şengül şennur şenol şerafet şerafettin şeref şerif şerife şermin şevket şevki şevval şeyda şeyma şiir şimşek şinasi şirin şule şura şöhret şükran şükriye şükrü şükufe", "az": "abasqulu abbas abbasqulu abdin abdulla abdulrəhman abdulxalıq abid abidin abidə abuzər adil adilxan adilşah adilə adnan adıgözəl adışirin adəm afaq afil afiq afiyət afərin afət aidə aişə akif akşin alagöz alim alimə aliyə allahverdi allahyar almas almaxanım almaz alpaslan altay altun altunay altunsaç alxan alxanım alxas alı alıcan alıxan alışan amalya amil amilə anaqız anar anaxanım aqil aqilə aqşin araz arif arifə arzu arzuxanım arəstun asif asim asimə aslan asya asəf atabəy atakişi ataxan ataş atilla atəş ayan ayaz aybəniz aydan aydın aydəmir aygül aygün aygünəş ayişə ayla aylin ayna aynişan aynur aynurə aysel aysu aysun aysəl aytac aytəkin aytən ayxan ayyub ayçiçək ayşə ayşən ayşənur azad azadə azim aziz azər azərin ağa ağababa ağabacı ağabala ağabəy ağabəyim ağacan ağadadaş ağahadi ağahüseyn ağahəsən ağakərim ağalar ağalı ağamalı ağamir ağamusa ağarza ağarəhim ağası ağasəf ağasəfa ağaverdi ağaxan ağaxanım ağaşirin ağaəli ağbəniz ağca ağcaqız ağdəmir ağgül ağçiçək baba babacan babakişi babaxan babayar babaş babaəli babək badam bahadur bahar bala balabəy baladadaş balakişi balaqız balaxan balaxanım balaş banu banuçiçək barat barış bayandur bayat bayram bağır beyrək bikə bilal bilqeyis budaq bülbül bəhlul bəhmən bəhram bəhriyyə bəhruz bəhruzə bəkir bəndalı bənövşə bəsir bəsirə bəsti bəstixanım bəxtiyar bəxtiyarə bəybala bəyim bəylər bəylərbəy bəyxanım bəyəhməd bəşir cabbar cabbarə cabir cahan cahanbəyim cahangir cahangül cahid cahidə camal camalxan camalə canan canpolad cavad cavan cavanşir cavid cavidan cavidə ceyhun ceyhunə ceyla ceyran coşqun cuma cümşüd cəbrayıl cəfər cəfərqulu cəlal cəlaləddin cəlil cəlilə cəmalə cəmaləddin cəmil cəmilə cəmşid cənnət cəsarət cəsur cəvad cəvahir dadaş dadaşbala dadaşbəy damla davud daşdəmir daşqın didar dilarə dilavər dilbər dilfiruz dilnarə dilnaz dilruba dilsuz dilşad dilşadə diləfruz dinarə durna dursun dönməz dövlət dövlətxanım dürdanə dürnisə dürrə dəmir dəniz dərdimənd dərgah dərviş dərya dəyanət elariz elbrus elcan eldar eldost eldəniz elgiz elgün elman elmar elmin elmir elmira elməddin elnarə elnur elnurə elsevər eltac eltəkin elvan elvin elvira elxan elyar elza elçibəy elçin elşad elşadə elşən emil emilya emilə emin eminə esmira esmər etibar eynulla eynur eyvaz faiq faiqə fariz fateh fatimə fazil fazilə feyruz feyzulla fidan fikrət firdovsi firidun firudin firuz firuzə firəngiz fizzə flora fuad füruzə füsun füzuli fəhmi fəhminə fəqan fərasət fərhad fərid fəridun fəridə fərizə fərman fərqanə fərrux fərzanə fərzəli fərəc fərəh fərəhnaz fərəmuz fəttah fəxri fəxriyyə fəxrəddin fəxrəndə fəzail fəzilə fəzilət gövhər gövhərtac göyçək gözəl gülabbas gülafət gülalı gülarə gülay gülağa gülbacı gülbahar gülbəniz gülbəyim gülcahan güldəstə gülgün gülgəz güllü güllüçiçək güllər gülmira gülmirə gülməmməd gülnar gülnarə gülnaz gülnisə gülnur gülpəri gülruh gülsabah gülsevər gülsüm gülsənəm gültac gültəkin gülxanım gülxar gülxumar gülyanaq gülyaz gülzadə gülzar gülçin gülçöhrə gülümsər gülüstan gülüş gülşad gülşirin gülşən güləbətin gülənbər gülər günay gündüz günel günəş günəşxanım gəncəli gəray gəraybəy gərayxan habil hacı hacıağa hacıbaba hacıbala hacıbəy hacımurad hacıqulu hacıxanım hafiz hafizə hakim hamid hamidə hamlet haqnəzər haqqı haqverdi hatəm haşım heydər hicran hidayət hikmət hilal hilalə humay hökümə hümbət hümeyra hümeyrə hümmət hüriyyə hürriyyət hürü hüseyn hüseynağa hüseynqulu hüseynəli hüsniyyə hüsnü həbib həbibulla həbibə həcər hədiyyə həkim həlim həlimə həmayıl həmdulla həmid həmidə həmzə həmzəli həqiqət həsən həsənağa həsənbəy həsənəli hətəm hətəmxan həvva həvvaxanım həyat həzi ibad ibadulla ibrahim ibrahimxəlil idrak idris iftixar ihsan ikram ilahə ilham ilhamə ilkanə ilkin ilknur ilmira ilnarə ilnur ilqar ilqarə ilyas imam imamqulu imamverdi imran inam inarə inci inqilab intiqam intizar iqbal iradə irşad isa isabəy isgəndər ishaq iskəndər islam ismayıl ismət israfil ixtiyar izzət jalə kamal kamalə kamaləddin kamil kamilə kamran kazım kifayət kişvər könül könülə kövkəb kövsər kübra kürşad kəklik kəlbəli kələntər kəmalə kəmaləddin kənan kəramət kərim kərimə kərəm lalazar lalə lamiyə lazım laçın leyla leyli leylixanım loğman lütfi lütfiyyə lütfəli ləman lətafət lətif lətifə mahir mahirə mahizər mahmud mahmudə mahnur mahparə mahrux maisə malik manaf maqsud maral mayıl mayılə mehdi mehdiqulu mehin mehman mehparə mehralı mehriban mehrəli mehrəngiz metin mikayıl minirə minurə mirabbas mirağa mirbağır mircavad mircəlal mirfəttah mirheydər mirhüseyn mirhəsən mirkazım mirmusa mirməmməd mirsadiq mirseyid mirsəməd mirvari mirzağa mirzə mirzəbala mirzəli mirəli mirəziz misir murad murtuz musa mustafa muxtar möhsün möhübbət möminə mübariz mübarək mübarəkə mühəmməd mülayim münəvvər mürsəl mürvət müseyib müslüm mütəllim müzəffər müşfiq müşkünaz müşviq məcid mədinə mədəd mədət məftun məhbub məhbubə məhrəm məhsəti məhəbbət məhəmməd məhəmmədhüseyn məhəmmədəli məhərrəm məhərrəmə məlahət məleykə məlik mələk mələkxanım mələkə məmməd məmmədağa məmmədhüseyn məmmədhəsən məmmədkərim məmmədrza məmmədtağı məmmədyar məmmədəli məmmədəmin mənsur mənsurə mənzər mərcan mərdan mərifət məryəm mərziyyə mərziyə məsmə məsud məsumə mətanət mətin mətləb məzahir nabat nadir nadirə nahid nahidə naib naibə nailə namidə namiq narıngül natella natiq natəvan nazan nazilə nazim nazimə nazlı nazlıxanım nazpəri nazəndə nazənin nağı nağıbəy neman nemət nicat nigar nihad nihal nihan nilay nilufər nisə niyaz nizami novruz novruzəli nubar nubarə nuranə nuray nurcahan nuridə nurlan nurlana nurpəri nursəba nurtac nurxan nurşən nurə nurəddin nurəli nüsrət nüşabə nəbi nəbibəy nəcib nəcibə nəcməddin nəcəf nəcəfqulu nəfisə nəfəs nərgiz nərgizə nəriman nərimanə nərmin nərminə nəsib nəsibə nəsimi nəsimə nəsir nəsrin nəsrəddin nəvai nəzakət nəzirə nəzrin nəzər nəğmə ocaq ofeliya oqtay orduxan oruc orxan osman ozan oğuz oğuzxan pakizə paşa pirverdi pirəli polad pünhan pənah pəncəli pəri pərinaz pərixan pərixanım pərişan pərvanə pərvin pərviz pərzad qabil qadir qafar qafur qalib qaraca qaraman qaratel qaraxan qasım qasımbəy qaşqay qiyas qorqud qorxmaz qubad qulam qulamhüseyn qulu qumru qurban qurbanəli qönçə qüdrət qüdsiyyə qızbəs qızqayıt qədimə qədir qəhrəman qələndər qəmbər qəmər qənbər qənirə qərib qəribə qərənfil qətibə qəzalə qəzənfər rafael rafiq rafiqə rahib rahil rahilə rahim rakif ramazan ramil ramilə ramin ramiz rasim rasimə rauf raziyə reyhan reyhanə rizvan ruhiyyə ruhulla ruhəngiz rumiyyə ruslan rza rzaqulu rövşən rövşənə röya rübabə rüfət rüqiyyə rüqəyyə rüstəm rüxsarə rəbiyyə rəfail rəfiq rəfiqə rəhilə rəhim rəhimə rəhman rəmzi rəna rəsmiyyə rəsul rəvan rəvanə rəxşəndə rəzzaq rəşad rəşadət rəşid rəşidə sabah sabahəddin sabina sabiq sabir sabirə sabit sadiq sadiqə sadıq safura sahib sahibə sahil sahilə sakinə sakit salatın saleh salman samir samirə sanan sanəm sara sevda sevgi sevil sevinc seyfəddin seyid seyidağa seymur seyran sima simuzər solmaz sona sonaxanım sultan surxay suğra sübhan süleyman sürəyya səadət səbinə səbuhi sədaqət səfa səfiyyə səfurə səfər səfərəli səhər səid səidə səkinə səlim səlimə səltənət səma səmayə səməd səmədağa səməndər sənan sənubər sərdar sərvinaz sərvər səttar səxavət səyavuş səyyad səyyarə tahir tahirə taleh talıb tamam tamara tamaşa tamerlan tamilla tanrıverdi tapdıq tariyel tağı telli telman teymur teymuraz tofiq tomris toğrul tunar turab tural turan turanə turqut turxan tutu tükəzban tünzalə türkan təbrik təbriz təhmasib təhminə təkin təranə tərlan tərxan təvəkkül ucal ulduz ulviyyə umud uğur vahab vahid vahidə valeh vaqif vasif vasilə vazeh veysəl vidadi vilayət vurğun vüqar vüsal vüsalə vəcihə vəfa vəfadar vəkil vəli vəliyulla vəsilə vəzir xalid xalidə xalıq xalıqverdi xanbaba xanbacı xanbala xanbikə xanhüseyn xanlar xanmirzə xanmusa xanoğlan xansuvar xanım xanış xanəli xanəmir xaqani xasay xasbulat xaspolad xatirə xatun xavər xeyransa xeyrulla xeyrəddin xosrov xudaverdi xudayar xudu xumar xuraman xurşid xurşidbanu xurşud xızır xədicə xəlifə xəlil xəlilulla xəlilə xəmis xəyal xəyalə xəyyam xəzər yadigar yalçın yaqub yaqut yasin yasəmən yaver yavər yaşar yeganə yetər yunis yunus yusif yusifəli yəhya zabil zabit zahid zahidə zahir zakir zaman zamin zamiq zarema zaur zemfira zeynal zeynalabdin zeynəb ziba zibeydə zivər ziya ziyad zöhrab zöhrə zübeydə züleyxa zülfiyyə zülfüqar zümrüd zəfər zəhra zəki zəkiyyə zəkəriyyə zəminə zərifə zərintac zərnigar zərxanım çimnaz çinar çinarə çingiz çiçək çiçəkxanım çoban çobanqulu çərkəz çərkəzxanım ömür ömər özbək özcan özdəmir ülfət ülkər ülvi ülviyyə ümid ümidə ümman ümmülbanu ümnisə üzeyir şaban şabanə şahbaz şahin şahinə şahlar şahmar şahməmməd şahnaz şahpəri şahsənəm şahvələd şahəddin şaiq şakir şamama şamil şamxal şirin şirinbəy şirzad şöhrət şövkət şükufə şükür şükürə şükürəli şəbnəm şəfa şəfaət şəfiqə şəfəq şəhanə şəhla şəhriyar şəhrizad şəkər şəlalə şəmistan şəmsi şəmsiyyə şəmsəddin şərafət şərif şərifə şərəf əbdül əbdülbağı əbdülhəmid əbdülkərim əbdülqədir əbdülrəhim əbdülsəməd əbdüləli əbdürrəhim əbdürrəhman əbil əbru əbuzər əbülfət əbülfəz əbülhəsən əbülqasım əda ədalət ədilə əflatun əfqan əfran əfrasiyab əfruz əfsanə əfsun əfsər əfşan əfşar əhliman əhməd əhmədağa əhmədxan əhəd əhədqulu əhədulla əjdər əkbər əli əliabbas əliağa əlibala əlican əlicavad əlif əliheydər əlihüseyn əlikram əlimusa əliməmməd əlimərdan əliqulu əlirza əlisəfa əlisəmid əlixan əliyar əlişir əliəşrəf əlyar əlövsət ələddin ələkbər ələmdar ələmşah ələsgər əmanət əmin əminağa əminə əmir əmiraslan əmirxan əmirşah əmrah əmrulla ənbər əntiqə ənvər ərkin ərşad ərəbzəngi ərəstun əsgər əsgərxan əskinaz əsmər əsmət əsəd əsədulla ətirə əvəz əyyub əzim əzimağa əziz əzizağa əzizə əzəmət əşrəf"};
-const NAMESET = {}; for (const l in NAMES) NAMESET[l] = new Set(NAMES[l].split(' '));
-let accepted = {}; try { accepted = JSON.parse(localStorage.getItem('iz-accepted')||'{}'); } catch(_){}
+const NAMES = {"tr": "abbas abdi abdullah abdurrahim abdurrahman abdurrezzak abdülaziz abdülbaki abdülbari abdülcelil abdülgani abdülhadi abdülhakim abdülhalim abdülhamit abdülkadir abdülkerim abdülkuddüs abdüllatif abdülmecit abdülmelik abdülmuttalip abdülnasır abdülsamet abdülvahap abdülvahit abdürrauf abdüssamet abdüsselam abide abidin acar aclan ada adalet adem adil adile adnan afet afife afitap afşin ahmet ahsen ahu akasya akay akgül akgün akhan akif akile akkız aksel aksu aktan aktuğ akça akçay akın alaaddin alaattin alattin alev algan ali alican alihan alim alime aliye alkan alkım almila alp alparslan alpaslan alpay alpcan alper alperen alphan alptekin alptuğ altan altay altuğ altın altınay alçin amine anber andaç anıl aras arca arda arif arife armağan arslan arslanbey arzu arık arıkan arın asaf asel asena asil asiye aslan aslı asude asuman asya asım ata atahan atakan atalay ataman atila atilla atiye atlas atıf atıl atınç avni avşar ayabakan ayaz aybala aybars aybek ayberk aybike aybüke aycan aydan aydemir aydeniz aydoğan aydoğdu aydın ayfer aygen aygül aygün ayhan aykan aykut aykız ayla aylan aylin ayman aynur ayperi aysal aysel aysu aysun aytaç aytekin ayten aytuğ aytül ayvaz ayyüce ayça ayşe ayşegül ayşen ayşenur azad azat azim azime aziz azize azmi azra ağah ağca aşkın aşır babür bade bager baha bahadır bahar bahattin bahise bahri bahriye bahtiyar bahtışen baki bakır balkan balkız balım banu baran barbaros barlas barçın barış basri battal batu batuhan batur baturalp batıhan bayar baybars baykal baykan bayram bedia bediha bedii bedirhan bedri bedriye begüm behice behire behiye behlül behram behzat behçet bekir belgin belkıs belma benan bengi bengisu bengü bennur berat beren berfin beril berk berkant berkay berkcan berke berker berkin berna berra berrak berrin besim beste betül beyazıt beyda beyhan beytullah beyza bilal bilge bilgehan bilgen bilgin billur binali binnaz birgül birhan birkan birnur birol birsel birsen bora boran bozkurt buket bulut burak burcu burhan burhaneddin burhanettin burç burçak burçin buse buğra bülent bünyamin büşra büşranur cafer cahide cahil cahit can canan canberk candan candemir canel caner canfeda cangül canip cansel cansu cansın cavit cebrail celal celalettin celil celile cem cemal cemalettin cemaliye cemalnur cemil cemile cemre cemşid cemşir cenan cenap cengiz cenk cennet ceren cesim cevahir cevat cevdet cevriye ceyda ceyhun ceyla ceylan cezmi cihan cihangir cihanser civan coşkun cuma cumali cumhur cülide cüneyd cüneyt dalya damla danyal davut dağhan defne demet demir demirhan deniz derin derman derviş derya destan devran devrim dicle didem dila dilan dilara dilay dilber dilek dilhan dilruba dilşad dilşen dinç dinçer direnç dirim dolunay doruk dorukhan doğa doğan doğu doğukan dudu duman duran durcan durdu durhan durmuş durmuşali dursun duru duygu döndü dündar dürdane düriye dürrü ebrar ebru ebubekir ece ecem ecesu ecrin eda edanur edhem edibe edip ediz efdal efe efkan efnan efsun eftal ege egemen ejder ekber ekim ekin ekmel ekrem ela elanur elfide elgin elif elifnur elmas elvan elvin elçim elçin emel emin emine emir emircan emirhan emrah emre emsal enes engin enginay enis ensar ensari enver ercan erdal erdem erdi erdinç erdoğan erdoğdu erem eren ergenekon ergin ergün erhan erim erinç erkal erkan erkin erkut erman erol ersan ersin ersoy ertan ertekin ertuğ ertuğrul ervin esat esen esengül eser esin eslem esma esra ethem evliya evren evrim eylem eylül eymen eyüp eyşan ezel ezgi ezgin eşe eşref fadime fadıl fahire fahrettin fahri fahriye fahrünnisa faik faika fakir faruk fatih fatin fatma fatmagül fatoş fazilet fazlı fazıl fecri fehime fehmi fehmiye ferah ferahnaz feray ferda ferdi ferhan ferhat feride feridun feriha ferit feriştah ferruh ferzan fevzi fevziye feyyaz feyza feyzi feyzullah fidan figen fikret fikri fikriye filiz firdevs firuze fuad fuat funda furkan fuzuli füruzan füsun gaffar galip gamze gani gaye gazanfer gediz gencay genco gençay giray gizem gonca gökalp gökay gökben gökberk gökdemir gökhan gökhun gökmen göknur göksel göksu gökten göktuğ göktürk gökçe gönül gözde gül gülay gülbahar gülben gülbeyaz gülbin gülcan güldane gülden güldeniz gülderen gülen güler gülfem gülfer gülfidan gülgün gülhan gülhanım gülistan gülizar güllü gülnar gülnaz gülnihal gülnur gülperi gülsen gülseren gülsüm gültekin gülten gülzar gülçin gülümser gülşah gülşen gümüş günal günay gündoğdu gündüz güney güneş güray gürbüz gürhan gürkan gürol gürsel güven güvenç güzel güzide güzin habibe habibullah habip hacer hadi hafize hafız hakan hakime hakkı halide halil halim halime halis halit haluk hamdi hamide hamit hamiyet hamza handan hande hanefi hanife hanım harun hasan hasbi hasibe hasip hasret hatem hatice hatip hatun hayal hayat hayati haydar hayreddin hayrettin hayri hayriye hazal hazım haşim hediye helin heves hicran hidayet hikmet hilal hilmi hilmiye hira hiranur hüda hüdai hülya hüma hümeyra hünkar hürrem hürriyet hüsamettin hüseyin hüsniye hüsnü hüsrev hızır ibrahim iclal idal idil idris iffet ihsan ihsaniye ikbal ikra ilayda ilbey ilhame ilhami ilhan ilkay ilke ilkem ilker ilkin ilkiz ilknur ilteber ilteriş ilyas imdat imran imren inal inanç inci ipek irem irfan isa ishak iskender islam ismail ismet ismigül ismihan israfil izzet izzettin içli kaan kadem kader kadir kadri kadriye kahraman kalender kamber kamil kamile kamuran kandemir karaca karanfil kardelen kartal kasım kaya kayahan kayhan kayra kayıhan kazime kazım kağan kemal kemalettin kemaliye kenan kenane kerem kerim keriman kerime kerimhan kevser kezban kiraz koray korkmaz korkut kubilay kuddusi kudret kumru kumsal kurtcan kurtuluş kutay kutlay kutlu kutsi kuzey kübra kübranur kürşat kılınç kılıç kınalı kınay kıvanç kıvılcım kıymet lale lalezar lamia latif latife laçin lebibe leman lerzan levent leyla leyli lezize lokman lütfi lütfiye lütfullah lütfü macit mahfuz mahinur mahir mahmure mahmut mahperi mahsun mahzar makbule maksut malik malika maliye mansur masal mazhar mazlum mecbure mecide mecit medet medih medine mefkure mehdi mehlika mehmet mehmetali mehmetcan mehtap mekin melahat melda melehat melek meleknur melih melik melike melikşah melis melisa meltem memduh memet memnune menekşe mensur meral merih mert mertcan merve meryem mestan mesude mesut metin mevlüde mevlüt meyrem mihri mihriban mihrimah mihrinaz mina mira miray miraç mirza mithat mualla muallim muammer muazzam muazzez mucize muhammed muharrem muhittin muhlis muhsin muhterem mukadder mukaddes mukbil murat musa mustafa mutlu mutluhan muzaffer mübeccel müberra mücahit mücella müfide müge müjde müjgan mükerrem mükremin mümin mümtaz münevver münir münire münür mürsel mürvet mürüvvet müslüm müzehher müzeyyen müşerref nabi naci naciye nadide nadir nadire nadiye nafia nafiz nahit nail naile naim naime nalan namık narin nazan nazen nazende nazenin nazif nazife nazike nazile nazime nazlı nazmi nazmiye nazım nağme naşit nebahat necati necdet necibe necip necla necmettin necmi necmiye nedim nedret nefes nefise nehir nergis neriman nermin nesibe nesimi neslihan nesrin nevin nevra nevriye nevzat nezahat nezaket nezih nezihe neşe neşet nida nigar nihal nihan nihat nil nilay nilgün nilsu nilüfer nimet nimetullah nisa nisanur niyazi nizam nizamettin nuh numan nur nuran nuray nurbanu nurcan nurdan nurdağ nurettin nurgül nurhan nurhayat nuri nurinisa nursel nurseli nursena nursu nurten nurullah nurşen nusret nüket nükhet nüvit nüzhet ogün okan okay oktar oktay okşan olcay olgun ongun onur orhan orkan orkun orçun osman oya ozan ozanalp oğulcan oğuz oğuzhan oğuzkaan pakize pamir payidar paşa pekcan pelin pembe pembegül peri perihan perizat perran pervin petek peyami piraye polat poyraz pürnur pınar rabia rabih raci racih ragıp rahim rahime rahmi rahmiye raif rakibe rakım ramazan ramiz rana rasim rasime rauf raşide raşit rebia recai recep refet refia refik refika reha remide remzi remziye resmiye resul revnak reyhan rezan rezzan reşat reşide reşit rifat ruhi rukiye rumeysa rumi ruşen rüfet rüknettin rüstem rüveyda rüya rüzgar rüçhan rüştü rıdvan rıfat rıza saadet saba sabahat sabahattin sabiha sabit sabri sabriye sacide sacit sadettin sadiye sadri sadık saffet safiye sahure saime sait sakine salih saliha salim samet sami samiha samim samiye sanem saniye sanver sare sarp satı savaş saygın sebahat seda sedanur sedat sedef sefa sefer sefure sehergül selahattin selami selda selen selim selin selma selvi selçuk sema semahat semanur semih semiha semiramis semra sena senanur senem serap serdar seren serhat serkan sermin serpil serra sertan sertaç server servet sevcan sevda sevde sevdenur sevgi sevgül sevil sevilay sevim sevinç sevtap seyfettin seyfi seyfullah seyhan seyhun seyit seyran seyyit sezai sezen sezer sezgin sezgül sezin seçil seçkin sibel sidar simay simge sinan sinem sona sonay soner songül su suat sude sultan suna sunay suphi suzan süha süheyl süheyla süleyman sülün sümbül sümeyye süphan süreyya süreyye sıddık sıdıka sıla sıtkı tacettin taci tahir tahire tahsin tahsine taibe talat talha talya tamer tanay tanel taner tanju tanrıverdi tansu tarkan tarık tayfun taylan tayyar tayyip taşkın tekin temel temmuz teoman tevfik tevhide tevhit tezcan tezel tijen timur tolga tolunay tomris toprak toygar toygun tuana tuba tufan tulpar tuna tunahan tunay tuncay tuncer tunç turan turgay turgut tutku tuğba tuğcan tuğhan tuğra tuğrul tuğçe tülay tülin tümay tümer türkan türker ufuk ulaş ulus ulvi ulviye umay ummahan umut ural urhan utku uygar uzay uğur uğurcan uğurhan vacit vahap vahdet vahide vahit varol vasfi vasfiye vecdet vecdi vecihe vedat vedia vefa vehbi vehbiye veli velit verda vesile veysel vicdan vildan vildane visal volkan vural yadigar yahya yahşi yakup yakut yalçın yalın yaman yamaç yaprak yaren yasemin yasin yasir yavuz yavuzhan yazgı yağmur yağız yaşar yekta yeliz yeter yeşim yiğit yiğitcan yonca yosun yunus yurdagül yurdakul yurdanur yusuf yücel yüksel yümnü yüsra yıldıray yıldırım yıldız yılmaz zafer zahide zahir zahire zahit zaim zakir zarif zarife zatiye zehra zekai zekayi zekeriya zeki zekiye zelal zeliha zerda zeren zerrin zeynel zeynelabidin zeynep zihni zikri zinet zinnur ziya ziynet zişan zübeyde zübeyir zübeyr zühal zühre zülal züleyha zülfikar zülfiye zülkarneyn zümra zümrüt çakır çağan çağatay çağdaş çağla çağlar çağlayan çağrı çağrıhan çağıl çelebi çelik çerağ çetin çilem çimen çisem çiçek çiğdem çolpan çınar öcal ödül öge ökkeş ömer ömrüm ömür önder öner örsan övünç öykü özay özcan özdemir özden özer özge özgen özgül özgür özhan özkan özker özlem öznur özsoy öztekin özün ülker ülkü ümit ümmet ümmü ümmügülsüm ümmühan ümran ünal ünsal ünzile ürün üstün üzeyir ıdil ılgar ılgaz ılgın ılık ılım ırmak ışık ışıl ışın şaban şadan şadi şafak şahabettin şahan şahap şahende şahika şahin şahinde şahnaz şahsenem şakir şamil şaziye şebnem şefik şefika şefkat şehmus şehrazat şehri şehriban şehzade şemsa şemsettin şemsi şemsiye şenay şenel şengül şennur şenol şerafet şerafettin şeref şerif şerife şermin şevket şevki şevval şeyda şeyma şiir şimşek şinasi şirin şule şura şöhret şükran şükriye şükrü şükufe", "az": "abasqulu abbas abbasqulu abdin abdulla abdulrəhman abdulxalıq abid abidin abidə abuzər adil adilxan adilşah adilə adnan adıgözəl adışirin adəm afaq afil afiq afiyət afərin afət aidə aişə akif akşin alagöz alim alimə aliyə allahverdi allahyar almas almaxanım almaz alpaslan altay altun altunay altunsaç alxan alxanım alxas alı alıcan alıxan alışan amalya amil amilə anaqız anar anaxanım aqil aqilə aqşin araz arif arifə arzu arzuxanım arəstun asif asim asimə aslan asya asəf atabəy atakişi ataxan ataş atilla atəş ayan ayaz aybəniz aydan aydın aydəmir aygül aygün aygünəş ayişə ayla aylin ayna aynişan aynur aynurə aysel aysu aysun aysəl aytac aytəkin aytən ayxan ayyub ayçiçək ayşə ayşən ayşənur azad azadə azim aziz azər azərin ağa ağababa ağabacı ağabala ağabəy ağabəyim ağacan ağadadaş ağahadi ağahüseyn ağahəsən ağakərim ağalar ağalı ağamalı ağamir ağamusa ağarza ağarəhim ağası ağasəf ağasəfa ağaverdi ağaxan ağaxanım ağaşirin ağaəli ağbəniz ağca ağcaqız ağdəmir ağgül ağçiçək baba babacan babakişi babaxan babayar babaş babaəli babək badam bahadur bahar bala balabəy baladadaş balakişi balaqız balaxan balaxanım balaş banu banuçiçək barat barış bayandur bayat bayram bağır beyrək bikə bilal bilqeyis budaq bülbül bəhlul bəhmən bəhram bəhriyyə bəhruz bəhruzə bəkir bəndalı bənövşə bəsir bəsirə bəsti bəstixanım bəxtiyar bəxtiyarə bəybala bəyim bəylər bəylərbəy bəyxanım bəyəhməd bəşir cabbar cabbarə cabir cahan cahanbəyim cahangir cahangül cahid cahidə camal camalxan camalə canan canpolad cavad cavan cavanşir cavid cavidan cavidə ceyhun ceyhunə ceyla ceyran coşqun cuma cümşüd cəbrayıl cəfər cəfərqulu cəlal cəlaləddin cəlil cəlilə cəmalə cəmaləddin cəmil cəmilə cəmşid cənnət cəsarət cəsur cəvad cəvahir dadaş dadaşbala dadaşbəy damla davud daşdəmir daşqın didar dilarə dilavər dilbər dilfiruz dilnarə dilnaz dilruba dilsuz dilşad dilşadə diləfruz dinarə durna dursun dönməz dövlət dövlətxanım dürdanə dürnisə dürrə dəmir dəniz dərdimənd dərgah dərviş dərya dəyanət elariz elbrus elcan eldar eldost eldəniz elgiz elgün elman elmar elmin elmir elmira elməddin elnarə elnur elnurə elsevər eltac eltəkin elvan elvin elvira elxan elyar elza elçibəy elçin elşad elşadə elşən emil emilya emilə emin eminə esmira esmər etibar eynulla eynur eyvaz faiq faiqə fariz fateh fatimə fazil fazilə feyruz feyzulla fidan fikrət firdovsi firidun firudin firuz firuzə firəngiz fizzə flora fuad füruzə füsun füzuli fəhmi fəhminə fəqan fərasət fərhad fərid fəridun fəridə fərizə fərman fərqanə fərrux fərzanə fərzəli fərəc fərəh fərəhnaz fərəmuz fəttah fəxri fəxriyyə fəxrəddin fəxrəndə fəzail fəzilə fəzilət gövhər gövhərtac göyçək gözəl gülabbas gülafət gülalı gülarə gülay gülağa gülbacı gülbahar gülbəniz gülbəyim gülcahan güldəstə gülgün gülgəz güllü güllüçiçək güllər gülmira gülmirə gülməmməd gülnar gülnarə gülnaz gülnisə gülnur gülpəri gülruh gülsabah gülsevər gülsüm gülsənəm gültac gültəkin gülxanım gülxar gülxumar gülyanaq gülyaz gülzadə gülzar gülçin gülçöhrə gülümsər gülüstan gülüş gülşad gülşirin gülşən güləbətin gülənbər gülər günay gündüz günel günəş günəşxanım gəncəli gəray gəraybəy gərayxan habil hacı hacıağa hacıbaba hacıbala hacıbəy hacımurad hacıqulu hacıxanım hafiz hafizə hakim hamid hamidə hamlet haqnəzər haqqı haqverdi hatəm haşım heydər hicran hidayət hikmət hilal hilalə humay hökümə hümbət hümeyra hümeyrə hümmət hüriyyə hürriyyət hürü hüseyn hüseynağa hüseynqulu hüseynəli hüsniyyə hüsnü həbib həbibulla həbibə həcər hədiyyə həkim həlim həlimə həmayıl həmdulla həmid həmidə həmzə həmzəli həqiqət həsən həsənağa həsənbəy həsənəli hətəm hətəmxan həvva həvvaxanım həyat həzi ibad ibadulla ibrahim ibrahimxəlil idrak idris iftixar ihsan ikram ilahə ilham ilhamə ilkanə ilkin ilknur ilmira ilnarə ilnur ilqar ilqarə ilyas imam imamqulu imamverdi imran inam inarə inci inqilab intiqam intizar iqbal iradə irşad isa isabəy isgəndər ishaq iskəndər islam ismayıl ismət israfil ixtiyar izzət jalə kamal kamalə kamaləddin kamil kamilə kamran kazım kifayət kişvər könül könülə kövkəb kövsər kübra kürşad kəklik kəlbəli kələntər kəmalə kəmaləddin kənan kəramət kərim kərimə kərəm lalazar lalə lamiyə lazım laçın leyla leyli leylixanım loğman lütfi lütfiyyə lütfəli ləman lətafət lətif lətifə mahir mahirə mahizər mahmud mahmudə mahnur mahparə mahrux maisə malik manaf maqsud maral mayıl mayılə mehdi mehdiqulu mehin mehman mehparə mehralı mehriban mehrəli mehrəngiz metin mikayıl minirə minurə mirabbas mirağa mirbağır mircavad mircəlal mirfəttah mirheydər mirhüseyn mirhəsən mirkazım mirmusa mirməmməd mirsadiq mirseyid mirsəməd mirvari mirzağa mirzə mirzəbala mirzəli mirəli mirəziz misir murad murtuz musa mustafa muxtar möhsün möhübbət möminə mübariz mübarək mübarəkə mühəmməd mülayim münəvvər mürsəl mürvət müseyib müslüm mütəllim müzəffər müşfiq müşkünaz müşviq məcid mədinə mədəd mədət məftun məhbub məhbubə məhrəm məhsəti məhəbbət məhəmməd məhəmmədhüseyn məhəmmədəli məhərrəm məhərrəmə məlahət məleykə məlik mələk mələkxanım mələkə məmməd məmmədağa məmmədhüseyn məmmədhəsən məmmədkərim məmmədrza məmmədtağı məmmədyar məmmədəli məmmədəmin mənsur mənsurə mənzər mərcan mərdan mərifət məryəm mərziyyə mərziyə məsmə məsud məsumə mətanət mətin mətləb məzahir nabat nadir nadirə nahid nahidə naib naibə nailə namidə namiq narıngül natella natiq natəvan nazan nazilə nazim nazimə nazlı nazlıxanım nazpəri nazəndə nazənin nağı nağıbəy neman nemət nicat nigar nihad nihal nihan nilay nilufər nisə niyaz nizami novruz novruzəli nubar nubarə nuranə nuray nurcahan nuridə nurlan nurlana nurpəri nursəba nurtac nurxan nurşən nurə nurəddin nurəli nüsrət nüşabə nəbi nəbibəy nəcib nəcibə nəcməddin nəcəf nəcəfqulu nəfisə nəfəs nərgiz nərgizə nəriman nərimanə nərmin nərminə nəsib nəsibə nəsimi nəsimə nəsir nəsrin nəsrəddin nəvai nəzakət nəzirə nəzrin nəzər nəğmə ocaq ofeliya oqtay orduxan oruc orxan osman ozan oğuz oğuzxan pakizə paşa pirverdi pirəli polad pünhan pənah pəncəli pəri pərinaz pərixan pərixanım pərişan pərvanə pərvin pərviz pərzad qabil qadir qafar qafur qalib qaraca qaraman qaratel qaraxan qasım qasımbəy qaşqay qiyas qorqud qorxmaz qubad qulam qulamhüseyn qulu qumru qurban qurbanəli qönçə qüdrət qüdsiyyə qızbəs qızqayıt qədimə qədir qəhrəman qələndər qəmbər qəmər qənbər qənirə qərib qəribə qərənfil qətibə qəzalə qəzənfər rafael rafiq rafiqə rahib rahil rahilə rahim rakif ramazan ramil ramilə ramin ramiz rasim rasimə rauf raziyə reyhan reyhanə rizvan ruhiyyə ruhulla ruhəngiz rumiyyə ruslan rza rzaqulu rövşən rövşənə röya rübabə rüfət rüqiyyə rüqəyyə rüstəm rüxsarə rəbiyyə rəfail rəfiq rəfiqə rəhilə rəhim rəhimə rəhman rəmzi rəna rəsmiyyə rəsul rəvan rəvanə rəxşəndə rəzzaq rəşad rəşadət rəşid rəşidə sabah sabahəddin sabina sabiq sabir sabirə sabit sadiq sadiqə sadıq safura sahib sahibə sahil sahilə sakinə sakit salatın saleh salman samir samirə sanan sanəm sara sevda sevgi sevil sevinc seyfəddin seyid seyidağa seymur seyran sima simuzər solmaz sona sonaxanım sultan surxay suğra sübhan süleyman sürəyya səadət səbinə səbuhi sədaqət səfa səfiyyə səfurə səfər səfərəli səhər səid səidə səkinə səlim səlimə səltənət səma səmayə səməd səmədağa səməndər sənan sənubər sərdar sərvinaz sərvər səttar səxavət səyavuş səyyad səyyarə tahir tahirə taleh talıb tamam tamara tamaşa tamerlan tamilla tanrıverdi tapdıq tariyel tağı telli telman teymur teymuraz tofiq tomris toğrul tunar turab tural turan turanə turqut turxan tutu tükəzban tünzalə türkan təbrik təbriz təhmasib təhminə təkin təranə tərlan tərxan təvəkkül ucal ulduz ulviyyə umud uğur vahab vahid vahidə valeh vaqif vasif vasilə vazeh veysəl vidadi vilayət vurğun vüqar vüsal vüsalə vəcihə vəfa vəfadar vəkil vəli vəliyulla vəsilə vəzir xalid xalidə xalıq xalıqverdi xanbaba xanbacı xanbala xanbikə xanhüseyn xanlar xanmirzə xanmusa xanoğlan xansuvar xanım xanış xanəli xanəmir xaqani xasay xasbulat xaspolad xatirə xatun xavər xeyransa xeyrulla xeyrəddin xosrov xudaverdi xudayar xudu xumar xuraman xurşid xurşidbanu xurşud xızır xədicə xəlifə xəlil xəlilulla xəlilə xəmis xəyal xəyalə xəyyam xəzər yadigar yalçın yaqub yaqut yasin yasəmən yaver yavər yaşar yeganə yetər yunis yunus yusif yusifəli yəhya zabil zabit zahid zahidə zahir zakir zaman zamin zamiq zarema zaur zemfira zeynal zeynalabdin zeynəb ziba zibeydə zivər ziya ziyad zöhrab zöhrə zübeydə züleyxa zülfiyyə zülfüqar zümrüd zəfər zəhra zəki zəkiyyə zəkəriyyə zəminə zərifə zərintac zərnigar zərxanım çimnaz çinar çinarə çingiz çiçək çiçəkxanım çoban çobanqulu çərkəz çərkəzxanım ömür ömər özbək özcan özdəmir ülfət ülkər ülvi ülviyyə ümid ümidə ümman ümmülbanu ümnisə üzeyir şaban şabanə şahbaz şahin şahinə şahlar şahmar şahməmməd şahnaz şahpəri şahsənəm şahvələd şahəddin şaiq şakir şamama şamil şamxal şirin şirinbəy şirzad şöhrət şövkət şükufə şükür şükürə şükürəli şəbnəm şəfa şəfaət şəfiqə şəfəq şəhanə şəhla şəhriyar şəhrizad şəkər şəlalə şəmistan şəmsi şəmsiyyə şəmsəddin şərafət şərif şərifə şərəf əbdül əbdülbağı əbdülhəmid əbdülkərim əbdülqədir əbdülrəhim əbdülsəməd əbdüləli əbdürrəhim əbdürrəhman əbil əbru əbuzər əbülfət əbülfəz əbülhəsən əbülqasım əda ədalət ədilə əflatun əfqan əfran əfrasiyab əfruz əfsanə əfsun əfsər əfşan əfşar əhliman əhməd əhmədağa əhmədxan əhəd əhədqulu əhədulla əjdər əkbər əli əliabbas əliağa əlibala əlican əlicavad əlif əliheydər əlihüseyn əlikram əlimusa əliməmməd əlimərdan əliqulu əlirza əlisəfa əlisəmid əlixan əliyar əlişir əliəşrəf əlyar əlövsət ələddin ələkbər ələmdar ələmşah ələsgər əmanət əmin əminağa əminə əmir əmiraslan əmirxan əmirşah əmrah əmrulla ənbər əntiqə ənvər ərkin ərşad ərəbzəngi ərəstun əsgər əsgərxan əskinaz əsmər əsmət əsəd əsədulla ətirə əvəz əyyub əzim əzimağa əziz əzizağa əzizə əzəmət əşrəf"};
+const BASE = {}; for (const l in NAMES) BASE[l] = NAMES[l].split(' ');
+/* Kullanıcının eklediği / çıkardığı isimler (bu cihazda saklanır) */
+let custom = { tr:{add:[],del:[]}, az:{add:[],del:[]} };
+try { const c = JSON.parse(localStorage.getItem('iz-custom')||'null'); if (c) custom = Object.assign(custom, c); } catch(_){}
+try { // eski "Listeye ekle" kayıtlarını taşı
+  const old = JSON.parse(localStorage.getItem('iz-accepted')||'{}');
+  for (const l in old) for (const k of old[l]) if (custom[l] && !custom[l].add.includes(k)) custom[l].add.push(k);
+  localStorage.removeItem('iz-accepted');
+} catch(_){}
+function saveCustom(){ try { localStorage.setItem('iz-custom', JSON.stringify(custom)); } catch(_){} }
+const NAMESET = {};
 const fold = k => k.replace(/ı/g,'i').replace(/ə/g,'e').replace(/x/g,'h').replace(/q/g,'k')
   .replace(/â/g,'a').replace(/î/g,'i').replace(/û/g,'u').replace(/d$/,'t').replace(/b$/,'p').replace(/c$/,'ç').replace(/g$/,'k');
-const FOLDSET = {}; for (const l in NAMESET) FOLDSET[l] = new Set([...NAMESET[l]].map(fold));
+const FOLDSET = {};
 /* Ses tanıma Azerbaycan harflerini (ə, x, q…) yazamazsa doğru isme çevir */
 const loose = k => fold(k).replace(/ç/g,'c').replace(/ö/g,'o').replace(/ü/g,'u').replace(/[gğ]/g,'k').replace(/y$/,'');
 const FIXMAP = {};
-for (const l in NAMESET){
-  const f = new Map(), lo = new Map();
-  for (const n of NAMESET[l]){
-    if (!f.has(fold(n))) f.set(fold(n), n);
-    const lk = loose(n); if (!lo.has(lk)) lo.set(lk, []); lo.get(lk).push(n);
-  }
-  FIXMAP[l] = { f, lo };
-}
 const dist = (a,b) => { const d = Array.from({length:a.length+1},(_,i)=>[i]);
   for (let j=1;j<=b.length;j++) d[0][j]=j;
   for (let i=1;i<=a.length;i++) for (let j=1;j<=b.length;j++)
@@ -259,8 +472,7 @@ const phon = k => {
        .replace(/(.)\1+/g,'$1').replace(/h$/,'').replace(/d$/,'t').replace(/b$/,'p').replace(/v$/,'f');
   return w;
 };
-const PHON = {}; for (const l in NAMESET){ const m = new Map();
-  for (const n of NAMESET[l]){ const p = phon(n); if (!m.has(p)) m.set(p, []); m.get(p).push(n); } PHON[l] = m; }
+const PHON = {};
 function fuzzy(k){
   const p = phon(k), m = PHON[lang]; if (!m) return null;
   if (m.has(p)) return m.get(p).slice().sort((x,y)=>dist(k,x)-dist(k,y))[0];
@@ -268,7 +480,20 @@ function fuzzy(k){
 }
 /* Türkçe ses tanıma Azerbaycan harflerini şöyle yazar: Ə→a/e, Q→k/g, X→h, Ğ→g. Her ismin bu yazılışlarını önceden üret */
 const VARMAP = {};
-(function(){
+/* Tüm arama tablolarını (yeniden) kur: başlangıçta ve listeye isim eklenip çıkarıldığında */
+function buildIndexes(){
+  for (const l in BASE){
+    const del = new Set(custom[l].del);
+    NAMESET[l] = new Set(BASE[l].filter(n => !del.has(n)).concat(custom[l].add.filter(n => !del.has(n))));
+    FOLDSET[l] = new Set([...NAMESET[l]].map(fold));
+    const f = new Map(), lo = new Map(), ph = new Map();
+    for (const n of NAMESET[l]){
+      if (!f.has(fold(n))) f.set(fold(n), n);
+      const lk = loose(n); if (!lo.has(lk)) lo.set(lk, []); lo.get(lk).push(n);
+      const p = phon(n); if (!ph.has(p)) ph.set(p, []); ph.get(p).push(n);
+    }
+    FIXMAP[l] = { f, lo }; PHON[l] = ph;
+  }
   const opts = { 'ə':['a','e'], 'q':['k','g'], 'x':['h','k'], 'ğ':['ğ','g'] };
   for (const l in NAMESET){
     const m = new Map();
@@ -279,7 +504,8 @@ const VARMAP = {};
     }
     VARMAP[l] = m;
   }
-})();
+}
+buildIndexes();
 function correct(k){
   const al = ALIAS[lang] && ALIAS[lang][k]; if (al) return al;
   const m = FIXMAP[lang]; if (!m || NAMESET[lang].has(k)) return k;
@@ -290,7 +516,7 @@ function correct(k){
   return fuzzy(k) || k;
 }
 const isKnown = k => k.includes(' ') ? k.split(' ').every(isKnown1) : isKnown1(k);
-const isKnown1 = k => !NAMESET[lang] || NAMESET[lang].has(k) || FOLDSET[lang].has(fold(k)) || (accepted[lang]||[]).some(a => fold(a) === fold(k));
+const isKnown1 = k => !NAMESET[lang] || NAMESET[lang].has(k) || FOLDSET[lang].has(fold(k));
 
 /* "Eee", "hmm", "şey" gibi isim olmayan sesler */
 const FILLER = new Set(('şey yani işte hani bir iki üç ve bu şu da de mi mı mu mü evet hayır tamam dur bekle sonra sen ben sıra sende bende sırada '+
@@ -298,43 +524,224 @@ const FILLER = new Set(('şey yani işte hani bir iki üç ve bu şu da de mi m�
   'bəli yox hə yəni yaxşı bilmirəm tapmadım gözlə dayan keç sənsən mənəm növbə').split(' '));
 const isFiller = k => !(NAMESET[lang] && NAMESET[lang].has(k)) && (k.length < 2 || FILLER.has(k) || /^(.)\1+$/.test(k) || /^[aeıioöuüə]+h*$/.test(k)
   || /^h*[mı]+h*$/.test(k) || /^h[aeıiəö]+h*$/.test(k) || /^[eəaı]+[mh]+$/.test(k));
+function addCustom(l, k){
+  k = k.trim().toLocaleLowerCase(LANGS[l].locale); if (!k) return false;
+  custom[l].del = custom[l].del.filter(x => x !== k);
+  if (!BASE[l].includes(k) && !custom[l].add.includes(k)) custom[l].add.push(k);
+  saveCustom(); buildIndexes(); return true;
+}
+function removeCustom(l, k){
+  custom[l].add = custom[l].add.filter(x => x !== k);
+  if (BASE[l].includes(k) && !custom[l].del.includes(k)) custom[l].del.push(k);
+  saveCustom(); buildIndexes();
+}
 function acceptName(i){
-  const k = names[i].key; (accepted[lang] = accepted[lang]||[]).push(k);
-  try { localStorage.setItem('iz-accepted', JSON.stringify(accepted)); } catch(_){}
-  recompute();
+  const n = names[i], wasValid = !n.unk;
+  n.key.split(' ').forEach(p => { if (!isKnown1(p)) addCustom(lang, p); }); recompute();
+  if (P() && !wasValid && i === names.length - 1 && n.by === turn && !n.wrong && !n.rep && !n.unk){ turn = nextAlive(turn); renderPbar(); if (listening) timerStart(); }
 }
 let lang = 'tr', used = new Set(), current = null, rotation = 0, spinning = false;
 let names = [];
 const $ = id => document.getElementById(id);
 const wheel = $('wheel'), hub = $('hub');
 
+/* ---------- Arayüz dili ---------- */
+const I18N = {
+  tr: { sub:'Son harften devam et', reset:'Sıfırla', spin:'Çarkı Çevir', newLetter:'Yeni Harf', start:'Başlat', stop:'Durdur',
+    listTitle:'Söylenen isimler', empty:'Çarkı çevir, sonra "Başlat"a bas ve isimleri söyle.', lgRep:'Tekrar / yanlış harf', lgUnk:'Listede yok', lgNext:'Sıradaki harf',
+    typeName:'Ya da ismi yaz…', add:'Ekle', timeUp:'Süre doldu!', cont:'Devam et', allUsed:'Tüm harfler kullanıldı',
+    allUsedQ:'Bu oturumdaki bütün harfler çıktı. Yeni oturum başlatılsın mı?', cancel:'Vazgeç',
+    left:n=>`${n} harf kaldı`, listening:l=>`🎤 ${l==='az'?'Azərbaycanca':'Türkçe'} dinleniyor`,
+    next:'Sıradaki harf:', startLetter:'Başlangıç:', rep:'Tekrar', wrong:x=>`Yanlış harf · ${x} olmalı`, unk:'Listede yok', addList:'+ Listeye ekle', heard:'duyulan:',
+    notFound:x=>x?`<b>${x}</b> harfiyle isim bulunamadı 😅`:'İsim bulunamadı 😅', unclear:'Anlaşılamadı, tekrar söyle: ',
+    micDenied:'Mikrofon izni verilmedi. İsimleri aşağıya yazabilirsin.', micNA:'Mikrofon şu an kullanılamıyor. Tekrar dene ya da isimleri aşağıya yaz.',
+    noSR:'Bu tarayıcıda ses tanıma yok. Chrome ile aç ya da isimleri aşağıya yaz.',
+    settings:'Ayarlar', theme:'Tema', light:'Gündüz', dark:'Gece', auto:'Otomatik', themeIs:x=>`Tema: ${x}`, uiLang:'Uygulama dili', nameLists:'İsim listeleri',
+    nmPh:'Ara veya yeni isim yaz…', nmReset:'Varsayılana dön', nmInfo:(a,b)=>`${a} isim${b?` · ${b} tanesini sen ekledin`:''}`,
+    nmMore:n=>`+${n} isim daha · aramak için yaz`, nmNone:'Bu harflerle isim yok. "Ekle" ile listeye ekleyebilirsin.',
+    nmAdded:x=>`"${x}" listeye eklendi`, nmExists:x=>`"${x}" zaten listede`, nmRemoved:x=>`"${x}" listeden çıkarıldı`,
+    nmResetQ:'Bu dildeki tüm eklemeler ve çıkarmalar geri alınsın mı? Tekrar bas.', nmResetDone:'Liste varsayılana döndü',
+    about:'Hakkında', aboutText:'İsim Zinciri, çocukken oynadığımız "son harften isim söyleme" oyununun sesli hâli. Çark ilk harfi seçer, isimleri söylersin, uygulama yazar ve kontrol eder.',
+    how1:'Çarkı çevir ve "Başlat"a bas.', how2:'Her isim, bir önceki ismin son harfiyle başlamalı.', how3:'Tekrar eden ve yanlış harfli isimler kırmızı görünür.', how4:()=>`Her isim için 3 + ${settings.time} saniyen var. Süresi dolan elenir.`,
+    aboutVer:'Sürüm 1.2 · Ayarlar ve eklediğin isimler bu cihazda saklanır.',
+    how5:'Her geçerli isim 1 puan, turu kazanan +2 puan alır.',
+    players:'Oyuncular', playersHint:'En fazla 11 oyuncu. Boş bırakırsan tek başına oynarsın.', addPlayer:'+ Oyuncu ekle', playerN:n=>`${n}. oyuncu`,
+    save:'Kaydet', close:'Kapat', noPlayers:'👤 Oyuncu ekle',
+    elim:(a,b)=>`<b>${a}</b> elendi.<br>Sıradaki: <b>${b}</b>`, roundOver:'Tur bitti', winner:n=>`${n} kazandı! (+2 puan)`,
+    soloEnd:n=>`${n} isim söyledin`, stats:(v,a)=>`Bu turda ${v} geçerli isim · ${a} deneme`, pts:'puan',
+    game:'Oyun', timeLimit:'Cevap süresi', sec:n=>`${n} sn`, graceNote:n=>`Her isim için önce 3 saniye ek süre, sonra ${n} saniye. Son 5 saniyede geri sayım başlar.`,
+    hardOff:'Zor harfleri çarktan çıkar', hardInfo:x=>`Bu listede çıkarılacak harfler: ${x}`, sound:'Geri sayım sesi',
+    nmEditing:x=>`"${x}" düzenleniyor. Yeni hâlini yazıp Kaydet'e bas.`, nmEdited:(a,b)=>`"${a}" → "${b}"`, nmTap:'Düzenlemek için isme, silmek için × işaretine dokun.',
+    exp:'⬇ Dışa aktar', imp:'⬆ İçe aktar', backupHint:'Eklediğin ve çıkardığın isimleri dosyaya kaydet, başka telefona aktar.',
+    impDone:n=>`${n} isim değişikliği içe aktarıldı`, impErr:'Dosya okunamadı' },
+  az: { sub:'Son hərfdən davam et', reset:'Sıfırla', spin:'Çarxı fırlat', newLetter:'Yeni hərf', start:'Başla', stop:'Dayandır',
+    listTitle:'Deyilən adlar', empty:'Çarxı fırlat, sonra "Başla" düyməsinə bas və adları de.', lgRep:'Təkrar / səhv hərf', lgUnk:'Siyahıda yoxdur', lgNext:'Növbəti hərf',
+    typeName:'Və ya adı yaz…', add:'Əlavə et', timeUp:'Vaxt bitdi!', cont:'Davam et', allUsed:'Bütün hərflər istifadə olundu',
+    allUsedQ:'Bu oyunda bütün hərflər çıxdı. Yeni oyun başlansın?', cancel:'Ləğv et',
+    left:n=>`${n} hərf qaldı`, listening:l=>`🎤 ${l==='az'?'Azərbaycanca':'Türkcə'} dinlənilir`,
+    next:'Növbəti hərf:', startLetter:'Başlanğıc:', rep:'Təkrar', wrong:x=>`Səhv hərf · ${x} olmalıdır`, unk:'Siyahıda yoxdur', addList:'+ Siyahıya əlavə et', heard:'eşidilən:',
+    notFound:x=>x?`<b>${x}</b> hərfi ilə ad tapılmadı 😅`:'Ad tapılmadı 😅', unclear:'Başa düşülmədi, yenidən de: ',
+    micDenied:'Mikrofona icazə verilmədi. Adları aşağıda yaza bilərsən.', micNA:'Mikrofon hazırda işləmir. Yenidən cəhd et və ya adları aşağıda yaz.',
+    noSR:'Bu brauzerdə səs tanıma yoxdur. Chrome ilə aç və ya adları aşağıda yaz.',
+    settings:'Ayarlar', theme:'Mövzu', light:'Gündüz', dark:'Gecə', auto:'Avtomatik', themeIs:x=>`Mövzu: ${x}`, uiLang:'Tətbiqin dili', nameLists:'Ad siyahıları',
+    nmPh:'Axtar və ya yeni ad yaz…', nmReset:'İlkin vəziyyətə qaytar', nmInfo:(a,b)=>`${a} ad${b?` · ${b} adı sən əlavə etmisən`:''}`,
+    nmMore:n=>`+${n} ad daha · axtarmaq üçün yaz`, nmNone:'Bu hərflərlə ad yoxdur. "Əlavə et" ilə siyahıya əlavə edə bilərsən.',
+    nmAdded:x=>`"${x}" siyahıya əlavə olundu`, nmExists:x=>`"${x}" artıq siyahıdadır`, nmRemoved:x=>`"${x}" siyahıdan çıxarıldı`,
+    nmResetQ:'Bu dildəki bütün dəyişikliklər geri qaytarılsın? Yenidən bas.', nmResetDone:'Siyahı ilkin vəziyyətə qaytarıldı',
+    about:'Haqqında', aboutText:'İsim Zinciri uşaqlıqda oynadığımız "son hərfdən ad demə" oyununun səsli formasıdır. Çarx ilk hərfi seçir, sən adları deyirsən, tətbiq yazır və yoxlayır.',
+    how1:'Çarxı fırlat və "Başla" düyməsinə bas.', how2:'Hər ad əvvəlki adın son hərfi ilə başlamalıdır.', how3:'Təkrar və səhv hərfli adlar qırmızı görünür.', how4:()=>`Hər ad üçün 3 + ${settings.time} saniyən var. Vaxtı bitən oyundan çıxır.`,
+    aboutVer:'Versiya 1.2 · Ayarlar və əlavə etdiyin adlar bu cihazda saxlanılır.',
+    how5:'Hər düzgün ad 1 xal, raundu qazanan +2 xal alır.',
+    players:'Oyunçular', playersHint:'Ən çox 11 oyunçu. Boş saxlasan tək oynayırsan.', addPlayer:'+ Oyunçu əlavə et', playerN:n=>`${n}. oyunçu`,
+    save:'Yadda saxla', close:'Bağla', noPlayers:'👤 Oyunçu əlavə et',
+    elim:(a,b)=>`<b>${a}</b> oyundan çıxdı.<br>Növbəti: <b>${b}</b>`, roundOver:'Raund bitdi', winner:n=>`${n} qalib gəldi! (+2 xal)`,
+    soloEnd:n=>`${n} ad dedin`, stats:(v,a)=>`Bu raundda ${v} düzgün ad · ${a} cəhd`, pts:'xal',
+    game:'Oyun', timeLimit:'Cavab vaxtı', sec:n=>`${n} san`, graceNote:n=>`Hər ad üçün əvvəlcə 3 saniyə əlavə vaxt, sonra ${n} saniyə. Son 5 saniyədə geri sayım başlayır.`,
+    hardOff:'Çətin hərfləri çarxdan çıxar', hardInfo:x=>`Bu siyahıda çıxarılacaq hərflər: ${x}`, sound:'Geri sayım səsi',
+    nmEditing:x=>`"${x}" redaktə olunur. Yeni formasını yaz və Yadda saxla düyməsinə bas.`, nmEdited:(a,b)=>`"${a}" → "${b}"`, nmTap:'Redaktə üçün ada, silmək üçün × işarəsinə toxun.',
+    exp:'⬇ İxrac et', imp:'⬆ İdxal et', backupHint:'Əlavə etdiyin və çıxardığın adları fayla saxla, başqa telefona köçür.',
+    impDone:n=>`${n} ad dəyişikliyi idxal olundu`, impErr:'Fayl oxunmadı' }
+};
+let settings = { theme:'auto', ui:'tr', players:[], time:10, hardOff:false, sound:true };
+try { Object.assign(settings, JSON.parse(localStorage.getItem('iz-settings')||'{}')); } catch(_){}
+function saveSettings(){ try { localStorage.setItem('iz-settings', JSON.stringify(settings)); } catch(_){} }
+function t(k, ...a){ const v = (I18N[settings.ui]||I18N.tr)[k]; return typeof v === 'function' ? v(...a) : (v ?? k); }
+function applyI18n(){
+  document.documentElement.lang = settings.ui;
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  $('spinLabel').textContent = t(current ? 'newLetter' : 'spin');
+  $('micLabel').textContent = t(listening ? 'stop' : 'start');
+  drawWheel(); renderList();
+  if ($('themeIco').innerHTML) updateThemeBtn();
+  if ($('sheet').classList.contains('open')) renderGameSettings();
+}
+/* ---------- Tema ---------- */
+const darkMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+function applyTheme(){
+  const dark = settings.theme === 'dark' || (settings.theme === 'auto' && darkMQ && darkMQ.matches);
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = dark ? '#121614' : '#2f6f5e';
+}
+if (darkMQ && darkMQ.addEventListener) darkMQ.addEventListener('change', () => { if (settings.theme === 'auto') applyTheme(); });
+applyTheme();
+
+/* ---------- Ayarlar ekranı ---------- */
+let nmLang = 'tr', nmResetArmed = false, nmEditing = null;
+function segSet(id, v){ document.querySelectorAll(`#${id} button`).forEach(b => b.classList.toggle('on', b.dataset.v === v)); }
+function openSettings(){ nmLang = lang; segSet('uiSeg', settings.ui); renderGameSettings(); segSet('nmSeg', nmLang); renderNames();
+  $('sheet').classList.add('open'); $('sheet').setAttribute('aria-hidden','false'); }
+function closeSettings(){ $('sheet').classList.remove('open'); $('sheet').setAttribute('aria-hidden','true'); nmEditing = null; $('nmAdd').textContent = t('add'); recompute(); drawWheel(); }
+function renderGameSettings(){
+  document.querySelectorAll('#timeSeg button').forEach(b => { b.textContent = t('sec', b.dataset.v); b.classList.toggle('on', +b.dataset.v === settings.time); });
+  $('graceNote').textContent = t('graceNote', settings.time);
+  $('hardTg').checked = !!settings.hardOff; $('soundTg').checked = !!settings.sound;
+  $('hardInfo').textContent = t('hardInfo', hardLetters(lang).join(', ') || '—');
+}
+function cap(k, l){ return k.split(' ').map(p => p.charAt(0).toLocaleUpperCase(LANGS[l].locale) + p.slice(1)).join(' '); }
+function renderNames(){
+  const l = nmLang, loc = LANGS[l].locale, q = $('nmInput').value.trim().toLocaleLowerCase(loc);
+  const all = [...NAMESET[l]].sort((a,b) => a.localeCompare(b, loc));
+  const mine = new Set(custom[l].add);
+  const hits = q ? all.filter(n => n.startsWith(q) || fold(n).startsWith(fold(q))) : all;
+  const MAX = 300, show = hits.slice(0, MAX);
+  $('nmList').innerHTML = show.map(n => `<span class="chipn${mine.has(n)?' mine':''}${nmEditing===n?' editing':''}"><span class="nm" data-e="${n.replace(/"/g,'&quot;')}">${cap(n,l).replace(/</g,'&lt;')}</span><button data-n="${n.replace(/"/g,'&quot;')}" aria-label="Sil">×</button></span>`).join('')
+    + (hits.length > MAX ? `<span class="chipn" style="border-style:dashed">${t('nmMore', hits.length - MAX)}</span>` : '')
+    + (q && !hits.length ? `<span style="font-size:13px;color:var(--muted)">${t('nmNone')}</span>` : '');
+  $('nmCntTr').textContent = NAMESET.tr.size; $('nmCntAz').textContent = NAMESET.az.size;
+  $('nmInfo').textContent = t('nmInfo', all.length, custom[l].add.length);
+}
+function nmFlash(txt){ $('nmMsg').textContent = txt; clearTimeout(nmFlash.t); nmFlash.t = setTimeout(() => $('nmMsg').textContent = '', 2500); }
+
+/* ---------- Oyuncular, sıra, puan ---------- */
+let totals = [], alive = [], turn = 0, startTurn = 0, roundOver = false;
+const P = () => settings.players.length;
+const pname = i => settings.players[i] || '';
+function resetPlayers(){ totals = settings.players.map(() => 0); alive = settings.players.map(() => true); turn = 0; startTurn = 0; }
+function nextAlive(i){ const n = P(); for (let k = 1; k <= n; k++){ const j = (i + k) % n; if (alive[j]) return j; } return i; }
+function roundScore(i){ return names.filter(n => n.by === i && !n.wrong && !n.unk && !n.rep).length; }
+function renderPbar(){
+  const el = $('pbar');
+  if (!P()){ el.innerHTML = `<button class="pchip edit" data-p="edit">${t('noPlayers')}</button>`; return; }
+  el.innerHTML = settings.players.map((nm, i) =>
+    `<button class="pchip${(current && !roundOver && i === turn) ? ' on' : ''}${alive[i] === false ? ' out' : ''}" data-p="${i}">${nm.replace(/</g,'&lt;')}<span class="sc">${(totals[i]||0) + roundScore(i)}</span></button>`
+  ).join('') + `<button class="pchip edit" data-p="edit" aria-label="${t('players')}">✎</button>`;
+  el.querySelector('.pchip.on')?.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
+}
+function hardLetters(l){ return ['J'].filter(ch => LANGS[l].letters.includes(ch)); }
+function activeLetters(){ const h = settings.hardOff ? new Set(hardLetters(lang)) : null; return LANGS[lang].letters.filter(ch => !h || !h.has(ch)); }
+function setPlaying(){ document.body.classList.toggle('playing', !!current && !roundOver); }
+function endRound(winner){
+  roundOver = true; stopListening(); timerStop(); $('timeout').classList.remove('show');
+  const valid = names.filter(n => !n.wrong && !n.unk && !n.rep);
+  if (P()){ settings.players.forEach((_, i) => totals[i] = (totals[i]||0) + roundScore(i)); if (winner != null) totals[winner] += 2; }
+  $('sumIco').textContent = winner != null ? '🏆' : '⏰';
+  $('sumTitle').textContent = t('roundOver');
+  $('sumText').innerHTML = (winner != null ? `<b>${t('winner', pname(winner).replace(/</g,'&lt;'))}</b>` : P() ? '' : `<b>${t('soloEnd', valid.length)}</b>`)
+    + `<br><small>${t('stats', valid.length, names.length)}</small>`;
+  const order = settings.players.map((nm, i) => ({ nm, i, pt: totals[i]||0 })).sort((a,b) => b.pt - a.pt);
+  const medal = ['🥇','🥈','🥉'];
+  $('sumScores').innerHTML = order.map((o, k) => `<li class="${o.i === winner ? 'win' : ''}"><span class="m">${medal[k] || (k+1)}</span><span class="nm">${o.nm.replace(/</g,'&lt;')}</span><span class="pt">${o.pt} ${t('pts')}</span></li>`).join('');
+  $('sumScores').style.display = P() ? '' : 'none';
+  lastSummary = {
+    ico: winner != null ? '🏆' : '⏰', title: t('roundOver') + (current ? ` · ${current}` : ''),
+    headline: winner != null ? t('winner', pname(winner)) : P() ? '' : t('soloEnd', valid.length),
+    stats: t('stats', valid.length, names.length),
+    scores: order.map((o, k) => ({ m: medal[k] || String(k+1), nm: o.nm, pt: `${o.pt} ${t('pts')}`, win: o.i === winner })),
+    date: new Date().toLocaleDateString(settings.ui === 'az' ? 'az' : 'tr', { day:'numeric', month:'long', year:'numeric' }),
+    url: inClaude ? '' : (location.host + location.pathname).replace(/index\.html$/, '').replace(/\/$/, '')
+  };
+  $('sumModal').classList.add('show');
+  $('micBtn').disabled = true; setPlaying(); renderPbar();
+  beep(330, .35);
+}
+/* Ekran kararmasın */
+let wakeLock = null;
+async function keepAwake(on){
+  try {
+    if (on && 'wakeLock' in navigator && !wakeLock){ wakeLock = await navigator.wakeLock.request('screen'); wakeLock.addEventListener('release', () => wakeLock = null); }
+    if (!on && wakeLock){ await wakeLock.release(); wakeLock = null; }
+  } catch(_){}
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && current && !roundOver) keepAwake(true); });
+/* Geri sayım sesi */
+let actx = null;
+function ensureAudio(){ try { actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume(); } catch(_){} }
+function beep(f, d){
+  if (!settings.sound || !actx) return;
+  try { const o = actx.createOscillator(), g = actx.createGain(); o.frequency.value = f; o.type = 'sine';
+    g.gain.setValueAtTime(.0001, actx.currentTime); g.gain.exponentialRampToValueAtTime(.25, actx.currentTime + .01);
+    g.gain.exponentialRampToValueAtTime(.0001, actx.currentTime + d); o.connect(g).connect(actx.destination); o.start(); o.stop(actx.currentTime + d + .02); } catch(_){}
+}
+
 /* ---------- Wheel ---------- */
 function drawWheel(){
-  const L = LANGS[lang].letters, n = L.length, seg = 360/n, cx=150, cy=150, r=146;
+  const L = activeLetters(), n = L.length, seg = 360/n, cx=150, cy=150, r=146;
   const pt = (a, rad) => { const t = a*Math.PI/180; return [cx + rad*Math.sin(t), cy - rad*Math.cos(t)]; };
   let s = '';
   L.forEach((ch, i) => {
     const a0 = i*seg, a1 = (i+1)*seg, [x0,y0] = pt(a0,r), [x1,y1] = pt(a1,r);
     const isUsed = used.has(ch);
     const fill = isUsed ? 'var(--used)' : (i%2 ? 'var(--seg-b)' : 'var(--seg-a)');
-    s += `<path d="M${cx},${cy} L${x0},${y0} A${r},${r} 0 0,1 ${x1},${y1} Z" fill="${fill}" stroke="#fff" stroke-width="1.2"/>`;
+    s += `<path d="M${cx},${cy} L${x0},${y0} A${r},${r} 0 0,1 ${x1},${y1} Z" fill="${fill}" style="stroke:var(--sep)" stroke-width="1.2"/>`;
     const mid = a0 + seg/2, [tx,ty] = pt(mid, r*0.83);
     s += `<text x="${tx}" y="${ty}" transform="rotate(${mid} ${tx} ${ty})" text-anchor="middle" dominant-baseline="central"
           font-size="${n>30?13.5:15}" font-weight="800" fill="${isUsed?'#a9a49a':'#fff'}"
           font-family="Inter,sans-serif">${ch}</text>`;
   });
-  s += `<circle cx="150" cy="150" r="146" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="2.5"/>`;
+  s += `<circle cx="150" cy="150" r="146" fill="none" style="stroke:var(--sep)" stroke-width="2.5"/>`;
   wheel.innerHTML = s;
-  const left = n - used.size;
-  $('info').textContent = `${left} harf kaldı` + (listening && micLang ? ` · 🎤 ${micLang==='az'?'Azərbaycan':'Türkçe'} dinleniyor` : '');
+  const left = L.filter(ch => !used.has(ch)).length;
+  $('info').textContent = t('left', left) + (listening && micLang ? ' · ' + t('listening', micLang) : '');
 }
 
 function spin(){
   if (spinning) return;
-  const L = LANGS[lang].letters;
+  const L = activeLetters();
   const pool = L.filter(ch => !used.has(ch));
   if (!pool.length){ $('modal').classList.add('show'); return; }
   stopListening();
+  $('sumModal').classList.remove('show');
   spinning = true; $('spinBtn').disabled = true; $('micBtn').disabled = true;
   hub.textContent = '…';
   const pick = pool[Math.floor(Math.random()*pool.length)];
@@ -348,16 +755,18 @@ function spin(){
   setTimeout(() => {
     spinning = false; current = pick; used.add(pick);
     hub.textContent = pick; hub.classList.add('pop'); setTimeout(()=>hub.classList.remove('pop'), 300);
-    names = []; renderList(); drawWheel();
+    names = []; roundOver = false;
+    if (P()){ alive = settings.players.map(() => true); turn = startTurn % P(); startTurn++; }
+    renderList(); drawWheel(); setPlaying(); keepAwake(true);
     $('spinBtn').disabled = false; $('micBtn').disabled = false;
-    $('spinLabel').textContent = 'Yeni Harf';
+    $('spinLabel').textContent = t('newLetter');
   }, 4700);
 }
 
 function resetSession(){
   stopListening();
-  used.clear(); current = null; names = []; hub.textContent = '?';
-  $('spinLabel').textContent = 'Çarkı Çevir'; $('micBtn').disabled = true;
+  used.clear(); current = null; names = []; hub.textContent = '?'; roundOver = false; resetPlayers(); setPlaying(); keepAwake(false);
+  $('spinLabel').textContent = t('spin'); $('micBtn').disabled = true;
   $('legend').style.display = NAMESET[lang] ? 'flex' : 'none';
   drawWheel(); renderList();
 }
@@ -378,12 +787,13 @@ function addPhrase(text){
   if (!words.length) return;
   // Uzun ve içinde hiç bilinen isim olmayan cümle = yanlış dilde duyulmuş gürültü, yazma
   if (words.length >= 3 && !words.some(w => isKnown(correct(keyOf(w))))){
-    $('interim').textContent = 'Anlaşılamadı, tekrar söyle: ' + words.join(' ');
+    $('interim').textContent = t('unclear') + words.join(' ');
     return;
   }
   addName(words);
 }
 function addName(words){
+  if (roundOver) return;
   const loc = LANGS[lang].locale;
   const heardText = words.join(' ');
   let k;
@@ -392,17 +802,16 @@ function addName(words){
   else k = words.map(w => correct(keyOf(w))).join(' ');      // çift isim: "Mustafa Kemal"
   const pretty = k.split(' ').map(p => p.charAt(0).toLocaleUpperCase(loc) + p.slice(1)).join(' ');
   const heard = keyOf(heardText) !== k ? heardText : null;
-  const exp = expectedLetter();
-  const wrong = !!exp && firstChar(k) !== exp;
-  names.push({ text: pretty, key: k, rep: !wrong && names.some(n => !n.wrong && fold(n.key) === fold(k)), unk: !isKnown(k), wrong, exp, heard });
-  if (wrong && navigator.vibrate) navigator.vibrate([80,60,80]);
-  renderList();
+  names.push({ text: pretty, key: k, heard, by: P() ? turn : -1 });
+  recompute();
+  const n = names[names.length-1];
+  if (P() && !n.wrong && !n.rep && !n.unk){ turn = nextAlive(turn); renderPbar(); }
+  if (navigator.vibrate){ if (n.wrong) navigator.vibrate([80,60,80]); else if (n.rep) navigator.vibrate(120); }
   $('timeout').classList.remove('show');
-  if (listening && !wrong) timerStart();
-  if (names[names.length-1].rep && navigator.vibrate) navigator.vibrate(120);
+  if (listening && !n.wrong && !n.rep && !n.unk) timerStart();
 }
 function removeName(i){ names.splice(i,1); recompute(); }
-/* Zinciri baştan hesapla: listede olmayan ve yanlış harfli isimler zinciri ilerletmez */
+/* Zinciri baştan hesapla: listede olmayan, yanlış harfli ve tekrar edilen isimler zinciri ilerletmez */
 function recompute(){
   const seen = new Set();
   let exp = current || '';
@@ -411,44 +820,45 @@ function recompute(){
     n.unk = !isKnown(n.key);
     n.wrong = !!exp && firstChar(n.key) !== exp; n.exp = exp;
     n.rep = !n.wrong && seen.has(f);
-    if (!n.wrong && !n.unk){ seen.add(f); exp = [...n.key].pop().toLocaleUpperCase(LANGS[lang].locale); }
+    if (!n.wrong && !n.unk && !n.rep){ seen.add(f); exp = lastLetter(n.key); }
   });
   renderList();
 }
+/* Sonraki ismin başlaması gereken harf: ı veya ğ ile biten isimde (Nazlı, Hacı) bir önceki harf geçer */
+function effIdx(k){ const c = [...k]; for (let i = c.length - 1; i > 0; i--){ if (c[i] !== ' ' && c[i] !== 'ı' && c[i] !== 'ğ') return i; } return c.length - 1; }
+function lastLetter(k){ return [...k][effIdx(k)].toLocaleUpperCase(LANGS[lang].locale); }
 function firstChar(k){ return [...k][0].toLocaleUpperCase(LANGS[lang].locale); }
 function expectedLetter(){
-  const ok = names.filter(n => !n.wrong && !n.unk);
+  const ok = names.filter(n => !n.wrong && !n.unk && !n.rep);
   const last = ok[ok.length-1];
-  return last ? [...last.key].pop().toLocaleUpperCase(LANGS[lang].locale) : (current || '');
+  return last ? lastLetter(last.key) : (current || '');
 }
 function nextLetter(){ return expectedLetter(); }
-function _oldNextLetter(){
-  const last = names[names.length-1];
-  return last ? [...last.key].pop().toLocaleUpperCase(LANGS[lang].locale) : (current || '');
-}
 function nameHtml(n){
   const ch = [...n.text].map(c => c.replace(/</g,'&lt;'));
   if (n.wrong || n.rep || n.unk || ch.length < 2) return ch.join('');
-  return ch.slice(0,-1).join('') + `<span class="last">${ch[ch.length-1]}</span>`;
+  const i = effIdx(n.key);
+  return ch.slice(0,i).join('') + `<span class="last">${ch[i]}</span>` + ch.slice(i+1).join('');
 }
 function renderList(){
   const ol = $('list');
   ol.innerHTML = names.map((n,i) =>
-    `<li class="${n.wrong?'wrong':(n.rep?'rep':(n.unk?'unk':''))}"><span class="t" dir="auto">${nameHtml(n)}${n.heard?`<small class="hd">duyulan: ${n.heard.replace(/</g,'&lt;')}</small>`:''}</span>${n.wrong?`<span class="wt">Yanlış harf · ${n.exp} olmalı</span>`:n.rep?'<span class="tag">Tekrar</span>':(n.unk?`<span class="ut">Listede yok</span><button class="acc" data-a="${i}">+ Listeye ekle</button>`:'')}<button class="x" data-i="${i}" aria-label="Sil">×</button></li>`
+    `<li class="${n.wrong?'wrong':(n.rep?'rep':(n.unk?'unk':''))}"><span class="t" dir="auto">${n.by >= 0 && pname(n.by) ? `<span class="by">${pname(n.by).replace(/</g,'&lt;')}</span>` : ''}${nameHtml(n)}${n.heard?`<small class="hd">${t('heard')} ${n.heard.replace(/</g,'&lt;')}</small>`:''}</span>${n.wrong?`<span class="wt">${t('wrong', n.exp)}</span>`:n.rep?`<span class="tag">${t('rep')}</span>`:(n.unk?`<span class="ut">${t('unk')}</span><button class="acc" data-a="${i}">${t('addList')}</button>`:'')}<button class="x" data-i="${i}" aria-label="Sil">×</button></li>`
   ).join('');
   $('empty').style.display = names.length ? 'none' : 'block';
   $('countBadge').textContent = names.filter(n => !n.wrong && !n.unk && !n.rep).length;
   const last = names[names.length-1];
   if (last){
-    $('next').innerHTML = `Sıradaki harf: <span>${nextLetter()}</span>`;
+    $('next').innerHTML = `${t('next')} <span>${nextLetter()}</span>`;
   } else {
-    $('next').innerHTML = current ? `Başlangıç: <span>${current}</span>` : '';
+    $('next').innerHTML = current ? `${t('startLetter')} <span>${current}</span>` : '';
   }
   const sb = $('scrollBox'); sb.scrollTo({top: sb.scrollHeight, behavior:'smooth'});
+  renderPbar();
 }
 
 /* ---------- Süre: 3 sn tolerans + 10 sn, son 5 sn geri sayım ---------- */
-const GRACE = 3000, LIMIT = 10000;
+const GRACE = 3000; const LIMIT_MS = () => (settings.time || 10) * 1000;
 let tStart = 0, tRaf = null, tLastSec = null;
 function hideCount(){ $('count').classList.remove('show'); $('count').innerHTML = ''; }
 function timerStart(){
@@ -461,7 +871,7 @@ function timerStop(){
   $('timer').classList.remove('on','warn'); hideCount();
 }
 function tick(now){
-  const el = now - tStart, remain = GRACE + LIMIT - el;
+  const LIMIT = LIMIT_MS(), el = now - tStart, remain = GRACE + LIMIT - el;
   $('timerBar').style.transform = `scaleX(${el < GRACE ? 1 : Math.max(0, remain/LIMIT)})`;
   $('timer').classList.toggle('warn', remain <= 5000);
   if (remain <= 5000 && remain > 0){
@@ -469,6 +879,7 @@ function tick(now){
     if (sec !== tLastSec){
       tLastSec = sec; $('count').innerHTML = `<span>${sec}</span>`; $('count').classList.add('show');
       if (navigator.vibrate) navigator.vibrate(40);
+      beep(sec === 1 ? 660 : 880, .09);
     }
   }
   if (remain <= 0){ tRaf = null; timeUp(); return; }
@@ -476,10 +887,14 @@ function tick(now){
 }
 function timeUp(){
   hideCount(); $('timer').classList.remove('warn');
-  const ch = nextLetter();
-  $('toText').innerHTML = ch ? `<b>${ch}</b> harfiyle isim bulunamadı 😅` : 'İsim bulunamadı 😅';
-  $('timeout').classList.add('show');
   if (navigator.vibrate) navigator.vibrate([200,100,200]);
+  if (P() < 2){ endRound(P() === 1 ? null : null); return; }
+  const out = turn; alive[out] = false;
+  const left = alive.map((a, i) => a ? i : -1).filter(i => i >= 0);
+  if (left.length <= 1){ endRound(left[0] ?? null); return; }
+  turn = nextAlive(out); renderPbar(); beep(330, .3);
+  $('toText').innerHTML = t('notFound', nextLetter()) + '<br><br>' + t('elim', pname(out).replace(/</g,'&lt;'), pname(turn).replace(/</g,'&lt;'));
+  $('timeout').classList.add('show');
 }
 $('toBtn').onclick = () => { $('timeout').classList.remove('show'); if (listening) timerStart(); };
 
@@ -501,7 +916,7 @@ if (inClaude && window.claude.use){
 function setListening(on){
   listening = on;
   $('micBtn').classList.toggle('live', on);
-  $('micLabel').textContent = on ? 'Durdur' : 'Başlat';
+  $('micLabel').textContent = t(on ? 'stop' : 'start');
   if (!on) micLang = null; drawWheel();
   if (on) timerStart(); else { $('interim').textContent = ''; engine = null; timerStop(); $('timeout').classList.remove('show'); }
 }
@@ -553,7 +968,7 @@ function startWebSpeech(){
   rec.onerror = e => {
     if (e.error === 'not-allowed' || e.error === 'service-not-allowed'){
       setListening(false);
-      $('msg').textContent = 'Mikrofon izni verilmedi. İsimleri aşağıya yazabilirsin.';
+      $('msg').textContent = t('micDenied');
     }
   };
   rec.onend = () => {
@@ -578,15 +993,15 @@ function startListening(){
         dictFallback.az = 'tr';
         $('msg').textContent = 'Azərbaycan dili burada desteklenmiyor. Türkçe tanımayla devam etmek için tekrar "Başlat"a bas.';
       } else if (code === 'not_granted'){
-        $('msg').textContent = 'Mikrofon izni verilmedi. İsimleri aşağıya yazabilirsin.';
+        $('msg').textContent = t('micDenied');
       } else if (code !== 'stopped'){
-        $('msg').textContent = 'Mikrofon şu an kullanılamıyor. Tekrar dene ya da isimleri aşağıya yaz.';
+        $('msg').textContent = t('micNA');
       }
     });
     return;
   }
   if (SR && !inClaude){ try { startWebSpeech(); return; } catch(_){} }
-  $('msg').textContent = 'Bu tarayıcıda ses tanıma yok. Chrome ile aç ya da isimleri aşağıya yaz.';
+  $('msg').textContent = t('noSR');
 }
 function stopListening(){
   flushPhrase();
@@ -598,7 +1013,7 @@ function stopListening(){
 
 /* ---------- Events ---------- */
 $('spinBtn').onclick = spin;
-$('micBtn').onclick = () => listening ? stopListening() : startListening();
+$('micBtn').onclick = () => { ensureAudio(); listening ? stopListening() : startListening(); };
 $('resetBtn').onclick = resetSession;
 $('mYes').onclick = () => { $('modal').classList.remove('show'); resetSession(); };
 $('mNo').onclick = () => $('modal').classList.remove('show');
@@ -610,7 +1025,135 @@ $('langs').onclick = e => {
   lang = b.dataset.l; resetSession();
 };
 
-drawWheel(); renderList();
+$('setBtn').onclick = openSettings;
+$('setClose').onclick = closeSettings;
+const THEME_ICO = {
+  light:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>',
+  dark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+  auto:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>' };
+function updateThemeBtn(){ $('themeIco').innerHTML = THEME_ICO[settings.theme]; $('themeBtn').title = t(settings.theme); }
+function toast(txt){ const el = $('toast'); el.textContent = txt; el.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 1400); }
+$('themeBtn').onclick = () => {
+  settings.theme = { light:'dark', dark:'auto', auto:'light' }[settings.theme] || 'light';
+  saveSettings(); applyTheme(); updateThemeBtn(); toast(t('themeIs', t(settings.theme)));
+};
+$('uiSeg').onclick = e => { const b = e.target.closest('button'); if (!b) return; settings.ui = b.dataset.v; saveSettings(); segSet('uiSeg', settings.ui); applyI18n(); renderNames(); };
+$('nmSeg').onclick = e => { const b = e.target.closest('button'); if (!b) return; nmLang = b.dataset.v; nmResetArmed = false; $('nmReset').textContent = t('nmReset'); segSet('nmSeg', nmLang); renderNames(); };
+$('nmInput').oninput = renderNames;
+$('nmInput').onkeydown = e => { if (e.key === 'Enter') $('nmAdd').click(); };
+$('nmAdd').onclick = () => {
+  const raw = $('nmInput').value.trim().replace(/\s+/g,' ');
+  if (!raw){ nmEditing = null; $('nmAdd').textContent = t('add'); renderNames(); return; }
+  const k = raw.toLocaleLowerCase(LANGS[nmLang].locale);
+  if (nmEditing){
+    const old = nmEditing; nmEditing = null; $('nmAdd').textContent = t('add');
+    if (k !== old){ removeCustom(nmLang, old); addCustom(nmLang, k); }
+    nmFlash(t('nmEdited', cap(old, nmLang), cap(k, nmLang)));
+  } else if (NAMESET[nmLang].has(k)) nmFlash(t('nmExists', cap(k, nmLang)));
+  else { addCustom(nmLang, k); nmFlash(t('nmAdded', cap(k, nmLang))); }
+  $('nmInput').value = ''; renderNames();
+};
+$('nmList').onclick = e => {
+  const b = e.target.closest('button[data-n]');
+  if (b){ if (nmEditing === b.dataset.n){ nmEditing = null; $('nmAdd').textContent = t('add'); }
+    removeCustom(nmLang, b.dataset.n); nmFlash(t('nmRemoved', cap(b.dataset.n, nmLang))); renderNames(); return; }
+  const e2 = e.target.closest('[data-e]'); if (!e2) return;
+  nmEditing = e2.dataset.e; $('nmInput').value = cap(nmEditing, nmLang); $('nmAdd').textContent = t('save');
+  nmFlash(t('nmEditing', cap(nmEditing, nmLang))); renderNames(); $('nmInput').focus();
+};
+/* Oyun ayarları */
+$('timeSeg').onclick = e => { const b = e.target.closest('button'); if (!b) return; settings.time = +b.dataset.v; saveSettings(); renderGameSettings(); };
+$('hardTg').onchange = () => { settings.hardOff = $('hardTg').checked; saveSettings(); };
+$('soundTg').onchange = () => { settings.sound = $('soundTg').checked; saveSettings(); if (settings.sound){ ensureAudio(); beep(880,.08); } };
+/* Yedek: dışa / içe aktar */
+$('nmExport').onclick = () => {
+  const data = JSON.stringify({ app:'isim-zinciri', v:1, custom }, null, 1);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], {type:'application/json'}));
+  a.download = 'isim-zinciri-listem.json'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+};
+$('nmImport').onclick = () => $('nmFile').click();
+$('nmFile').onchange = async () => {
+  const f = $('nmFile').files[0]; if (!f) return;
+  try {
+    const d = JSON.parse(await f.text()); const c = d.custom || d; let n = 0;
+    for (const l of ['tr','az']) if (c[l]){
+      for (const k of c[l].add || []) if (!custom[l].add.includes(k)){ custom[l].add.push(k); n++; }
+      for (const k of c[l].del || []) if (!custom[l].del.includes(k)){ custom[l].del.push(k); n++; }
+    }
+    saveCustom(); buildIndexes(); renderNames(); nmFlash(t('impDone', n));
+  } catch(_){ nmFlash(t('impErr')); }
+  $('nmFile').value = '';
+};
+/* Oyuncular penceresi */
+function pRow(v, i){ return `<div class="prow"><span>${i+1}</span><input value="${(v||'').replace(/"/g,'&quot;')}" placeholder="${t('playerN', i+1)}" maxlength="18"><button aria-label="Sil">×</button></div>`; }
+function openPlayers(){
+  const list = settings.players.length ? settings.players : ['', ''];
+  $('pRows').innerHTML = list.map(pRow).join(''); pRenumber(); $('pModal').classList.add('show');
+}
+function pRenumber(){ [...$('pRows').children].forEach((r, i) => { r.querySelector('span').textContent = i+1; r.querySelector('input').placeholder = t('playerN', i+1); });
+  $('pAdd').style.display = $('pRows').children.length >= 11 ? 'none' : ''; }
+$('pAdd').onclick = () => { if ($('pRows').children.length >= 11) return; $('pRows').insertAdjacentHTML('beforeend', pRow('', $('pRows').children.length)); pRenumber(); $('pRows').lastElementChild.querySelector('input').focus(); };
+$('pRows').onclick = e => { const b = e.target.closest('button'); if (!b) return; b.parentElement.remove(); pRenumber(); };
+$('pCancel').onclick = () => $('pModal').classList.remove('show');
+$('pSave').onclick = () => {
+  settings.players = [...$('pRows').querySelectorAll('input')].map(i => i.value.trim()).filter(Boolean).slice(0, 11);
+  saveSettings(); resetPlayers(); if (current && P()){ turn = 0; } names.forEach(n => n.by = -1);
+  $('pModal').classList.remove('show'); renderList();
+};
+$('pbar').onclick = e => { if (e.target.closest('.pchip')) openPlayers(); };
+/* Tur özeti */
+$('sumClose').onclick = () => $('sumModal').classList.remove('show');
+/* Tur sonucunu resim olarak paylaş */
+let lastSummary = null;
+function rr(c, x, y, w, h, r){ c.beginPath(); c.moveTo(x+r,y); c.arcTo(x+w,y,x+w,y+h,r); c.arcTo(x+w,y+h,x,y+h,r); c.arcTo(x,y+h,x,y,r); c.arcTo(x,y,x+w,y,r); c.closePath(); }
+function drawSummary(){
+  const S = lastSummary, rows = S.scores.length, W = 1080, H = Math.max(1080, 760 + rows * 104);
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const c = cv.getContext('2d');
+  const F = 'Inter, "Segoe UI", Roboto, system-ui, sans-serif';
+  const g = c.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#3a8670'); g.addColorStop(1, '#1c483c'); c.fillStyle = g; c.fillRect(0, 0, W, H);
+  // logo
+  c.save(); c.translate(80, 70); c.rotate(.14); c.fillStyle = '#fff'; rr(c, 0, 0, 74, 74, 18); c.fill();
+  c.fillStyle = '#2f6f5e'; c.font = `800 52px ${F}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('A', 37, 40); c.restore();
+  c.save(); c.translate(128, 112); c.rotate(-.14); c.fillStyle = '#f0be3c'; rr(c, 0, 0, 74, 74, 18); c.fill();
+  c.fillStyle = '#28241e'; c.font = `800 52px ${F}`; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('Z', 37, 40); c.restore();
+  c.textAlign = 'left'; c.textBaseline = 'alphabetic'; c.fillStyle = '#fff'; c.font = `800 60px ${F}`; c.fillText('İsim Zinciri', 240, 130);
+  c.fillStyle = 'rgba(255,255,255,.75)'; c.font = `500 32px ${F}`; c.fillText(S.date, 242, 178);
+  // kart
+  const cy = 250, ch = H - cy - 110; c.fillStyle = '#fff'; rr(c, 60, cy, W - 120, ch, 44); c.fill();
+  c.textAlign = 'center'; c.font = `110px ${F}`; c.fillText(S.ico, W/2, cy + 140);
+  c.fillStyle = '#1c1b19'; c.font = `800 56px ${F}`; c.fillText(S.title, W/2, cy + 225);
+  c.fillStyle = '#2f6f5e'; c.font = `700 42px ${F}`; c.fillText(S.headline, W/2, cy + 290);
+  c.fillStyle = '#8a857c'; c.font = `500 30px ${F}`; c.fillText(S.stats, W/2, cy + 340);
+  let y = cy + 390;
+  S.scores.forEach((r, k) => {
+    c.fillStyle = r.win ? '#e7f0ec' : '#f4f1ea'; rr(c, 110, y, W - 220, 84, 22); c.fill();
+    c.textAlign = 'center'; c.fillStyle = '#1c1b19'; c.font = `${k < 3 ? '' : '700 '}40px ${F}`; c.fillText(r.m, 170, y + 56);
+    c.textAlign = 'left'; c.font = `600 40px ${F}`; c.fillText(r.nm, 230, y + 56);
+    c.textAlign = 'right'; c.fillStyle = '#2f6f5e'; c.font = `800 40px ${F}`; c.fillText(r.pt, W - 150, y + 56);
+    y += 104;
+  });
+  c.textAlign = 'center'; c.fillStyle = 'rgba(255,255,255,.8)'; c.font = `500 30px ${F}`; c.fillText(S.url, W/2, H - 48);
+  return cv;
+}
+$('sumShare').onclick = async () => {
+  if (!lastSummary) return;
+  const cv = drawSummary();
+  const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+  const file = new File([blob], 'isim-zinciri-sonuc.png', { type:'image/png' });
+  try {
+    if (navigator.canShare && navigator.canShare({ files:[file] })){ await navigator.share({ files:[file], title:'İsim Zinciri' }); return; }
+  } catch(e){ if (e && e.name === 'AbortError') return; }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+};
+$('sumNext').onclick = () => { $('sumModal').classList.remove('show'); spin(); };
+$('nmReset').onclick = () => {
+  if (!nmResetArmed){ nmResetArmed = true; nmFlash(t('nmResetQ')); setTimeout(() => nmResetArmed = false, 4000); return; }
+  nmResetArmed = false; custom[nmLang] = { add:[], del:[] }; saveCustom(); buildIndexes(); nmFlash(t('nmResetDone')); renderNames();
+};
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSettings(); });
+
+resetPlayers(); applyI18n(); updateThemeBtn();
 // Uygulama olarak kurulabilmesi için (Claude içinde çalışmaz, sorun değil)
 if ('serviceWorker' in navigator && !inClaude){ try { navigator.serviceWorker.register('sw.js').catch(()=>{}); } catch(_){} }
 </script>
