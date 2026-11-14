@@ -2,52 +2,101 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>İsim Zinciri</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2f6f5e">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
   :root{
-    --bg:#f6f4ef; --card:#ffffff; --ink:#1f1d1a; --muted:#8a857c; --line:#e7e3da;
-    --accent:#2f6f5e; --accent-2:#e9f1ee; --seg-a:#2f6f5e; --seg-b:#3d8a75;
-    --used:#d9d5cc; --red:#d64541; --red-bg:#fdecea;
+    --bg:#f4f1ea; --card:#ffffff; --ink:#1c1b19; --muted:#8a857c; --line:#e6e1d6;
+    --accent:#2f6f5e; --accent-d:#245849; --accent-2:#e7f0ec; --seg-a:#2f6f5e; --seg-b:#3d8a75;
+    --used:#dcd7cc; --red:#d64541; --red-bg:#fdecea; --gold:#e8b630;
+    --w:min(72vw, 34dvh, 340px);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);
-       min-height:100vh;display:flex;justify-content:center;padding:20px 16px 40px}
-  .app{width:100%;max-width:440px;display:flex;flex-direction:column;gap:18px}
-  header{display:flex;align-items:center;justify-content:space-between}
-  h1{font-size:22px;font-weight:700;letter-spacing:-.3px}
-  .reset{background:none;border:1px solid var(--line);color:var(--muted);font:inherit;font-size:13px;
-         padding:6px 12px;border-radius:999px;cursor:pointer}
-  .langs{display:flex;gap:8px}
-  .lang{flex:1;border:1px solid var(--line);background:var(--card);font:inherit;font-size:14px;font-weight:500;
-        padding:9px 6px;border-radius:12px;cursor:pointer;color:var(--ink);transition:all .2s}
-  .lang.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  html,body{height:100%}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);overflow:hidden;
+       background:radial-gradient(120% 70% at 50% -10%, #e3eee8 0%, rgba(227,238,232,0) 60%), var(--bg);
+       padding:max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
+  .app{height:100%;width:100%;max-width:620px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  .stage{display:flex;flex-direction:column;gap:12px}
 
-  .wheel-wrap{position:relative;width:100%;max-width:330px;aspect-ratio:1;margin:0 auto}
-  .pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;z-index:2;
-           border-left:13px solid transparent;border-right:13px solid transparent;border-top:22px solid var(--ink);
-           filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
-  #wheel{width:100%;height:100%;transition:transform 4.6s cubic-bezier(.15,.75,.12,1);
-         filter:drop-shadow(0 6px 18px rgba(47,111,94,.18))}
-  .hub{position:absolute;inset:0;margin:auto;width:24%;height:24%;border-radius:50%;background:var(--card);
-       display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;color:var(--accent);
-       box-shadow:0 2px 10px rgba(0,0,0,.12);transition:transform .3s}
+  /* Başlık */
+  .top{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px}
+  .logo{width:40px;height:40px;border-radius:12px;background:linear-gradient(170deg,#3a8670,#1c483c);display:grid;place-items:center;box-shadow:0 4px 12px rgba(47,111,94,.25)}
+  .logo svg{width:30px;height:30px}
+  h1{font-size:20px;font-weight:800;letter-spacing:-.4px;line-height:1.1}
+  .brand small{display:block;font-size:12px;color:var(--muted);font-weight:500}
+  .reset{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.7);border:1px solid var(--line);color:var(--ink);
+         font:inherit;font-size:13px;font-weight:600;padding:8px 13px;border-radius:999px;cursor:pointer;backdrop-filter:blur(6px)}
+  .reset svg{width:15px;height:15px}
+
+  /* Dil seçimi */
+  .langs{display:flex;padding:4px;background:#e9e4d9;border-radius:14px;gap:4px}
+  .lang{flex:1;border:none;background:transparent;font:inherit;font-size:14px;font-weight:600;color:#6d685f;
+        padding:9px 6px;border-radius:10px;cursor:pointer;transition:all .25s}
+  .lang.on{background:#fff;color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+
+  /* Çark */
+  .wheel-area{display:grid;place-items:center;padding:calc(var(--w) * .11) 0 calc(var(--w) * .04)}
+  .wheel-wrap{position:relative;width:var(--w);aspect-ratio:1}
+  .wheel-wrap::before{content:"";position:absolute;inset:-4.5%;border-radius:50%;
+       background:linear-gradient(160deg,#ffffff,#ece6da);box-shadow:0 18px 40px rgba(47,111,94,.18), inset 0 1px 0 #fff}
+  .wheel-wrap::after{content:"";position:absolute;inset:-4.5%;border-radius:50%;
+       background:repeating-conic-gradient(from 0deg, rgba(47,111,94,.35) 0 1.2deg, transparent 1.2deg 10deg);
+       -webkit-mask:radial-gradient(circle, transparent 66%, #000 67%, #000 69.5%, transparent 70%);
+               mask:radial-gradient(circle, transparent 66%, #000 67%, #000 69.5%, transparent 70%);opacity:.0}
+  #wheel{position:relative;width:100%;height:100%;transition:transform 4.6s cubic-bezier(.15,.75,.12,1)}
+  .pointer{position:absolute;top:-9%;left:50%;transform:translateX(-50%);width:12%;z-index:3;filter:drop-shadow(0 3px 4px rgba(0,0,0,.25))}
+  .pointer svg{display:block;width:100%;height:auto}
+  .hub{position:absolute;inset:0;margin:auto;width:27%;height:27%;border-radius:50%;background:#fff;z-index:2;
+       display:flex;align-items:center;justify-content:center;font-size:calc(var(--w) * .135);font-weight:800;color:var(--accent);
+       box-shadow:0 0 0 calc(var(--w) * .018) rgba(255,255,255,.55), 0 6px 18px rgba(0,0,0,.18);transition:transform .3s}
   .hub.pop{transform:scale(1.15)}
 
-  .info{text-align:center;color:var(--muted);font-size:13px;margin-top:-6px}
+  .info{align-self:center;color:var(--muted);font-size:12.5px;font-weight:500;background:rgba(255,255,255,.65);
+        border:1px solid var(--line);padding:5px 12px;border-radius:999px}
   .row{display:flex;gap:10px}
-  .btn{flex:1;border:none;font:inherit;font-size:16px;font-weight:600;padding:14px;border-radius:14px;cursor:pointer;
-       display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .1s, opacity .2s}
+  .btn{flex:1;border:none;font:inherit;font-size:16px;font-weight:700;padding:15px;border-radius:16px;cursor:pointer;
+       display:flex;align-items:center;justify-content:center;gap:9px;transition:transform .1s, opacity .2s, background .2s}
+  .btn svg{width:19px;height:19px}
   .btn:active{transform:scale(.97)}
   .btn:disabled{opacity:.4;cursor:default}
-  .spin{background:var(--ink);color:#fff}
-  .mic{background:var(--accent);color:#fff}
-  .mic.live{background:var(--red)}
+  .spin{background:var(--ink);color:#fff;box-shadow:0 6px 16px rgba(28,27,25,.18)}
+  .mic{background:var(--accent);color:#fff;box-shadow:0 6px 16px rgba(47,111,94,.28)}
+  .mic.live{background:var(--red);box-shadow:0 6px 16px rgba(214,69,65,.3)}
   .dot{width:10px;height:10px;border-radius:50%;background:#fff}
   .mic.live .dot{animation:pulse 1s infinite}
   @keyframes pulse{50%{opacity:.3}}
 
+  /* İsim listesi kartı */
+  .list-card{flex:1;min-height:230px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+  .list-card ol, .list-card .empty{flex:0 1 auto}
+  .scroll{flex:1;overflow-y:auto;margin:0 -6px;padding:0 6px;-webkit-overflow-scrolling:touch}
+  .badge{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-2);padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:2px}
+
+  /* Büyük ekran: iki sütun */
+  @media (min-width: 820px){
+    :root{ --w:min(38vw, 56dvh, 600px); }
+    body{padding:max(24px, env(safe-area-inset-top)) 28px 24px}
+    .app{max-width:1400px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:28px;align-items:stretch}
+    .stage{justify-content:center;gap:16px;min-height:0}
+    .stage .langs,.stage .row,.stage .timer,.stage .msg{width:min(100%, 560px);align-self:center}
+    .stage .top{width:100%}
+    h1{font-size:24px}
+    .list-card{min-height:0;height:100%}
+    .btn{font-size:17px;padding:17px}
+  }
+  @media (min-width: 820px) and (orientation: portrait){
+    :root{ --w:min(70vw, 42dvh, 600px); }
+    .app{display:flex;flex-direction:column;max-width:760px}
+  }
   .card{background:var(--card);border-radius:18px;padding:16px;border:1px solid var(--line)}
   .card-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
   .card-head b{font-size:15px}
@@ -67,7 +116,7 @@
   li .acc{font:inherit;font-size:11px;font-weight:600;color:#9a6a00;background:#fff;border:1px solid #f0d58a;border-radius:6px;padding:2px 6px;cursor:pointer}
   li.wrong{background:var(--red-bg)}
   li.wrong .t{color:var(--red)}
-  li .last{color:#1f6fd1;font-weight:700;background:#e3efff;border-radius:4px;padding:0 2px;margin-left:1px}
+  li .last{color:#1f6fd1;font-weight:800;background:#e3efff;border-radius:4px;padding:0 1px;box-shadow:inset 0 -2px 0 #1f6fd1}
   li .wt{font-size:11px;font-weight:600;color:var(--red);background:#fff;border-radius:6px;padding:2px 6px;white-space:nowrap}
   li .hd{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:1px}
   li .ut{font-size:11px;font-weight:600;color:#9a6a00;white-space:nowrap}
@@ -99,44 +148,53 @@
 </head>
 <body>
 <div class="app">
-  <header>
-    <h1>İsim Zinciri</h1>
-    <button class="reset" id="resetBtn">Sıfırla</button>
-  </header>
+  <section class="stage">
+    <header class="top">
+      <div class="brand">
+        <span class="logo"><svg viewBox="0 0 32 32"><g transform="rotate(8 11 11)"><rect x="3" y="3" width="15" height="15" rx="4" fill="#fff"/><text x="10.5" y="15.2" text-anchor="middle" font-family="Poppins,Inter,sans-serif" font-weight="800" font-size="12" fill="#2f6f5e">A</text></g><g transform="rotate(-8 21 21)"><rect x="13.5" y="13.5" width="15" height="15" rx="4" fill="#f0be3c"/><text x="21" y="25.6" text-anchor="middle" font-family="Poppins,Inter,sans-serif" font-weight="800" font-size="12" fill="#28241e">Z</text></g></svg></span>
+        <div><h1>İsim Zinciri</h1><small>Son harften devam et</small></div>
+      </div>
+      <button class="reset" id="resetBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span>Sıfırla</span></button>
+    </header>
 
-  <div class="langs" id="langs">
-    <button class="lang on" data-l="tr">Türkçe</button>
-    <button class="lang" data-l="az">Azərbaycan</button>
-  </div>
+    <div class="langs" id="langs">
+      <button class="lang on" data-l="tr">Türkçe</button>
+      <button class="lang" data-l="az">Azərbaycan</button>
+    </div>
 
-  <div class="wheel-wrap">
-    <div class="pointer"></div>
-    <svg id="wheel" viewBox="0 0 300 300"></svg>
-    <div class="hub" id="hub">?</div>
-  </div>
-  <div class="info" id="info"></div>
+    <div class="wheel-area">
+      <div class="wheel-wrap">
+        <div class="pointer"><svg viewBox="0 0 40 52"><path d="M20 51 C14 38 3 30 3 18 A17 17 0 0 1 37 18 C37 30 26 38 20 51Z" fill="#1c1b19"/><circle cx="20" cy="18" r="6.5" fill="#e8b630"/></svg></div>
+        <svg id="wheel" viewBox="0 0 300 300"></svg>
+        <div class="hub" id="hub">?</div>
+      </div>
+    </div>
+    <div class="info" id="info"></div>
 
-  <div class="row">
-    <button class="btn spin" id="spinBtn">Çarkı Çevir</button>
-    <button class="btn mic" id="micBtn" disabled><span class="dot"></span><span id="micLabel">Başlat</span></button>
-  </div>
-  <div class="timer" id="timer"><i id="timerBar"></i></div>
-  <div class="msg" id="msg"></div>
+    <div class="row">
+      <button class="btn spin" id="spinBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg><span id="spinLabel">Çarkı Çevir</span></button>
+      <button class="btn mic" id="micBtn" disabled><span class="dot"></span><span id="micLabel">Başlat</span></button>
+    </div>
+    <div class="timer" id="timer"><i id="timerBar"></i></div>
+    <div class="msg" id="msg"></div>
+  </section>
 
-  <div class="card">
+  <section class="card list-card">
     <div class="card-head">
-      <b>Söylenen isimler</b>
+      <b>Söylenen isimler<span class="badge" id="countBadge">0</span></b>
       <div class="next" id="next"></div>
     </div>
-    <ol id="list"></ol>
-    <div class="empty" id="empty">Çarkı çevir, sonra "Başlat"a bas ve isimleri söyle.</div>
+    <div class="scroll" id="scrollBox">
+      <ol id="list"></ol>
+      <div class="empty" id="empty">Çarkı çevir, sonra "Başlat"a bas ve isimleri söyle.</div>
+    </div>
     <div class="interim" id="interim"></div>
-    <div class="legend" id="legend"><span><i style="background:var(--red)"></i>Tekrar</span><span><i style="background:#e8b630"></i>Listede yok</span><span><i style="background:var(--red)"></i>Yanlış harf</span><span><i style="background:#1f6fd1"></i>Sıradaki harf</span></div>
+    <div class="legend" id="legend"><span><i style="background:var(--red)"></i>Tekrar / yanlış harf</span><span><i style="background:#e8b630"></i>Listede yok</span><span><i style="background:#1f6fd1"></i>Sıradaki harf</span></div>
     <form id="form">
       <input id="input" placeholder="Ya da ismi yaz…" autocomplete="off" dir="auto">
       <button type="submit">Ekle</button>
     </form>
-  </div>
+  </section>
 </div>
 
 <div class="count" id="count"></div>
@@ -262,9 +320,10 @@ function drawWheel(){
     s += `<path d="M${cx},${cy} L${x0},${y0} A${r},${r} 0 0,1 ${x1},${y1} Z" fill="${fill}" stroke="#fff" stroke-width="1.2"/>`;
     const mid = a0 + seg/2, [tx,ty] = pt(mid, r*0.83);
     s += `<text x="${tx}" y="${ty}" transform="rotate(${mid} ${tx} ${ty})" text-anchor="middle" dominant-baseline="central"
-          font-size="${n>30?13:14}" font-weight="700" fill="${isUsed?'#a9a49a':'#fff'}"
+          font-size="${n>30?13.5:15}" font-weight="800" fill="${isUsed?'#a9a49a':'#fff'}"
           font-family="Inter,sans-serif">${ch}</text>`;
   });
+  s += `<circle cx="150" cy="150" r="146" fill="none" stroke="rgba(255,255,255,.95)" stroke-width="2.5"/>`;
   wheel.innerHTML = s;
   const left = n - used.size;
   $('info').textContent = `${left} harf kaldı` + (listening && micLang ? ` · 🎤 ${micLang==='az'?'Azərbaycan':'Türkçe'} dinleniyor` : '');
@@ -291,14 +350,14 @@ function spin(){
     hub.textContent = pick; hub.classList.add('pop'); setTimeout(()=>hub.classList.remove('pop'), 300);
     names = []; renderList(); drawWheel();
     $('spinBtn').disabled = false; $('micBtn').disabled = false;
-    $('spinBtn').textContent = 'Yeni Harf';
+    $('spinLabel').textContent = 'Yeni Harf';
   }, 4700);
 }
 
 function resetSession(){
   stopListening();
   used.clear(); current = null; names = []; hub.textContent = '?';
-  $('spinBtn').textContent = 'Çarkı Çevir'; $('micBtn').disabled = true;
+  $('spinLabel').textContent = 'Çarkı Çevir'; $('micBtn').disabled = true;
   $('legend').style.display = NAMESET[lang] ? 'flex' : 'none';
   drawWheel(); renderList();
 }
@@ -378,13 +437,14 @@ function renderList(){
     `<li class="${n.wrong?'wrong':(n.rep?'rep':(n.unk?'unk':''))}"><span class="t" dir="auto">${nameHtml(n)}${n.heard?`<small class="hd">duyulan: ${n.heard.replace(/</g,'&lt;')}</small>`:''}</span>${n.wrong?`<span class="wt">Yanlış harf · ${n.exp} olmalı</span>`:n.rep?'<span class="tag">Tekrar</span>':(n.unk?`<span class="ut">Listede yok</span><button class="acc" data-a="${i}">+ Listeye ekle</button>`:'')}<button class="x" data-i="${i}" aria-label="Sil">×</button></li>`
   ).join('');
   $('empty').style.display = names.length ? 'none' : 'block';
+  $('countBadge').textContent = names.filter(n => !n.wrong && !n.unk && !n.rep).length;
   const last = names[names.length-1];
   if (last){
     $('next').innerHTML = `Sıradaki harf: <span>${nextLetter()}</span>`;
   } else {
     $('next').innerHTML = current ? `Başlangıç: <span>${current}</span>` : '';
   }
-  ol.lastElementChild?.scrollIntoView({block:'nearest', behavior:'smooth'});
+  const sb = $('scrollBox'); sb.scrollTo({top: sb.scrollHeight, behavior:'smooth'});
 }
 
 /* ---------- Süre: 3 sn tolerans + 10 sn, son 5 sn geri sayım ---------- */
@@ -551,6 +611,8 @@ $('langs').onclick = e => {
 };
 
 drawWheel(); renderList();
+// Uygulama olarak kurulabilmesi için (Claude içinde çalışmaz, sorun değil)
+if ('serviceWorker' in navigator && !inClaude){ try { navigator.serviceWorker.register('sw.js').catch(()=>{}); } catch(_){} }
 </script>
 </body>
 </html>
